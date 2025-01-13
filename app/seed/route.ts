@@ -56,8 +56,8 @@ async function seedWorkoutHistory() {
   await client.sql`
       CREATE TABLE IF NOT EXISTS workout_history (
         workout_history_id SERIAL PRIMARY KEY,
-        user_id REFERENCES users(user_id) INT NOT NULL,
-        workout_id REFERENCES workouts(workout_id) INT NOT NULL,
+        user_id INT REFERENCES users(user_id) NOT NULL,
+        workout_id INT REFERENCES workouts(workout_id) NOT NULL,
         date DATE NOT NULL,
         duration INT NOT NULL,
         exercise_list JSON
