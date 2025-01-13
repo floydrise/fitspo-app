@@ -5,7 +5,6 @@ const users = [
     name: "David",
     avatar_img_url:
       "https://cdn.pixabay.com/photo/2024/02/10/15/03/flowers-8564948_960_720.png",
-    workout_history_id: 1,
   },
 ];
 
@@ -14,7 +13,7 @@ const workout_history = [
     workout_history_id: 1,
     user_id: 1,
     workout_id: 1,
-    date: 1586179020000,
+    date: "2025-01-13",
     duration: 1200,
     exercise_list: [
       {
