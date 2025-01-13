@@ -15,7 +15,7 @@ async function seedUsers() {
       user_id SERIAL PRIMARY KEY,
       username VARCHAR(32) NOT NULL UNIQUE,
       name VARCHAR(255) NOT NULL,
-      avatar_img_url VARCHAR,
+      avatar_img_url VARCHAR
     );
   `;
 
