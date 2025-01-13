@@ -16,15 +16,14 @@ async function seedUsers() {
       username VARCHAR(32) NOT NULL UNIQUE,
       name VARCHAR(255) NOT NULL,
       avatar_img_url VARCHAR,
-      workout_history_id INT REFERENCES workout_history(workout_history_id) ON DELETE CASCADE
     );
   `;
 
   const insertedUsers = await Promise.all(
     users.map(async (user) => {
       return client.sql`
-        INSERT INTO users (username, name, avatar_img_url, workout_history_id)
-        VALUES (${user.username}, ${user.name}, ${user.avatar_img_url}, ${user.workout_history_id});
+        INSERT INTO users (username, name, avatar_img_url)
+        VALUES (${user.username}, ${user.name}, ${user.avatar_img_url});
       `;
     })
   );
