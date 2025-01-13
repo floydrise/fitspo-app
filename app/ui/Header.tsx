@@ -7,7 +7,7 @@ import { HeaderDropdown } from '@/components/ui/header-dropdown';
 export default function Header() {
   return (
     <>
-      <header className='flex min-h-32 flex-wrap justify-around gap-5 border-b border-solid border-slate-400'>
+      <header className='flex min-h-32 flex-wrap items-center justify-around gap-5 border-b border-solid border-slate-400'>
         <Link href={'/'} className={'flex'}>
           <Image
             src='/Logo.svg'
