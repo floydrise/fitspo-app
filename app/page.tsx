@@ -1,4 +1,4 @@
-import AppOverview from "./ui/AppOverview";
+import AppOverview from "@/app/ui/AppOverview";
 
 export default function Home() {
   return (

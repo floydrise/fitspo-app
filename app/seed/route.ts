@@ -4,9 +4,31 @@ import { users, workouts, workout_history } from "../lib/placeholder-data";
 const client = await db.connect();
 
 async function dropTables() {
-  await client.sql`DROP TABLE IF EXISTS users`;
-  await client.sql`DROP TABLE IF EXISTS workouts`;
   await client.sql`DROP TABLE IF EXISTS workout_history`;
+  await client.sql`DROP TABLE IF EXISTS workouts`;
+  await client.sql`DROP TABLE IF EXISTS users`;
+}
+
+async function seedUsers() {
+  await client.sql`
+    CREATE TABLE IF NOT EXISTS users (
+      user_id SERIAL PRIMARY KEY,
+      username VARCHAR(32) NOT NULL UNIQUE,
+      name VARCHAR(255) NOT NULL,
+      avatar_img_url VARCHAR
+    );
+  `;
+
+  const insertedUsers = await Promise.all(
+    users.map(async (user) => {
+      return client.sql`
+        INSERT INTO users (username, name, avatar_img_url)
+        VALUES (${user.username}, ${user.name}, ${user.avatar_img_url});
+      `;
+    })
+  );
+
+  return insertedUsers;
 }
 
 async function seedWorkouts() {
@@ -34,8 +56,8 @@ async function seedWorkoutHistory() {
   await client.sql`
       CREATE TABLE IF NOT EXISTS workout_history (
         workout_history_id SERIAL PRIMARY KEY,
-        user_id REFERENCES users(user_id) INT NOT NULL,
-        workout_id REFERENCES workouts(workout_id) INT NOT NULL,
+        user_id INT REFERENCES users(user_id) NOT NULL,
+        workout_id INT REFERENCES workouts(workout_id) NOT NULL,
         date DATE NOT NULL,
         duration INT NOT NULL,
         exercise_list JSON
@@ -54,29 +76,6 @@ async function seedWorkoutHistory() {
   return insertedWorkoutHistory;
 }
 
-async function seedUsers() {
-  await client.sql`
-    CREATE TABLE IF NOT EXISTS users (
-      user_id SERIAL PRIMARY KEY,
-      username VARCHAR(32) NOT NULL UNIQUE,
-      name VARCHAR(255) NOT NULL,
-      avatar_img_url VARCHAR,
-      workout_history_id INT REFERENCES workout_history(workout_history_id) ON DELETE CASCADE
-    );
-  `;
-
-  const insertedUsers = await Promise.all(
-    users.map(async (user) => {
-      return client.sql`
-        INSERT INTO users (username, name, avatar_img_url, workout_history_id)
-        VALUES (${user.username}, ${user.name}, ${user.avatar_img_url}, ${user.workout_history_id});
-      `;
-    })
-  );
-
-  return insertedUsers;
-}
-
 export async function GET() {
   try {
     await client.sql`BEGIN`;
@@ -89,6 +88,6 @@ export async function GET() {
     return Response.json({ message: "Database seeded successfully" });
   } catch (error) {
     await client.sql`ROLLBACK`;
-    return console.log(error), Response.json({ error }, { status: 500 });
+    return Response.json({ error }, { status: 500 });
   }
 }
