@@ -4,9 +4,9 @@ import { users, workouts, workout_history } from "../lib/placeholder-data";
 const client = await db.connect();
 
 async function dropTables() {
-  await client.sql`DROP TABLE IF EXISTS users`;
-  await client.sql`DROP TABLE IF EXISTS workouts`;
   await client.sql`DROP TABLE IF EXISTS workout_history`;
+  await client.sql`DROP TABLE IF EXISTS workouts`;
+  await client.sql`DROP TABLE IF EXISTS users`;
 }
 
 async function seedUsers() {
