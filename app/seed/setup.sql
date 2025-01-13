@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS fitspo_test;
+DROP DATABASE IF EXISTS fitspo;
+
+CREATE DATABASE fitspo_test;
+CREATE DATABASE fitspo;
