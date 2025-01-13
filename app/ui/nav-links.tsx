@@ -21,7 +21,7 @@ const NavLinks = () => {
             key={link.name}
             href={link.href}
             className={
-              pathname === link.href ? 'text-purple-400' : 'text-black'
+              pathname === link.href ? 'text-purple-400 border-b-2 border-purple-400' : 'text-black hover:border-b-2 border-slate-400'
             }
           >
             <p>{link.name}</p>
