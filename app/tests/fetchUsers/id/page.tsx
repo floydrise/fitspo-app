@@ -1,4 +1,4 @@
-import { fetchUsers, fetchUsersById } from '@/app/lib/endpoints';
+import { fetchUsersById } from '@/app/lib/endpoints';
 import React from 'react';
 
 async function page() {
