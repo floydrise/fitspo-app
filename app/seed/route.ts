@@ -44,7 +44,7 @@ async function seedWorkouts() {
     workouts.map(
       (workouts) => client.sql`
           INSERT INTO workouts (workout_name, exercise_ids)
-          VALUES (${workouts.workout_name}, ${JSON.stringify(workouts.exercise_ids)});
+          VALUES (${workouts.workout_name}, ${JSON.stringify(workouts.exercise_ids, null, ' ' )});
         `
     )
   );

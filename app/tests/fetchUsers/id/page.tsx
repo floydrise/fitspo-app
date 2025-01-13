@@ -1,8 +1,8 @@
-import { fetchUsersById } from '@/app/lib/endpoints';
+import { fetchUserById } from '@/app/lib/endpoints';
 import React from 'react';
 
 async function page() {
-  const user = await fetchUsersById(1);
+  const user = await fetchUserById(1);
   return (
     <div>
       <h1>Users</h1>
