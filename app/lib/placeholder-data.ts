@@ -58,8 +58,18 @@ const workout_history = [
 const workouts = [
   {
     workout_id: 1,
-    workout_name: 'Push',
-    exercise_ids: ['guT8YnS', 'U6G2gk9', 'BReCuOn'],
+    workout_name: 'Upper Body',
+    exercise_ids: ['I4hDWkc', 'lBDjFxJ', 'aXtJhlg'],
+  },
+  {
+    workout_id: 2,
+    workout_name: 'Lower Body',
+    exercise_ids: ['JZuApnB', 'IZVHb27', 'MrgP9L6'],
+  },
+  {
+    workout_id: 3,
+    workout_name: 'Core',
+    exercise_ids: ['VBAWRPG', 'XVDdcoj', 'tZkGYZ9'],
   },
 ];
 
