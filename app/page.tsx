@@ -1,7 +1,9 @@
+import AppOverview from "@/app/ui/AppOverview";
+
 export default function Home() {
   return (
-      <div>
-        Main page
-      </div>
+    <main>
+      <AppOverview />
+    </main>
   );
 }
