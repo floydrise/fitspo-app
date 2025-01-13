@@ -1,7 +1,7 @@
 const AppOverview = () => {
   return (
     <section className="max-h-[510px] bg-fitViolet">
-      <div className="w-[1440px] flex justify-between items-center py-[50px]">
+      <div className="container flex justify-between items-center py-[50px]">
         <div className="overview-info">
           <h1 className="text-[68px] text-white max-w-[600px] leading-none">
             PLAN YOUR DAILY WORKOUT
