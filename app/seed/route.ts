@@ -46,7 +46,7 @@ async function seedWorkoutHistory() {
     workout_history.map(
       (workout_history) => client.sql`
           INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
-          VALUES (${workout_history.user_id}, ${workout_history.workout_id}, ${workout_history.date}, ${workout_history.duration}, ${workout_history.exercise_list});
+          VALUES (${workout_history.user_id}, ${workout_history.workout_id}, ${workout_history.date}, ${workout_history.duration}, ${JSON.stringify(workout_history.exercise_list)});
         `
     )
   );
