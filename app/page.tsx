@@ -1,9 +1,9 @@
-import Image from "next/image";
+import AppOverview from "./ui/AppOverview";
 
 export default function Home() {
   return (
-      <div>
-        Main page
-      </div>
+    <main>
+      <AppOverview />
+    </main>
   );
 }
