@@ -53,19 +53,18 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   }
 }
 
-export async function fetchExerciseById() {
+export async function fetchExerciseById(exercise_id: string) {
   try {
     const response = await fetch(
-      `https://exercisedb-api.vercel.app/api/v1/exercises/I4hDWkc`
+      `https://exercisedb-api.vercel.app/api/v1/exercises/${exercise_id}`
     );
     if (!response.ok) {
-      throw new Error(`Error fetching exercise with ID: I4hDWkc`);
+      throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
     }
     const exercise = await response.json();
-    console.log(exercise, 'exercise');
     return exercise;
   } catch (error) {
-    console.error(`Error fetching exercise with ID: I4hDWkc`, error);
-    throw new Error(`Error fetching exercise with ID: I4hDWkc`);
+    console.error(`Error fetching exercise with ID: ${exercise_id}`, error);
+    throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
   }
 }

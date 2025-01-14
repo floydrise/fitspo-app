@@ -4,16 +4,15 @@ import { fetchExerciseById } from '@/app/lib/endpoints';
 
 async function Page() {
   const workouts = await fetchWorkouts();
-  console.log(workouts[0], 'workouts');
-  console.log(workouts[0].exercise_ids, 'exercise_ids');
 
-  const exercise = await fetchExerciseById();
-
-  console.log(exercise.data.name, 'exercise');
+  // Only proof of concept using the API to convert ids to details, will need to
+  // use useEffect and useState I think to avoid function being called every render
+  // and to avoid 'await' being used in React Render
 
   return (
     <div>
       <h1
+        className='text-2xl font-bold'
         style={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -24,8 +23,41 @@ async function Page() {
       >
         Workouts list
       </h1>
-      <p>{workouts[0].exercise_ids}</p>
-      <p></p>
+      {workouts.map((workout) => (
+        <ul
+          key={workout.workout_id}
+          className='mx-auto block max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-shadow hover:shadow-xl'
+        >
+          <h2
+            className='text-1xl font-bold'
+            style={{
+              marginBottom: '10px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {workout.workout_name}
+          </h2>
+          {workout.exercise_ids.map((exercise_id: string) => {
+            {
+              return (
+                <ul style={{ marginBottom: '5px' }} key={exercise_id}>
+                  {fetchExerciseById(exercise_id).then((exercise) => (
+                    <li
+                      style={{ marginLeft: '15px', listStyleType: 'square' }}
+                      key={exercise.data.exerciseId}
+                    >
+                      {exercise.data.name}
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+          })}
+        </ul>
+      ))}
     </div>
   );
 }

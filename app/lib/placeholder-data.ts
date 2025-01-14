@@ -101,6 +101,31 @@ const workouts = [
     workout_name: 'Core',
     exercise_ids: ['VBAWRPG', 'XVDdcoj', 'tZkGYZ9'],
   },
+  {
+    workout_id: 4,
+    workout_name: 'Chest',
+    exercise_ids: ['EIeI8Vf', '3TZduzM', '0CXGHya', 'hl8DUh8'],
+  },
+  {
+    workout_id: 5,
+    workout_name: 'Back',
+    exercise_ids: ['eYnzaCm', 'SzX3uzM', 'i6LWjok', 'dG7tG5y'],
+  },
+  {
+    workout_id: 6,
+    workout_name: 'Biceps',
+    exercise_ids: ['faHKVkK', 'qOgPVf6', 'BCGQ6J5'],
+  },
+  {
+    workout_id: 7,
+    workout_name: 'Triceps',
+    exercise_ids: ['dZl9Q27', 'HJ63mSO', '1xHyxys'],
+  },
+  {
+    workout_id: 8,
+    workout_name: 'Shoulders',
+    exercise_ids: ['UDlhcO8', 'S8mo30S', 'S9zHIvU', 'goJ6ezq'],
+  },
 ];
 
 export { users, workouts, workout_history };
