@@ -41,6 +41,7 @@ export async function signUp(formData: FormData): Promise<void> {
 
 // Needs revisiting
 
+/*
 const WorkoutHistoryScheme = z.object({
   workout_history_id: z.number(),
   user_id: z.number(),
@@ -54,7 +55,7 @@ const submittedWorkoutHistory = WorkoutHistoryScheme.omit({
   workout_history_id: true,
 });
 
-/*
+
 export async function postWorkoutHistory(formData: FormData): Promise<void> {
   const { user_id, workout_id, date, duration, exercise_list } =
     submittedWorkoutHistory.parse({
