@@ -15,17 +15,18 @@ const buttonVariants = cva(
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:
           'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-        green: 'bg-green-500 text-green-50 shadow hover:bg-green-600',
-        purple: 'bg-purple-500 text-purple-50 shadow hover:bg-purple-600',
         filterBtn:
           'bg-fitBlue text-primary-foreground hover:bg-fitBlue/90 text-sm font-bold',
         filterBtnAct: 'bg-fitViolet text-primary-foreground text-sm font-bold',
         searchBtn:
           'bg-fitGreen text-fitBlue hover:bg-Green/90 text-sm font-bold',
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        green: "bg-green-500 text-green-50 shadow hover:bg-green-600",
+        purple: "bg-purple-500 text-purple-50 shadow hover:bg-purple-600",
+        orange: "bg-orange-500 text-purple-50 shadow hover:bg-orange-600"
       },
       size: {
         default: 'h-9 px-4 py-2',
