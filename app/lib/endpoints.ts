@@ -1,5 +1,4 @@
 import { sql } from '@vercel/postgres';
-import { Workout_history } from './definitions';
 
 export async function fetchUsers() {
   try {
@@ -48,23 +47,6 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
     const data = await sql`SELECT * FROM workout_history
     WHERE user_id = ${user_id}`;
     return data.rows;
-  } catch (error) {
-    console.error('error fetching workout history ', error);
-    throw new Error('error fetching workout history');
-  }
-}
-
-
-export async function postWorkoutHistory(testData: Workout_history) {
-  /* const workoutHistory = await request.json(); */
- const { user_id, workout_id, date, duration, exercise_list } = testData;
-  try {
-    const data = await sql`
-            INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
-            VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});
-          `;
-          console.log(data, 'insert successful')
-    return 'Insert successful';
   } catch (error) {
     console.error('error fetching workout history ', error);
     throw new Error('error fetching workout history');
