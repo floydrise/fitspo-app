@@ -53,52 +53,51 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
     throw new Error('error fetching workout history');
   }
 }
-/*
-async function postWorkoutHistory(values: Workout_history) {
-  const {
-    user_id,
-    workout_id,
-    date,
-    duration,
-    exercise_list,
-  } = values;
 
-  console.log('Saving workout history to database:', {
-    user_id,
-    workout_id,
-    date,
-    duration,
-    exercise_list,
-  });
-}
-
-
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-export function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    // Process a POST request
-    console.log(req.body)
-      try {
-        const { user_id, workout_id, date, duration, exercise_list } = req.body
-        if (!user_id || !workout_id || !date || !duration || !Array.isArray(exercise_list)) {
-          return res.status(400).json({error: "invalid request"})
-        }
-
-        const workoutHistoryId = await postWorkoutHistory({
-          user_id,
-          workout_id,
-          date,
-          duration,
-          exercise_list,
-        });
-
-
-      
+const workoutData = {
+  "user_id": 1,
+  "workout_id": 1,
+  "date": "2025-01-14",
+  "duration": 1000,
+  "exercise_list": [
+    {
+      "name": "Bench press",
+      "previous_weight": 20,
+      "reps_count": 2,
+      "weight": 25,
+      "sets_count": 4
+    },
+    {
+      "name": "Incline bench press",
+      "previous_weight": 15,
+      "reps_count": 4,
+      "weight": 20,
+      "sets_count": 2
+    },
+    {
+      "name": "Cable flies",
+      "previous_weight": 6,
+      "reps_count": 5,
+      "weight": 8,
+      "sets_count": 6
     }
+  ]
+}
+export async function postWorkoutHistory(testData: Workout_history) {
+  /* const workoutHistory = await request.json(); */
+ const { user_id, workout_id, date, duration, exercise_list } = testData;
+  try {
+    const data = await sql`
+            INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
+            VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});
+          `;
+          console.log('insert successful')
+    return 'Insert successful';
+  } catch (error) {
+    console.error('error fetching workout history ', error);
+    throw new Error('error fetching workout history');
   }
 }
-*/
 
 export async function fetchExerciseById() {
   try {
