@@ -1,6 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { Workout_history } from './definitions';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { workout_history } from './placeholder-data';
 
 export async function fetchUsers() {
   try {
@@ -55,55 +56,21 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   }
 }
 
-/* export async function postWorkoutHistory(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    try {
-      const {
-        workout_history_id,
-        user_id,
-        workout_id,
-        date,
-        duration,
-        exercise_list,
-      } = req.body as Workout_history;
-    
-      if (!workout_history_id || !user_id || !workout_id || !date || !duration || !exercise_list) {
-        return res.status(400).json({ message: 'All fields are required.' });
-      }
-      try {
-        const workoutResult = await sql(
-          `INSERT INTO workout_history (workout_history_id, user_id, workout_id, date, duration) 
-           VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-          [workout_history_id, user_id, workout_id, date, duration]
-        );
-
-        const workout = workoutResult.rows[0]
-        const exerciseQueries = exercise_list.map(exercise =>
-          await sql (
-            `INSERT INTO exercises (workout_history_id, name, previous_weight, reps_count, weight, sets_count) 
-             VALUES ($1, $2, $3, $4, $5, $6)`,
-            [
-              workout_history_id,
-              exercise.name,
-              exercise.previous_weight,
-              exercise.reps_count,
-              exercise.weight,
-              exercise.sets_count,
-            ]
-          )
-        );
-
-        await Promise.all(exerciseQueries);
-        return res.status(201).json({ message: 'Workout added successfully!', workout });
-}
-    catch (error) {
-      console.error('error fetching workout history ', error);
-      throw new Error('error fetching workout history');
-}
-
+/* export async function postWorkoutHistory(request: any) {
+  const workoutHistory = await request.json();
+  const { user_id, workout_id, date, duration, exercise_list } = workoutHistory;
+  try {
+    const data = await sql`
+            INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
+            VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});
+          `;
+          console.log('insert successful')
+    return 'Insert successful';
+  } catch (error) {
+    console.error('error fetching workout history ', error);
+    throw new Error('error fetching workout history');
+  }
 } */
-
-
 
 export async function fetchExerciseById() {
   try {
