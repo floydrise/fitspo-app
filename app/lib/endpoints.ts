@@ -1,5 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { Workout_history } from './definitions';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function fetchUsers() {
   try {
@@ -53,52 +54,56 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
     throw new Error('error fetching workout history');
   }
 }
-/*
-async function postWorkoutHistory(values: Workout_history) {
-  const {
-    user_id,
-    workout_id,
-    date,
-    duration,
-    exercise_list,
-  } = values;
 
-  console.log('Saving workout history to database:', {
-    user_id,
-    workout_id,
-    date,
-    duration,
-    exercise_list,
-  });
-}
-
-
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-export function handler(req: NextApiRequest, res: NextApiResponse) {
+/* export async function postWorkoutHistory(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    // Process a POST request
-    console.log(req.body)
+    try {
+      const {
+        workout_history_id,
+        user_id,
+        workout_id,
+        date,
+        duration,
+        exercise_list,
+      } = req.body as Workout_history;
+    
+      if (!workout_history_id || !user_id || !workout_id || !date || !duration || !exercise_list) {
+        return res.status(400).json({ message: 'All fields are required.' });
+      }
       try {
-        const { user_id, workout_id, date, duration, exercise_list } = req.body
-        if (!user_id || !workout_id || !date || !duration || !Array.isArray(exercise_list)) {
-          return res.status(400).json({error: "invalid request"})
-        }
+        const workoutResult = await sql(
+          `INSERT INTO workout_history (workout_history_id, user_id, workout_id, date, duration) 
+           VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+          [workout_history_id, user_id, workout_id, date, duration]
+        );
 
-        const workoutHistoryId = await postWorkoutHistory({
-          user_id,
-          workout_id,
-          date,
-          duration,
-          exercise_list,
-        });
+        const workout = workoutResult.rows[0]
+        const exerciseQueries = exercise_list.map(exercise =>
+          await sql (
+            `INSERT INTO exercises (workout_history_id, name, previous_weight, reps_count, weight, sets_count) 
+             VALUES ($1, $2, $3, $4, $5, $6)`,
+            [
+              workout_history_id,
+              exercise.name,
+              exercise.previous_weight,
+              exercise.reps_count,
+              exercise.weight,
+              exercise.sets_count,
+            ]
+          )
+        );
 
-
-      
-    }
-  }
+        await Promise.all(exerciseQueries);
+        return res.status(201).json({ message: 'Workout added successfully!', workout });
 }
-*/
+    catch (error) {
+      console.error('error fetching workout history ', error);
+      throw new Error('error fetching workout history');
+}
+
+} */
+
+
 
 export async function fetchExerciseById() {
   try {
