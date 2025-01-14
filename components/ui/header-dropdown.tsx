@@ -19,7 +19,7 @@ export function HeaderDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='outline'>
-          <Bars3Icon />
+          Menu<Bars3Icon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56'>
