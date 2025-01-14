@@ -53,6 +53,36 @@ const workout_history = [
       },
     ],
   },
+  {
+    workout_history_id: 2,
+    user_id: 1,
+    workout_id: 1,
+    date: '2025-01-14',
+    duration: 1100,
+    exercise_list: [
+      {
+        name: 'Bench press',
+        previous_weight: 20,
+        reps_count: 2,
+        weight: 25,
+        sets_count: 4,
+      },
+      {
+        name: 'Incline bench press',
+        previous_weight: 15,
+        reps_count: 4,
+        weight: 20,
+        sets_count: 2,
+      },
+      {
+        name: 'Cable flies',
+        previous_weight: 6,
+        reps_count: 5,
+        weight: 8,
+        sets_count: 6,
+      },
+    ],
+  },
 ];
 
 const workouts = [

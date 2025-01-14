@@ -1,9 +1,16 @@
 import React from 'react';
 import { fetchWorkouts } from '@/app/lib/endpoints';
-// import { fetchExerciseById } from '@/app/lib/endpoints';
+import { fetchExerciseById } from '@/app/lib/endpoints';
 
 async function Page() {
   const workouts = await fetchWorkouts();
+  console.log(workouts[0], 'workouts');
+  console.log(workouts[0].exercise_ids, 'exercise_ids');
+
+  const exercise = await fetchExerciseById();
+
+  console.log(exercise.data.name, 'exercise');
+
   return (
     <div>
       <h1
@@ -18,11 +25,7 @@ async function Page() {
         Workouts list
       </h1>
       <p>{workouts[0].exercise_ids}</p>
-      <p>
-        {/* {fetchExerciseById(workouts[0].exercise_ids[0]).then((exercise) => {
-          return exercise.exercise.name;
-        })} */}
-      </p>
+      <p></p>
     </div>
   );
 }

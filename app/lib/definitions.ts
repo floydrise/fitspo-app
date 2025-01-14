@@ -19,7 +19,7 @@ export type Exercise = {
   sets_count: number;
 };
 
-export type workout_history = {
+export type Workout_history = {
   workout_history_id: number;
   user_id: number;
   workout_id: number;
