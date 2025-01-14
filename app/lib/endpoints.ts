@@ -54,35 +54,7 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   }
 }
 
-const workoutData = {
-  "user_id": 1,
-  "workout_id": 1,
-  "date": "2025-01-14",
-  "duration": 1000,
-  "exercise_list": [
-    {
-      "name": "Bench press",
-      "previous_weight": 20,
-      "reps_count": 2,
-      "weight": 25,
-      "sets_count": 4
-    },
-    {
-      "name": "Incline bench press",
-      "previous_weight": 15,
-      "reps_count": 4,
-      "weight": 20,
-      "sets_count": 2
-    },
-    {
-      "name": "Cable flies",
-      "previous_weight": 6,
-      "reps_count": 5,
-      "weight": 8,
-      "sets_count": 6
-    }
-  ]
-}
+
 export async function postWorkoutHistory(testData: Workout_history) {
   /* const workoutHistory = await request.json(); */
  const { user_id, workout_id, date, duration, exercise_list } = testData;
@@ -91,7 +63,7 @@ export async function postWorkoutHistory(testData: Workout_history) {
             INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
             VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});
           `;
-          console.log('insert successful')
+          console.log(data, 'insert successful')
     return 'Insert successful';
   } catch (error) {
     console.error('error fetching workout history ', error);

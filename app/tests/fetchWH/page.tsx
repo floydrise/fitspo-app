@@ -1,3 +1,4 @@
+import { Exercise } from '@/app/lib/definitions';
 import { fetchWorkoutHistoryByUserId } from '@/app/lib/endpoints';
 import React from 'react';
 
@@ -8,7 +9,7 @@ async function page() {
       <h1>workout history</h1>
       {workout_history.map((workout) => (
         <div key={workout.workout_history_id}>
-          {workout.exercise_list.map((exercise: any) => {
+          {workout.exercise_list.map((exercise: Exercise) => {
             {
               return (
                 <ul style={{ margin: '10px' }} key={exercise.name}>
