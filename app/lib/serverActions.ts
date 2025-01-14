@@ -12,14 +12,22 @@ const FormSchema = z.object({
 
 const RegisterUser = FormSchema.omit({ user_id: true });
 
-export async function signUp(formData: FormData) {
+export async function signUp(formData: FormData): Promise<void>{
   const { username, name, imgUrl } = RegisterUser.parse({
     username: formData.get('username'),
     name: formData.get('name'),
     imgUrl: formData.get('imgUrl'),
   });
 
-  await sql`insert into users (username, name, avatar_img_url) values (${username}, ${name}, ${imgUrl})`
+  if (!username || !name) {
+    throw new Error('Empty fields');
+  }
 
-  redirect("/");
+  try {
+    await sql`insert into users (username, name, avatar_img_url)
+              values (${username}, ${name}, ${imgUrl})`;
+  } catch (e:unknown) {
+    throw e
+  }
+  redirect(`/${username}/history`);
 }
