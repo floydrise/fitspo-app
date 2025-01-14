@@ -1,7 +1,5 @@
 import { sql } from '@vercel/postgres';
 import { Workout_history } from './definitions';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { workout_history } from './placeholder-data';
 
 export async function fetchUsers() {
   try {
@@ -56,9 +54,38 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   }
 }
 
-/* export async function postWorkoutHistory(request: any) {
-  const workoutHistory = await request.json();
-  const { user_id, workout_id, date, duration, exercise_list } = workoutHistory;
+const workoutData = {
+  "user_id": 1,
+  "workout_id": 1,
+  "date": "2025-01-14",
+  "duration": 1000,
+  "exercise_list": [
+    {
+      "name": "Bench press",
+      "previous_weight": 20,
+      "reps_count": 2,
+      "weight": 25,
+      "sets_count": 4
+    },
+    {
+      "name": "Incline bench press",
+      "previous_weight": 15,
+      "reps_count": 4,
+      "weight": 20,
+      "sets_count": 2
+    },
+    {
+      "name": "Cable flies",
+      "previous_weight": 6,
+      "reps_count": 5,
+      "weight": 8,
+      "sets_count": 6
+    }
+  ]
+}
+export async function postWorkoutHistory(testData: Workout_history) {
+  /* const workoutHistory = await request.json(); */
+ const { user_id, workout_id, date, duration, exercise_list } = testData;
   try {
     const data = await sql`
             INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
@@ -70,7 +97,7 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
     console.error('error fetching workout history ', error);
     throw new Error('error fetching workout history');
   }
-} */
+}
 
 export async function fetchExerciseById() {
   try {
