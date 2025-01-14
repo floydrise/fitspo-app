@@ -1,5 +1,6 @@
 import React from 'react';
-import { fetchExerciseById, fetchWorkouts } from '@/app/lib/endpoints';
+import { fetchWorkouts } from '@/app/lib/endpoints';
+// import { fetchExerciseById } from '@/app/lib/endpoints';
 
 async function Page() {
   const workouts = await fetchWorkouts();
@@ -16,11 +17,11 @@ async function Page() {
       >
         Workouts list
       </h1>
-      <p>{workouts[0].exercise_ids[0]}</p>
+      <p>{workouts[0].exercise_ids}</p>
       <p>
-        {fetchExerciseById(workouts[0].exercise_ids[0]).then((exercise) => {
+        {/* {fetchExerciseById(workouts[0].exercise_ids[0]).then((exercise) => {
           return exercise.exercise.name;
-        })}
+        })} */}
       </p>
     </div>
   );
