@@ -3,10 +3,11 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="p-4 text-center text-gray-500">
-
+      
       {/* Footer Content */}
-      <div className="container mx-auto flex items-center justify-between">
-        {/* Left Side, Home, About and COntact */}
+      <div className="container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+
+        {/* Left Side, Home, About, and C0ntact */}
         <nav className="flex space-x-6">
           <Link
             href="/"
@@ -37,7 +38,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* Right Side, Copyrifhgt Info */}
+        {/* Right Side, Copyright Info */}
         <div className="text-sm">
           Copyright © 2025 FitSpo. All rights reserved.
         </div>
