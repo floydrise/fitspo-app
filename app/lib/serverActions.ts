@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const FormSchema = z.object({
   user_id: z.string(),
@@ -28,6 +29,7 @@ export async function signUp(formData: FormData): Promise<void> {
   } catch (e: unknown) {
     throw e;
   }
+  revalidatePath("/signup")
   redirect(`/${username}/history`);
 }
 

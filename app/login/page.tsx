@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 const Page = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-fitViolet">
@@ -38,9 +39,9 @@ const Page = () => {
         {/* Register Link */}
         <p className="text-sm text-center text-gray-600">
   Don’t have an account?{" "}
-  <a href="/signup" className="text-fitBlue hover:underline">
+  <Link href="/signup" className="text-fitBlue hover:underline">
     <span className="font-bold">Sign up today!</span>
-  </a>
+  </Link>
 </p>
 
       </div>

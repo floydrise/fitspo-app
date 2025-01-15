@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,23 +8,23 @@ export default function Footer() {
       {/* Footer Content */}
       <div className="container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
 
-        {/* Left Side, Home, About, and C0ntact */}
+        {/* Left Side, Home, About, and Contact */}
         <nav className="flex space-x-6">
           <Link
             href="/"
-            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200"
+            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200"
+            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800"
           >
             About
           </Link>
           <Link
             href="/contact"
-            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200"
+            className="px-3 py-1 rounded-lg hover:bg-gray-200 hover:text-gray-800"
           >
             Contact
           </Link>
@@ -31,16 +32,20 @@ export default function Footer() {
 
         {/* Center FitSpo Logo */}
         <div>
-          <img
-            src="./LogoMonochrome.svg"
+          <Link href={"/"}>
+          <Image
+            src="/LogoMonochrome.svg"
+            width={1440}
+            height={531}
             alt="Monochrome FitSpo Logo"
             className="h-10 w-auto mx-auto mt-4"
           />
+          </Link>
         </div>
 
         {/* Right Side, Copyright Info */}
         <div className="text-sm">
-          Copyright © 2025 FitSpo. All rights reserved.
+          <p>Copyright © 2025 FitSpo. All rights reserved.</p>
         </div>
       </div>
     </footer>

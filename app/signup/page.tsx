@@ -5,7 +5,9 @@ import { HashtagIcon } from '@heroicons/react/24/outline';
 const Page = () => {
   return (
     <div
-      className={'flex w-full flex-col items-center justify-center gap-2 p-10'}
+      className={
+        'flex h-screen w-screen flex-col items-center justify-center gap-2 p-10'
+      }
     >
       <span className={'flex gap-1'}>
         <HashtagIcon className={'w-5'} />
@@ -13,7 +15,7 @@ const Page = () => {
       </span>
       <div
         className={
-          'flex w-full justify-center rounded-md border bg-indigo-50 p-4 md:w-2/5'
+          'flex w-full justify-center rounded-md border border-indigo-100 bg-indigo-200 p-4 md:w-2/5'
         }
       >
         <SignupForm />

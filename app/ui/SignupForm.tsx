@@ -47,7 +47,6 @@ const SignupForm = () => {
           }
           placeholder={'Image url'}
         />
-        <p className={'text-red-500'}>* Required field</p>
       </div>
       <div className={'flex justify-center gap-8'}>
         <Button variant='green' type={'submit'}>
@@ -57,7 +56,7 @@ const SignupForm = () => {
           <Link href={'/'}>Cancel</Link>
         </Button>
       </div>
-      <span className={'text-purple-600 underline'}>
+      <span className={'text-purple-600 hover:underline'}>
         <Link href={'/login'}>Already have an account?</Link>
       </span>
     </form>
