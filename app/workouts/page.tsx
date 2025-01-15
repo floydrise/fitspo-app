@@ -1,84 +1,55 @@
 import React from 'react';
-import { fetchWorkouts } from '@/app/lib/endpoints';
-import { fetchExerciseById } from '@/app/lib/endpoints';
+import { fetchWorkouts, fetchExerciseById } from '@/app/lib/endpoints';
+import ExerciseCard from '../ui/ExerciseCard';
 
 async function Page() {
   const workouts = await fetchWorkouts();
 
-  // Only proof of concept using the API to convert ids to details, will need to
-  // use useEffect and useState I think to avoid function being called every render
-  // and to avoid 'await' being used in React Render
+  const workoutsWithExercises = await Promise.all(
+    workouts.map(async (workout) => {
+      const exercises = await Promise.all(
+        workout.exercise_ids.map(async (exercise_id: string) => {
+          const {
+            data: { name },
+          } = await fetchExerciseById(exercise_id);
+          return name;
+        })
+      );
+      return {
+        ...workout,
+        exercises,
+        workout_id: workout.workout_id,
+        workout_name: workout.workout_name,
+      };
+    })
+  );
 
   return (
-    <div>
-      <h1
-        className='text-2xl font-bold'
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          margin: '10px',
-        }}
-      >
-        Workouts list
+    <section>
+      <h1 className='m-2 flex flex-col items-center justify-center text-2xl font-bold'>
+        Workouts List
       </h1>
-      {workouts.map((workout) => (
-        <ul
-          key={workout.workout_id}
-          className='mx-auto block max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-shadow hover:shadow-xl'
-        >
-          <h2
-            className='text-1xl font-bold'
-            style={{
-              marginBottom: '10px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+      <div className='mb-5 min-h-screen py-6'>
+        {workoutsWithExercises.map((workout) => (
+          <div
+            key={workout.workout_id}
+            className='mx-auto mb-5 block w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 p-4 shadow-lg transition-shadow hover:bg-fitGrey hover:shadow-xl'
           >
-            {workout.workout_name}
-          </h2>
-          {workout.exercise_ids.map((exercise_id: string) => {
-            {
-              return (
-                <ul style={{ marginBottom: '5px' }} key={exercise_id}>
-                  {fetchExerciseById(exercise_id).then((exercise) => (
-                    <li
-                      style={{ marginLeft: '15px', listStyleType: 'square' }}
-                      key={exercise.data.exerciseId}
-                    >
-                      {exercise.data.name}
-                    </li>
-                  ))}
-                </ul>
-              );
-            }
-          })}
-        </ul>
-      ))}
-    </div>
+            <h2 className='mb-2 flex flex-col items-center justify-center text-xl font-bold'>
+              {workout.workout_name}
+            </h2>
+            <ul className='mb-1 flex flex-col items-center gap-1'>
+              {workout.exercises.map((exercise) => (
+                <li key={exercise}>
+                  <ExerciseCard exTitle={exercise} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
 export default Page;
-
-/*
-      {workouts.map((workout) => (
-        <div key={workout.workout_id}>
-          <h2 style={{ marginBottom: '10px' }}>{workout.workout_name}</h2>
-          {workout.exercise_ids.map((exercise_id: string) => {
-            {
-              return (
-                <ul style={{ marginBottom: '5px' }} key={exercise_id}>
-                  {fetchExerciseById(exercise_id).then((exercise) => (
-                    <li key={exercise.exercise_id}>a</li>
-                  ))}
-                </ul>
-              );
-            }
-          })}
-        </div>
-      ))}
-*/
