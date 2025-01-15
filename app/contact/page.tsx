@@ -6,7 +6,7 @@ export default function Contact() {
     'Eugeniu Rascu',
     'Stefan Petrov',
     'Tyler Mulligan',
-    'Yayha Islam',
+    'Yahya Islam',
     'Yousuf',
   ];
   const githubUsername = [
