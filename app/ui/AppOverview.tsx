@@ -43,9 +43,8 @@ const AppOverview = () => {
       <div className='flex items-center justify-around px-[15px] py-[55px] min-[320px]:max-[1023px]:flex-col min-[320px]:max-[1023px]:items-center'>
         <div className='max-w-[574px]'>
           <Image
-            className='max-w-full'
             src='/form.png'
-            width={576}
+            width={574}
             height={296}
             alt='Workout form example'
           />
