@@ -11,29 +11,29 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function HeaderDropdown() {
-  const [position, setPosition] = React.useState('home');
-
+  const pathname = usePathname();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='outline'>
-          Menu<Bars3Icon />
+          Menu <Bars3Icon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56'>
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+        <DropdownMenuRadioGroup value={pathname} >
           <Link href={'/'}>
-            <DropdownMenuRadioItem value='home'>Home</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value='/'>Home</DropdownMenuRadioItem>
           </Link>
           <Link href={'/exercises'}>
-            <DropdownMenuRadioItem value='exercises'>
+            <DropdownMenuRadioItem value='/exercises'>
               Exercises
             </DropdownMenuRadioItem>
           </Link>
           <Link href={'/workouts'}>
-            <DropdownMenuRadioItem value='workouts'>
+            <DropdownMenuRadioItem value='/workouts'>
               Workouts
             </DropdownMenuRadioItem>
           </Link>
