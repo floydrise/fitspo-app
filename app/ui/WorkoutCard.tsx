@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { Workout_history } from '../lib/definitions';
+
 export function WorkoutCard({ workout }: { workout: Workout_history }) {
+  
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
