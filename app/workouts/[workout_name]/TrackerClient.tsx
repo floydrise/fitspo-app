@@ -54,7 +54,8 @@ function TrackerClient({
         }
       } catch (error) {
         console.error('Error fetching exercises', error);
-        setError('Failed to load exercises...');
+        setError(`Failed to load exercises...
+          There may be a problem with the API`);
       } finally {
         setLoading(false);
       }
