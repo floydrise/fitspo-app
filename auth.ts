@@ -21,16 +21,16 @@ export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
-      async authorize(credentials) {
+      async authorize(credentials): Promise<User | null> {
         const parsedCredentials = z
           .object({ username: z.string() })
           .safeParse(credentials);
         if (parsedCredentials.success) {
           const { username } = parsedCredentials.data;
           const user = await getUser(username);
-          if (!user) return null;
-          return user;
+          if (user) return user;
         }
+        return null;
       },
     }),
   ],
