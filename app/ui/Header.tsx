@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import NavLinks from '@/app/ui/nav-links';
 import Link from 'next/link';
 import { HeaderDropdown } from '@/components/ui/header-dropdown';
+import {signOut} from '@/auth';
+
 
 export default function Header() {
   return (
@@ -10,7 +12,7 @@ export default function Header() {
       <header className='flex min-h-32 flex-wrap items-center justify-around gap-5 border-b border-solid border-slate-400'>
         <Link href={'/'} className={'flex'}>
           <Image
-            src='/Logo.svg'
+            src="/Logo.svg"
             width={1200}
             height={531}
             alt='Logo of our website'
@@ -34,8 +36,16 @@ export default function Header() {
           >
             <Link href={'/signup'}>Sign up</Link>
           </Button>
+          <form
+            action={async () => {
+              'use server';
+              await signOut({redirectTo:"/", redirect:true});
+            }}
+          >
+            <Button>Log out</Button>
+          </form>
         </div>
       </header>
     </>
-  );
+);
 }
