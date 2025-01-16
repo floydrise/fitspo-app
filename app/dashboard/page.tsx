@@ -1,14 +1,11 @@
 'use server';
 import React from 'react';
 import { auth } from '@/auth';
-import {
-  fetchUserByUsername,
-  fetchWorkoutHistoryByUserId,
-  // fetchWorkoutHistoryByUserId,
-} from '../lib/endpoints';
-import UserProfile from '../ui/UserProfile';
-
+import { fetchUserByUsername, fetchWorkoutHistoryByUserId } from '../lib/endpoints';
 import { WorkoutCard } from '../ui/WorkoutCard';
+import UserProfile from '../ui/UserProfile';
+import { Component } from '../ui/PieChart';
+
 
 export default async function Page() {
   const session = await auth();
@@ -17,8 +14,7 @@ export default async function Page() {
   }
   const userData = await fetchUserByUsername(session.user.username);
   const workout_history = await fetchWorkoutHistoryByUserId(userData.user_id);
-  console.log(userData, "<== user data")
-  console.log(workout_history, "<== workout history")
+
   return (
     <div>
       <p>
@@ -29,6 +25,9 @@ export default async function Page() {
       <div className='container mx-auto p-6'>
         <h1>User Profile</h1>
         <UserProfile user={userData} />
+      </div>
+      <div>
+        <Component history={workout_history}/>
       </div>
       <div className='space-y-4'>
         {workout_history.map((workout) => (
