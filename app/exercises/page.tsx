@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
 import ExerciseCard from '../ui/ExerciseCard';
-import ExerciseInfo from '../ui/ExerciseInfo';
+// import ExerciseInfo from '../ui/ExerciseInfo';
 import Form from 'next/form';
 import { useDebouncedCallback } from 'use-debounce';
 // import Link from 'next/link';
