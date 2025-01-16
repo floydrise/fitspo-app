@@ -23,7 +23,7 @@ export type Workout_history = {
   workout_history_id: number;
   user_id: number;
   workout_id: number;
-  date: string;
+  date: Date;
   duration: number;
   exercise_list: Exercise[];
 };

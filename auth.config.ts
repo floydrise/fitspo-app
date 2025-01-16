@@ -20,7 +20,7 @@ export const authConfig = {
     },
     authorized({ auth, request: { nextUrl } }) {
       const protectedRoutes = ['/dashboard']
-      const publicRoutes = ["/", "/exercises", "/workouts", "/about", "/contact", "/home"]
+      const publicRoutes = ["/", "/exercises", "/workouts", "/about", "/contact", "/home", ]
       const isLoggedIn = !!auth?.user;
       const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
       const isPublicRoute = publicRoutes.includes(nextUrl.pathname);

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { User } from "../lib/definitions";
 
 function UserProfile ( { user } : { user: User }) {
