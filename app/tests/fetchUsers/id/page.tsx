@@ -1,9 +1,9 @@
-import { fetchUserByUserId } from '@/app/lib/endpoints';
+import { fetchUserByUsername } from '@/app/lib/endpoints';
 import Image from 'next/image';
 import React from 'react';
 
 async function page() {
-  const user = await fetchUserByUserId(1);
+  const user = await fetchUserByUsername('ThisIsAUsername');
   return (
     <div>
       <h1>User</h1>

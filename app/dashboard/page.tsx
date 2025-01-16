@@ -10,7 +10,7 @@ import { User } from '../lib/definitions';
 
 
 // import { workout_history } from '../lib/data';
-import { WorkoutCard } from '../ui/WorkoutCard';
+// import { WorkoutCard } from '../ui/WorkoutCard';
 
 export default async function Page() {
   const session = await auth();
