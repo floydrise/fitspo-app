@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { Button } from "@/components/ui/button"
-import {UserIcon, PhotoIcon, AtSymbolIcon } from '@heroicons/react/24/outline';
-import {signUp} from '@/app/lib/serverActions';
+import { Button } from '@/components/ui/button';
+import { UserIcon, PhotoIcon, AtSymbolIcon } from '@heroicons/react/24/outline';
+import { signUp } from '@/app/lib/serverActions';
 
 const SignupForm = () => {
   return (
@@ -18,8 +18,8 @@ const SignupForm = () => {
             'h-8 rounded-md border focus:border-violet-200 focus:outline-none focus:ring'
           }
           placeholder={'Username'}
+          required
         />
-        <p className={'text-red-500'}>* Required field</p>
       </div>
       <div className={'flex flex-col items-start'}>
         <label htmlFor={'name'} className={'flex gap-1'}>
@@ -32,8 +32,8 @@ const SignupForm = () => {
             'h-8 rounded-md border focus:border-violet-200 focus:outline-none focus:ring'
           }
           placeholder={'First name'}
+          required
         />
-        <p className={'text-red-500'}>* Required field</p>
       </div>
       <div className={'flex flex-col items-start'}>
         <label htmlFor={'imgUrl'} className={'flex gap-1'}>
