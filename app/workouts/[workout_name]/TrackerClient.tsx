@@ -2,9 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { fetchExerciseById } from '@/app/lib/endpoints';
+import { QueryResultRow } from '@vercel/postgres';
+import { Workout } from '@/app/lib/definitions';
 
-function TrackerClient({ workouts }: { workouts: any[] }) {
+function TrackerClient({
+  workouts,
+}: {
+  workouts: Workout[] | QueryResultRow[];
+}) {
   const { workout_name } = useParams();
+
   const [exerciseNames, setExerciseNames] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,23 +29,17 @@ function TrackerClient({ workouts }: { workouts: any[] }) {
     (workout) => workout.workout_name === decodedWorkout_name
   );
 
-  if (!isValidWorkout) {
-    return (
-      <div>
-        <h1 className='text-center text-2xl font-bold'>Tracker Page</h1>
-        <p className='text-center text-red-500'>No workout found...</p>
-      </div>
-    );
-  }
-
   useEffect(() => {
-    const matchingWorkout = workouts.find(
-      (workout) => workout.workout_name === decodedWorkout_name
-    );
+    const fetchExercises = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    if (matchingWorkout) {
-      const fetchExercises = async () => {
-        try {
+        const matchingWorkout = workouts.find(
+          (workout) => workout.workout_name === decodedWorkout_name
+        );
+
+        if (matchingWorkout) {
           const exercises = await Promise.all(
             matchingWorkout.exercise_ids.map((id: string) =>
               fetchExerciseById(id)
@@ -48,16 +49,27 @@ function TrackerClient({ workouts }: { workouts: any[] }) {
             return exercise.data.name;
           });
           setExerciseNames(exerciseNames);
-        } catch (error) {
-          console.error('Error fetching exercises', error);
-          setError('Failed to load exercises...');
-        } finally {
-          setLoading(false);
+        } else {
+          setExerciseNames([]);
         }
-      };
-      fetchExercises();
-    }
+      } catch (error) {
+        console.error('Error fetching exercises', error);
+        setError('Failed to load exercises...');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchExercises();
   }, [decodedWorkout_name, workouts]);
+
+  if (!isValidWorkout) {
+    return (
+      <div>
+        <h1 className='text-center text-2xl font-bold'>Tracker Page</h1>
+        <p className='text-center text-red-500'>No workout found...</p>
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -32,7 +32,10 @@ async function Page() {
       </h1>
       <div className='mb-5 min-h-screen w-full py-6'>
         {workoutsWithExercises.map((workout) => (
-          <div className='mx-auto mb-5 block w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 p-4 shadow-lg transition-shadow hover:bg-fitGrey hover:shadow-xl'>
+          <div
+            key={workout.workout_id}
+            className='mx-auto mb-5 block w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 p-4 shadow-lg transition-shadow hover:bg-fitGrey hover:shadow-xl'
+          >
             <Link
               key={workout.workout_id}
               href={`workouts/${workout.workout_name}`}
