@@ -10,7 +10,7 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserById(user_id: number) {
+export async function fetchUserByUserId(user_id: number) {
   try {
     const data = await sql`SELECT * FROM users 
     WHERE user_id = ${user_id}`;
