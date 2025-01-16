@@ -3,9 +3,10 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const links = [
-  { name: 'Home', href: '/' },
+  { name: 'Home', href: '/home' },
   { name: 'Exercises', href: '/exercises' },
   { name: 'Workouts', href: '/workouts' },
 ];
@@ -20,11 +21,8 @@ const NavLinks = () => {
           <Link
             key={link.name}
             href={link.href}
-            className={
-              pathname === link.href ? 'text-purple-500 p-2 rounded-lg bg-purple-100' : 'text-black  p-2 rounded-lg hover:bg-gray-200'
-            }
           >
-            <p>{link.name}</p>
+            <Button variant={pathname === link.href ? "purple" : "ghost"}>{link.name}</Button>
           </Link>
         );
       })}
