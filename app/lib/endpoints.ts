@@ -10,10 +10,10 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserByUserId(user_id: number) {
+export async function fetchUserByUsername(username: string) {
   try {
     const data = await sql`SELECT * FROM users 
-    WHERE user_id = ${user_id}`;
+    WHERE username = ${username}`;
     return data.rows[0];
   } catch (error) {
     console.error('error fetching user', error);
