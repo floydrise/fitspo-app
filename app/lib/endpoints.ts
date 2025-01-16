@@ -1,4 +1,5 @@
 import { sql } from '@vercel/postgres';
+import { User, Workout_history } from '@/app/lib/definitions';
 
 export async function fetchUsers() {
   try {
@@ -10,9 +11,9 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserByUsername(username: string) {
+export async function fetchUserByUsername(username: string){
   try {
-    const data = await sql`SELECT * FROM users 
+    const data= await sql<User>`SELECT * FROM users 
     WHERE username = ${username}`;
     return data.rows[0];
   } catch (error) {
@@ -44,7 +45,7 @@ export async function fetchWorkoutById(workout_id: number) {
 
 export async function fetchWorkoutHistoryByUserId(user_id: number) {
   try {
-    const data = await sql`SELECT * FROM workout_history
+    const data = await sql<Workout_history>`SELECT * FROM workout_history
     WHERE user_id = ${user_id}`;
     return data.rows;
   } catch (error) {
