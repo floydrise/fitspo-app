@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Workout_history } from "../lib/definitions"
+// import { Workout_history } from "../lib/definitions"
 
 const chartConfig: ChartConfig = {
   visitors: {
@@ -39,24 +39,28 @@ const chartConfig: ChartConfig = {
     label: "Edge",
     color: "hsl(var(--chart-5))",
   },
-};
 
-export function Component({ history }: { history: Workout_history[] }) {
-  const data = history.flatMap((history) =>
-    history.exercise_list.map((exercise) => {
-      return {
-        exercise: exercise.name,
-      }
-    })
-  )
+} satisfies ChartConfig
+export function Component(){
+  // { history }: { history: Workout_history[] }
 
-  const userData: string[] = data.map((data) => data.exercise)
+/*    const data = history.flatMap((history) =>
+        history.exercise_list.map((exercise) => {
+          return {
+            exercise: exercise.name,
+            
+          };
+        })
+      );*/
+    
+    const chartData = [
+        { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+        { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+        { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
+        { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+        { browser: "other", visitors: 190, fill: "var(--color-other)" },
+      ]
 
-  type ChartData = {
-    exercise: string
-    attempts: number
-    fill: string
-  }
 
   const generateChartData = (data: string[]): ChartData[] => {
     const exerciseCounts: Record<string, number> = data.reduce((acc, exercise) => {
