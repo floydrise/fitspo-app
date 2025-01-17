@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Workout_history } from "../lib/definitions"
+// import { Workout_history } from "../lib/definitions"
 
 const chartConfig = {
   visitors: {
@@ -43,17 +43,17 @@ const chartConfig = {
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig
-export function Component( { history }: { history: Workout_history[] }){
+export function Component(){
+  // { history }: { history: Workout_history[] }
 
-
-    const data = history.flatMap((history) =>
+/*    const data = history.flatMap((history) =>
         history.exercise_list.map((exercise) => {
           return {
             exercise: exercise.name,
             
           };
         })
-      );
+      );*/
     
     const chartData = [
         { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },

@@ -17,9 +17,9 @@ export default async function exerciseHandler() {
       throw new Error(`Failed to fetch: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data: Response = await response.json();
     return data;
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
@@ -39,7 +39,7 @@ export async function fetchExerciseById(exercise_id: string) {
     if (!response.ok) {
       throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
     }
-    const exercise = await response.json();
+    const exercise: Response = await response.json();
     return exercise;
   } catch (error) {
     console.error(`Error fetching exercise with ID: ${exercise_id}`, error);
