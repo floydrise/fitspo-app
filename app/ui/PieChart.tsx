@@ -16,8 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-// import { Workout_history } from "../lib/definitions"
-
+import { Workout_history } from "../lib/definitions"
 const chartConfig: ChartConfig = {
   visitors: {
     label: "Times worked out",
@@ -39,47 +38,37 @@ const chartConfig: ChartConfig = {
     label: "Edge",
     color: "hsl(var(--chart-5))",
   },
-
-} satisfies ChartConfig
-export function Component(){
-  // { history }: { history: Workout_history[] }
-
-/*    const data = history.flatMap((history) =>
-        history.exercise_list.map((exercise) => {
-          return {
-            exercise: exercise.name,
-            
-          };
-        })
-      );*/
-    
-    const chartData = [
-        { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-        { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-        { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-        { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-        { browser: "other", visitors: 190, fill: "var(--color-other)" },
-      ]
-
-
+};
+export function Component({ history }: { history: Workout_history[] }) {
+  const data = history.flatMap((history) =>
+    history.exercise_list.map((exercise) => {
+      return {
+        exercise: exercise.name,
+      }
+    })
+  )
+  // this  is a comment
+  const userData: string[] = data.map((data) => data.exercise)
+  type ChartData = {
+    exercise: string
+    attempts: number
+    fill: string
+  }
   const generateChartData = (data: string[]): ChartData[] => {
     const exerciseCounts: Record<string, number> = data.reduce((acc, exercise) => {
       acc[exercise] = (acc[exercise] || 0) + 1
       return acc
     }, {} as Record<string, number>)
-
-    
     const chartData: ChartData[] = Object.entries(exerciseCounts).map(
       ([exercise, count]) => {
         const configItem = chartConfig[exercise as keyof typeof chartConfig];
         return {
           exercise,
           attempts: count,
-          fill: configItem?.color || "hsl(var(--default-color))", 
+          fill: configItem?.color || "hsl(var(--default-color))",
         };
       }
     );
-  
     return chartData;
   };
   const chartData =generateChartData(userData)
