@@ -1,3 +1,4 @@
+/*
 'use client';
 import {
   Pagination,
@@ -64,7 +65,12 @@ const Page = () => {
     setIsLoading(true);
     async function fetchExercises() {
       const res = await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/${bodyFilter === 'all' ? '' : 'bodyparts/' + bodyFilter + '/'}exercises?offset=0&limit=12`
+        `https://exercisedb-api.vercel.app/api/v1/${bodyFilter === 'all' ? '' : 'bodyparts/' + bodyFilter + '/'}exercises?offset=0&limit=12`,
+        {
+          headers: {
+            'X-Api-Key': 'edb_cX9xwiLzwQK7N7fec-JY2-xvEHssimU2V4N4kVxFbKlS7',
+          }
+        }
       );
       const { data } = await res.json();
       setExercises(data.exercises);
@@ -85,7 +91,7 @@ const Page = () => {
                 onClick={() => setBodyFilter(name.toLowerCase())}
               >
                 {name}
-                {/* <Link href={'/exercises'}>{name}</Link> */}
+                {/!* <Link href={'/exercises'}>{name}</Link> *!/}
               </Button>
             </li>
           ))}
@@ -100,13 +106,13 @@ const Page = () => {
             defaultValue={searchParams.get('search')?.toString()}
             onChange={(e) => handleSearch(e.target.value)}
           />
-          {/* <Button type='submit' variant='searchBtn' size='searchSize'>
+          {/!* <Button type='submit' variant='searchBtn' size='searchSize'>
             Search
-          </Button> */}
+          </Button> *!/}
         </Form>
       </div>
       <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
-      {/* <ExerciseInfo /> */}
+      {/!* <ExerciseInfo /> *!/}
       <div>
         <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
           {isLoading
@@ -134,6 +140,63 @@ const Page = () => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
+    </section>
+  );
+};
+
+export default Page;
+*/
+
+import React from 'react';
+import ExerciseCard from '@/app/ui/ExerciseCard';
+import Search from '@/app/ui/Search';
+import Pages from '@/app/ui/Pages';
+
+interface Exercise {
+  name: string;
+  exerciseId: string;
+}
+
+const Page = async (props: {
+  searchParams?: Promise<{
+    page?: string;
+  }>;
+}) => {
+  const searchParams = await props.searchParams;
+  const currentPage =
+    Number(searchParams?.page) === 1
+      ? 0
+      : (Number(searchParams?.page) - 1) * 10 || 0;
+
+  const req = await fetch(
+    `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=10`,
+    {
+      headers: {
+        'X-Api-Key': 'edb_cX9xwiLzwQK7N7fec-JY2-xvEHssimU2V4N4kVxFbKlS7',
+      },
+    }
+  );
+
+  const {
+    data: { exercises },
+  } = await req.json();
+  const exercisesList: Exercise[] = await exercises;
+
+  return (
+    <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+      <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
+      <Search placeholder={'Search for an exercise'} />
+      {/* <ExerciseInfo /> */}
+      <main className={'mb-10'}>
+        <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
+          {exercisesList.map(({ name, exerciseId }) => (
+            <li key={exerciseId}>
+              <ExerciseCard exTitle={name} />
+            </li>
+          ))}
+        </ul>
+      </main>
+      <Pages />
     </section>
   );
 };
