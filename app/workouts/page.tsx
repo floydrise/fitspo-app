@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchWorkouts } from '@/app/lib/endpoints';
-import { fetchExerciseById } from '../routes/route';
+import { fetchExerciseById } from '../routes/fetchingExercises';
 import ExerciseCard from '../ui/ExerciseCard';
 import Link from 'next/link';
 
