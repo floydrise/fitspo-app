@@ -3,23 +3,22 @@ import React, { useState } from 'react';
 import { Workout_history } from '../lib/definitions';
 
 export function WorkoutCard({ workout }: { workout: Workout_history }) {
-  
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const date: string = workout.date.toString();
+  const date: string = workout.date.toDateString();
   const duration: number = Math.round(workout.duration / 60);
   return (
-    <div className='mb-4 rounded-md border border-gray-200'>
+    <div className='mb-4 rounded-md border border-gray-200 bg-fitViolet'>
       <button
         type='button'
         onClick={handleToggle}
-        className='flex w-full items-center justify-between p-4 font-medium text-gray-800 hover:bg-gray-100 focus:outline-none'
+        className=' w-full p-4 font-medium text-white focus:outline-none'
       >
-        <h2>
-          <p>Date: {date} </p>
-          <p>Length: {duration} minutes </p>
+        <h2 className='text-center'>
+          <p>{date} </p>
+          <p>{duration} minutes </p>
         </h2>
       </button>
       {isOpen && (
