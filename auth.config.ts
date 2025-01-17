@@ -19,17 +19,25 @@ export const authConfig = {
       return session;
     },
     authorized({ auth, request: { nextUrl } }) {
-      const protectedRoutes = ['/dashboard']
-      const publicRoutes = ["/", "/exercises", "/workouts", "/about", "/contact", "/home", ]
+      const protectedRoutes = ['/dashboard', '/tracker'];
+      const publicRoutes = [
+        '/exercises',
+        '/workouts',
+        '/about',
+        '/contact',
+        '/home',
+      ];
       const isLoggedIn = !!auth?.user;
-      const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+      const isProtectedRoute = protectedRoutes.some((route) =>
+        nextUrl.pathname.startsWith(route)
+      );
       const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-      if(isPublicRoute) {
-        return true
+      if (isPublicRoute) {
+        return true;
       }
       if (isProtectedRoute) {
-        if (isLoggedIn) return  true;
-        return false
+        if (isLoggedIn) return true;
+        return false;
       } else if (isLoggedIn) {
         return Response.redirect(new URL(`/dashboard`, nextUrl));
       }

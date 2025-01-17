@@ -54,9 +54,6 @@ export function Component( { history }: { history: Workout_history[] }){
           };
         })
       );
-      
-      console.log(data.map((exercise) => exercise.exercise));
-
     
     const chartData = [
         { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
