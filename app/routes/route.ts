@@ -31,7 +31,7 @@ export async function fetchExerciseById(exercise_id: string) {
       {
         method: 'GET',
         headers: {
-          'X-Api-Key': apiKey,
+          'X-Api-Key': 'edb_cX9xwiLzwQK7N7fec-JY2-xvEHssimU2V4N4kVxFbKlS7',
           'Content-Type': 'application/json',
         },
       }

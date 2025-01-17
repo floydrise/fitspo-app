@@ -28,18 +28,18 @@ async function Page() {
 
   return (
     <section>
-      <h1 className='m-2 flex flex-col items-center justify-center text-2xl font-bold'>
+      <h1 className='m-4 flex justify-start text-3xl font-bold'>
         Workouts List
       </h1>
-      <div className='mb-5 min-h-screen w-full py-6'>
+      <div className='mb-5 flex gap-14 min-h-screen justify-center w-full flex-wrap py-6'>
         {workoutsWithExercises.map((workout) => (
           <div
             key={workout.workout_id}
-            className='mx-auto mb-5 block w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 p-4 shadow-lg transition-shadow hover:bg-fitGrey hover:shadow-xl'
+            className='flex w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 bg-violet-100 p-4'
           >
             <Link
               key={workout.workout_id}
-              href={`workouts/${workout.workout_name}`}
+              href={`/tracker/${workout.workout_name}`}
               passHref
             >
               <div>

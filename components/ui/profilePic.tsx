@@ -27,7 +27,9 @@ const ProfilePic = ({ avatarImg }: { avatarImg: string | undefined }) => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel className={"text-center"}>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className={'text-center'}>
+            My Account
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Button variant={'ghost'} asChild>
@@ -56,3 +58,63 @@ const ProfilePic = ({ avatarImg }: { avatarImg: string | undefined }) => {
 };
 
 export default ProfilePic;
+
+/*
+import React from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  ArrowRightEndOnRectangleIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
+import { signOut } from '@/auth';
+import Link from 'next/link';
+
+const ProfilePic = ({ avatarImg }: { avatarImg: string | undefined }) => {
+
+  const handleLogout = async () => {
+    'use server';
+    await signOut({ redirectTo: '/', redirect: true });
+  };
+
+  return (
+    <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Avatar>
+            <AvatarImage src={avatarImg} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel className={'text-center'}>
+            My Account
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Link href={'/dashboard'} passHref>
+              <UserCircleIcon /> Dashboard
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={handleLogout}
+            style={{ cursor: 'pointer' }}
+          >
+            <ArrowRightEndOnRectangleIcon />
+            Log out
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
+
+export default ProfilePic;
+*/
