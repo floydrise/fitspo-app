@@ -31,7 +31,7 @@ async function Page() {
       <h1 className='m-4 flex justify-start text-3xl font-bold'>
         Workouts List
       </h1>
-      <div className='mb-5 flex gap-14 min-h-screen justify-center w-full flex-wrap py-6'>
+      <div className='mb-5 flex min-h-screen w-full flex-wrap justify-center gap-14 py-6'>
         {workoutsWithExercises.map((workout) => (
           <div
             key={workout.workout_id}
