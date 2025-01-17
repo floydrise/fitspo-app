@@ -18,30 +18,28 @@ import {
 } from "@/components/ui/chart"
 // import { Workout_history } from "../lib/definitions"
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
   visitors: {
     label: "Times worked out",
+    color: "hsl(var(--chart-1))", // Add a color property for compatibility
   },
   chrome: {
-    label: "Bench",
-    color: "hsl(var(--chart-1))",
+    label: "Chrome",
+    color: "hsl(var(--chart-2))",
   },
   safari: {
     label: "Safari",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-3))",
   },
   firefox: {
     label: "Firefox",
-    color: "hsl(var(--chart-3))",
+    color: "hsl(var(--chart-4))",
   },
   edge: {
     label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
     color: "hsl(var(--chart-5))",
   },
+
 } satisfies ChartConfig
 export function Component(){
   // { history }: { history: Workout_history[] }
@@ -63,10 +61,32 @@ export function Component(){
         { browser: "other", visitors: 190, fill: "var(--color-other)" },
       ]
 
+
+  const generateChartData = (data: string[]): ChartData[] => {
+    const exerciseCounts: Record<string, number> = data.reduce((acc, exercise) => {
+      acc[exercise] = (acc[exercise] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+
+    
+    const chartData: ChartData[] = Object.entries(exerciseCounts).map(
+      ([exercise, count]) => {
+        const configItem = chartConfig[exercise as keyof typeof chartConfig];
+        return {
+          exercise,
+          attempts: count,
+          fill: configItem?.color || "hsl(var(--default-color))", 
+        };
+      }
+    );
+  
+    return chartData;
+  };
+  const chartData =generateChartData(userData)
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Your most popular excercises</CardTitle>
+        <CardTitle>Your most popular exercises</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
@@ -81,9 +101,10 @@ export function Component(){
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey="attempts"
+              nameKey="exercise"
               innerRadius={60}
+              outerRadius={100}
               strokeWidth={5}
             >
               <Label
@@ -99,8 +120,9 @@ export function Component(){
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          className="fill-foreground text-2xl font-bold"
                         >
+                          Exercises
                         </tspan>
                         <tspan
                           x={viewBox.cx}
@@ -119,10 +141,10 @@ export function Component(){
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-        <TrendingUp className="h-4 w-4" />
+          <TrendingUp className="h-4 w-4" />
+          <span>Keep up the great work!</span>
         </div>
-        <div className="leading-none text-muted-foreground">
-        </div>
+        <div className="leading-none text-muted-foreground"></div>
       </CardFooter>
     </Card>
   )
