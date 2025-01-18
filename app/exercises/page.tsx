@@ -159,27 +159,39 @@ interface Exercise {
 
 const Page = async (props: {
   searchParams?: Promise<{
+    query?: string,
     page?: string;
   }>;
 }) => {
+
   const searchParams = await props.searchParams;
+  const query = searchParams?.query;
   const currentPage =
     Number(searchParams?.page) === 1
       ? 0
       : (Number(searchParams?.page) - 1) * 10 || 0;
 
-  const req = await fetch(
+
+  const req = query ? await fetch(
+    `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=10`,
+    {
+      headers: {
+        'X-Api-Key': `${process.env.API_KEY}`,
+      },
+    }
+  ) :  await fetch(
     `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=10`,
     {
       headers: {
-        'X-Api-Key': 'edb_cX9xwiLzwQK7N7fec-JY2-xvEHssimU2V4N4kVxFbKlS7',
+        'X-Api-Key': `${process.env.API_KEY}`,
       },
     }
   );
 
   const {
-    data: { exercises },
+    data: { exercises, totalPages },
   } = await req.json();
+
   const exercisesList: Exercise[] = await exercises;
 
   return (
@@ -189,14 +201,14 @@ const Page = async (props: {
       {/* <ExerciseInfo /> */}
       <main className={'mb-10'}>
         <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
-          {exercisesList.map(({ name, exerciseId }) => (
+          {exercisesList.length > 0 ? exercisesList.map(({ name, exerciseId }) => (
             <li key={exerciseId}>
               <ExerciseCard exTitle={name} />
             </li>
-          ))}
+          )) : <p className={"text-3xl font-bold text-red-500"}>No exercises</p>}
         </ul>
       </main>
-      <Pages />
+      {exercisesList.length > 0 ? <Pages totalPages={totalPages} /> : null}
     </section>
   );
 };

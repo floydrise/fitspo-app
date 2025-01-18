@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 import { Login } from '@/app/ui/login';
 
 const Page = () => {
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-fitViolet">
-      <Login/>
+    <div className='relative flex min-h-screen items-center justify-center bg-fitViolet'>
+      <Login />
     </div>
   );
 };
