@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const Pages = ({totalPages} : {totalPages:number}) => {
+const Pages = ({ totalPages }: { totalPages: number }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -31,19 +31,41 @@ const Pages = ({totalPages} : {totalPages:number}) => {
             <PaginationPrevious href={createPageURL(currentPage - 1)} />
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink isActive={currentPage === 1} href={createPageURL(1)}>1</PaginationLink>
+            <PaginationLink
+              isActive={currentPage === 1}
+              href={createPageURL(1)}
+            >
+              1
+            </PaginationLink>
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink isActive={currentPage === 2} href={createPageURL(2)}>2</PaginationLink>
+            <PaginationLink
+              isActive={currentPage === 2}
+              href={createPageURL(2)}
+            >
+              2
+            </PaginationLink>
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink isActive={currentPage === 3} href={createPageURL(3)}>3</PaginationLink>
+            <PaginationLink
+              isActive={currentPage === 3}
+              href={createPageURL(3)}
+            >
+              3
+            </PaginationLink>
           </PaginationItem>
+          {totalPages === 4 ? null : (
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+          )}
           <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink isActive={currentPage === totalPages} href={createPageURL(totalPages)}>{totalPages}</PaginationLink>
+            <PaginationLink
+              isActive={currentPage === totalPages}
+              href={createPageURL(totalPages)}
+            >
+              {totalPages}
+            </PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationNext href={createPageURL(currentPage + 1)} />
