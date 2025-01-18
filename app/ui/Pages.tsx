@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const Pages = () => {
+const Pages = ({totalPages} : {totalPages:number}) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -43,7 +43,7 @@ const Pages = () => {
             <PaginationEllipsis />
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink isActive={currentPage === 133} href={createPageURL(133)}>133</PaginationLink>
+            <PaginationLink isActive={currentPage === totalPages} href={createPageURL(totalPages)}>{totalPages}</PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationNext href={createPageURL(currentPage + 1)} />
