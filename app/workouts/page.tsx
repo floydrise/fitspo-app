@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchWorkouts } from '@/app/lib/endpoints';
 import { fetchExerciseById } from '../routes/fetchingExercises';
-import ExerciseCard from '../ui/ExerciseCard';
+// import ExerciseCard from '../ui/ExerciseCard';
 import Link from 'next/link';
 
 async function Page() {
@@ -25,7 +25,7 @@ async function Page() {
       };
     })
   );
-
+console.log(workoutsWithExercises);
   return (
     <section>
       <h1 className='m-4 flex justify-start text-3xl font-bold'>
@@ -46,13 +46,13 @@ async function Page() {
                 <h2 className='mb-2 flex flex-col items-center justify-center text-xl font-bold'>
                   {workout.workout_name}
                 </h2>
-                <ul className='mb-1 flex flex-col items-center gap-1'>
-                  {workout.exercises.map((exercise) => (
+{/*                <ul className='mb-1 flex flex-col items-center gap-1'>
+                  {workout.exercises.map((exercise:string) => (
                     <li key={exercise}>
                       <ExerciseCard exTitle={exercise} />
                     </li>
                   ))}
-                </ul>
+                </ul>*/}
               </div>
             </Link>
           </div>
