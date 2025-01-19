@@ -46,27 +46,23 @@ const Pages = ({ totalPages }: { totalPages: number }) => {
               2
             </PaginationLink>
           </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              isActive={currentPage === 3}
-              href={createPageURL(3)}
-            >
-              3
-            </PaginationLink>
-          </PaginationItem>
-          {totalPages === 4 ? null : (
+
+          {totalPages === 2 ? null : (
+            <>
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                isActive={currentPage === totalPages}
+                href={createPageURL(totalPages)}
+              >
+                {totalPages}
+              </PaginationLink>
+            </PaginationItem>
+            </>
           )}
-          <PaginationItem>
-            <PaginationLink
-              isActive={currentPage === totalPages}
-              href={createPageURL(totalPages)}
-            >
-              {totalPages}
-            </PaginationLink>
-          </PaginationItem>
+
           <PaginationItem>
             <PaginationNext href={createPageURL(currentPage + 1)} />
           </PaginationItem>

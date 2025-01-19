@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
     ]
   },
   crossOrigin: "anonymous",
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn-exercisedb.vercel.app',
+        port: '',
+        pathname: '/api/v1/images/*',
+        search: '',
+      },
+    ]
+  }
 };
 
 export default nextConfig;

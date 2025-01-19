@@ -151,6 +151,7 @@ import React from 'react';
 import ExerciseCard from '@/app/ui/ExerciseCard';
 import Search from '@/app/ui/Search';
 import Pages from '@/app/ui/Pages';
+import ExerciseInfo from '@/app/ui/ExerciseInfo';
 
 interface Exercise {
   name: string;
@@ -161,6 +162,8 @@ const Page = async (props: {
   searchParams?: Promise<{
     query?: string,
     page?: string;
+    modal?: string,
+    exercise_id?: string
   }>;
 }) => {
 
@@ -170,7 +173,8 @@ const Page = async (props: {
     Number(searchParams?.page) === 1
       ? 0
       : (Number(searchParams?.page) - 1) * 10 || 0;
-
+  const showModal = searchParams?.modal === "true";
+  const exercise_id = searchParams?.exercise_id;
 
   const req = query ? await fetch(
     `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=10`,
@@ -203,10 +207,11 @@ const Page = async (props: {
         <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
           {exercisesList.length > 0 ? exercisesList.map(({ name, exerciseId }) => (
             <li key={exerciseId}>
-              <ExerciseCard exTitle={name} />
+              <ExerciseCard exTitle={name} exerciseId={exerciseId} />
             </li>
-          )) : <p className={"text-3xl font-bold text-red-500"}>No exercises</p>}
+          )) : <p className={"text-3xl font-bold text-red-500"}>No exercises match this query</p>}
         </ul>
+        {showModal && <ExerciseInfo exercise_id={exercise_id}/>}
       </main>
       {exercisesList.length > 0 ? <Pages totalPages={totalPages} /> : null}
     </section>
