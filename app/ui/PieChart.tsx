@@ -1,7 +1,7 @@
-"use client"
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
+'use client';
+import * as React from 'react';
+import { TrendingUp } from 'lucide-react';
+import { Label, Pie, PieChart } from 'recharts';
 import {
   Card,
   CardContent,
@@ -9,34 +9,34 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { Workout_history } from "../lib/definitions"
+} from '@/components/ui/chart';
+import { Workout_history } from '../lib/definitions';
 const chartConfig: ChartConfig = {
-  visitors: {
-    label: "Times worked out",
-    color: "hsl(var(--chart-1))", // Add a color property for compatibility
+  exercise: {
+    label: 'Times worked out',
+    color: 'hsl(var(--chart-1))',
   },
   chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-2))",
+    label: 'Chrome',
+    color: 'hsl(var(--chart-2))',
   },
   safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-3))",
+    label: 'Safari',
+    color: 'hsl(var(--chart-3))',
   },
   firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-4))",
+    label: 'Firefox',
+    color: 'hsl(var(--chart-4))',
   },
   edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-5))",
+    label: 'Edge',
+    color: 'hsl(var(--chart-5))',
   },
 };
 export function Component({ history }: { history: Workout_history[] }) {
@@ -44,44 +44,49 @@ export function Component({ history }: { history: Workout_history[] }) {
     history.exercise_list.map((exercise) => {
       return {
         exercise: exercise.name,
-      }
+      };
     })
-  )
-  // this  is a comment
-  const userData: string[] = data.map((data) => data.exercise)
+  );
+  const userData: string[] = data.map((data) => data.exercise);
   type ChartData = {
-    exercise: string
-    attempts: number
-    fill: string
-  }
+    exercise: string;
+    attempts: number;
+    fill: string;
+  };
   const generateChartData = (data: string[]): ChartData[] => {
-    const exerciseCounts: Record<string, number> = data.reduce((acc, exercise) => {
-      acc[exercise] = (acc[exercise] || 0) + 1
-      return acc
-    }, {} as Record<string, number>)
+    const exerciseCounts: Record<string, number> = data.reduce(
+      (acc, exercise) => {
+        acc[exercise] = (acc[exercise] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
     const chartData: ChartData[] = Object.entries(exerciseCounts).map(
       ([exercise, count]) => {
         const configItem = chartConfig[exercise as keyof typeof chartConfig];
+        console.log(configItem);
+
         return {
           exercise,
           attempts: count,
-          fill: configItem?.color || "hsl(var(--default-color))",
+          fill: configItem?.color || 'hsl(var(--default-color))',
         };
       }
     );
     return chartData;
   };
-  const chartData =generateChartData(userData)
+
+  const chartData = generateChartData(userData);
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
+    <Card className='flex flex-col'>
+      <CardHeader className='items-center pb-0'>
         <CardTitle>Your most popular exercises</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className='flex-1 pb-0'>
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className='mx-auto aspect-square max-h-[250px]'
         >
           <PieChart>
             <ChartTooltip
@@ -90,37 +95,36 @@ export function Component({ history }: { history: Workout_history[] }) {
             />
             <Pie
               data={chartData}
-              dataKey="attempts"
-              nameKey="exercise"
+              dataKey='attempts'
+              nameKey='exercise'
               innerRadius={60}
               outerRadius={100}
               strokeWidth={5}
             >
               <Label
                 content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                     return (
                       <text
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
+                        textAnchor='middle'
+                        dominantBaseline='middle'
                       >
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-2xl font-bold"
+                          className='fill-foreground text-2xl font-bold'
                         >
                           Exercises
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
-                        </tspan>
+                          className='fill-muted-foreground'
+                        ></tspan>
                       </text>
-                    )
+                    );
                   }
                 }}
               />
@@ -128,13 +132,13 @@ export function Component({ history }: { history: Workout_history[] }) {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          <TrendingUp className="h-4 w-4" />
+      <CardFooter className='flex-col gap-2 text-sm'>
+        <div className='flex items-center gap-2 font-medium leading-none'>
+          <TrendingUp className='h-4 w-4' />
           <span>Keep up the great work!</span>
         </div>
-        <div className="leading-none text-muted-foreground"></div>
+        <div className='leading-none text-muted-foreground'></div>
       </CardFooter>
     </Card>
-  )
+  );
 }

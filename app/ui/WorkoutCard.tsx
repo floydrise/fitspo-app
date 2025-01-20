@@ -9,14 +9,25 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
   };
   const date: string = workout.date.toDateString();
   const duration: number = Math.round(workout.duration / 60);
+  const workoutName: { [key: number]: string } = {
+    1: 'Upper Body',
+    2: 'Lower Body',
+    3: 'Core',
+    4: 'Chest',
+    5: 'Back',
+    6: 'Biceps',
+    7: 'Triceps',
+    8: 'Shoulders',
+  };
   return (
     <div className='mb-4 rounded-md border border-gray-200 bg-fitViolet'>
       <button
         type='button'
         onClick={handleToggle}
-        className=' w-full p-4 font-medium text-white focus:outline-none'
+        className='w-full p-4 font-medium text-white focus:outline-none'
       >
         <h2 className='text-center'>
+          <p> {workoutName[workout.workout_id]}</p>
           <p>{date} </p>
           <p>{duration} minutes </p>
         </h2>
