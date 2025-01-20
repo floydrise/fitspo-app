@@ -19,6 +19,7 @@ export default {
         fitViolet: '#857CED',
         fitBlue: '#091B35',
         fitGreen: '#D3F076',
+        fitDarkerGreen: '#bde719',
         fitRed: '#FD6131',
         card: {
           DEFAULT: 'hsl(var(--card))',

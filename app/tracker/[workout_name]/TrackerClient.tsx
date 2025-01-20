@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { fetchExerciseById } from '@/app/routes/fetchingExercises';
 import { QueryResultRow } from '@vercel/postgres';
 import { Workout } from '@/app/lib/definitions';
+import { fetchExerciseById } from '@/app/lib/endpoints';
 
 function TrackerClient({
   workouts,

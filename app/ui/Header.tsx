@@ -19,13 +19,13 @@ export default async function Header() {
         <Link href={'/'} className={'flex'}>
           <Image
             src='/Logo.svg'
-            width={1200}
+            width={600}
             height={531}
             alt='Logo of our website'
-            className={'h-auto w-24 md:h-auto md:w-[200px]'}
+            className={'h-auto w-24 md:h-auto md:w-[150px]'}
           />
         </Link>
-        <nav className='hidden items-center gap-5 md:flex'>
+        <nav className='hidden items-center gap-5 md:flex md:justify-center'>
           <NavLinks />
         </nav>
         <nav className={'flex items-center md:hidden'}>
@@ -44,8 +44,8 @@ export default async function Header() {
               <Link href={'/signup'}>Sign up</Link>
             </Button>
           </div>
-          <div className={session?.user ? 'flex items-center gap-2 focus:outline-none' : 'hidden'}>
-            <ProfilePic avatarImg={userData?.avatar_img_url}/>
+          <div className={session?.user ? 'flex items-center gap-2' : 'hidden'}>
+            <ProfilePic title={userData?.name} avatarImg={userData?.avatar_img_url}/>
           </div>
         </div>
       </header>

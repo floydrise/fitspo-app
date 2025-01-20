@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { User, Workout_history } from '@/app/lib/definitions';
+import { User, Workout, Workout_history } from '@/app/lib/definitions';
 
 export async function fetchUsers() {
   try {
@@ -43,6 +43,17 @@ export async function fetchWorkoutById(workout_id: number) {
   }
 }
 
+export const fetchWorkoutByName = async (workout_name: string | undefined) => {
+  try {
+    const data = await sql<Workout>`SELECT * FROM workouts
+    WHERE workout_name = ${workout_name}`;
+    return data.rows[0];
+  } catch (error) {
+    console.error('error fetching workout', error);
+    throw new Error('error fetching workout');
+  }
+}
+
 export async function fetchWorkoutHistoryByUserId(user_id: number) {
   try {
     const data = await sql<Workout_history>`SELECT * FROM workout_history
@@ -51,5 +62,26 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   } catch (error) {
     console.error('error fetching workout history ', error);
     throw new Error('error fetching workout history');
+  }
+}
+
+export async function fetchExerciseById(exercise_id: string) {
+  try {
+    const response = await fetch(
+      `https://exercisedb-api.vercel.app/api/v1/exercises/${exercise_id}`,
+      {
+        headers: {
+          'X-Api-Key': `${process.env.API_KEY}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
+    }
+    const exercise = await response.json();
+    return exercise;
+  } catch (error) {
+    console.error(`Error fetching exercise with ID: ${exercise_id}`, error);
+    throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
   }
 }
