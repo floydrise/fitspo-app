@@ -15,7 +15,7 @@ const Page = () => {
       </span>
       <div
         className={
-          'flex w-full justify-center rounded-md border border-indigo-100 bg-indigo-200 p-4 md:w-2/5'
+          'flex w-full justify-center rounded-md shadow-md bg-indigo-200 p-4 md:w-1/3'
         }
       >
         <SignupForm />

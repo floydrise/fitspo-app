@@ -1,6 +1,6 @@
 import React from 'react';
-import { fetchWorkouts } from '@/app/lib/endpoints';
-import { fetchExerciseById } from '../routes/fetchingExercises';
+import { fetchExerciseById, fetchWorkouts } from '@/app/lib/endpoints';
+
 // import ExerciseCard from '../ui/ExerciseCard';
 import Link from 'next/link';
 
@@ -25,7 +25,7 @@ async function Page() {
       };
     })
   );
-console.log(workoutsWithExercises);
+  console.log(workoutsWithExercises)
   return (
     <section>
       <h1 className='m-4 flex justify-start text-3xl font-bold'>

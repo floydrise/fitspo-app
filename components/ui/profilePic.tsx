@@ -16,44 +16,45 @@ import { signOut } from '@/auth';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-const ProfilePic = ({ avatarImg }: { avatarImg: string | undefined }) => {
+const ProfilePic = ({ avatarImg, title }: { avatarImg: string | undefined, title: string | undefined }) => {
   return (
-    <div>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Avatar>
-            <AvatarImage src={avatarImg} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel className={'text-center'}>
-            My Account
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Button variant={'ghost'} asChild>
-              <Link href={'/dashboard'}>
-                <UserCircleIcon /> Dashboard
-              </Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        className={'flex justify-center items-center gap-2 p-1 pl-1.5 rounded-3xl bg-fitGreen'}
+      >
+        <p><span className={"font-bold"}>Hello,</span> {title}</p>
+        <Avatar>
+          <AvatarImage src={avatarImg} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel className={'text-center'}>
+          My Account
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Button variant={'ghost'} asChild>
+            <Link href={'/dashboard'}>
+              <UserCircleIcon /> Dashboard
+            </Link>
+          </Button>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <form
+            action={async () => {
+              'use server';
+              await signOut({ redirectTo: '/', redirect: true });
+            }}
+          >
+            <Button variant={'ghost'}>
+              <ArrowRightEndOnRectangleIcon />
+              Log out
             </Button>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <form
-              action={async () => {
-                'use server';
-                await signOut({ redirectTo: '/', redirect: true });
-              }}
-            >
-              <Button variant={'ghost'}>
-                <ArrowRightEndOnRectangleIcon />
-                Log out
-              </Button>
-            </form>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+          </form>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
