@@ -64,7 +64,6 @@ export function Component({ history }: { history: Workout_history[] }) {
     const chartData: ChartData[] = Object.entries(exerciseCounts).map(
       ([exercise, count]) => {
         const configItem = chartConfig[exercise as keyof typeof chartConfig];
-        console.log(configItem);
 
         return {
           exercise,
