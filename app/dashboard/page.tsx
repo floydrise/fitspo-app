@@ -1,44 +1,55 @@
-"use server"
+'use server';
 import React from 'react';
 import { auth } from '@/auth';
-import { fetchUserByUserId, fetchWorkoutHistoryByUserId } from '../lib/endpoints'
-import UserProfile from '../ui/UserProfile'
-import { User } from '../lib/definitions'
+import {
+  fetchUserByUsername,
+  fetchWorkoutHistoryByUserId,
+} from '../lib/endpoints';
 import { WorkoutCard } from '../ui/WorkoutCard';
+import UserProfile from '../ui/UserProfile';
+import { Component } from '../ui/PieChart';
+import Link from 'next/link';
+import { ProcessWorkoutData } from '../ui/ProcessWorkoutData';
 
 export default async function Page() {
-
   const session = await auth();
-  console.log(session)
-  const workout_history = (await fetchWorkoutHistoryByUserId(1)).map((workout: any) => ({
-    workout_history_id: workout.workout_history_id,
-    user_id: workout.user_id,
-    workout_id: workout.workout_id,
-    date: workout.date,
-    duration: workout.duration,
-    exercise_list: workout.exercise_list
-  }));
-
-   const userData = await fetchUserByUserId(1)
-           const user: User = {
-               user_id: userData.user_id,
-               username: userData.username,
-               name: userData.name,
-               avatar_img_url: userData.avatar_img_url
-           }
+  if (!session?.user.username) {
+    throw new Error('User is not logged in');
+  }
+  const userData = await fetchUserByUsername(session.user.username);
+  const workout_history = await fetchWorkoutHistoryByUserId(userData.user_id);
+  if (workout_history.length === 0)
+    return (
+      <div className='mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 p-4'>
+        <UserProfile user={userData} />
+        <p>nothing to see yet...</p>
+        <Link href='/workouts'>
+          <p className='text-center text-xl font-bold'>
+            Click here to start your Journey
+          </p>
+        </Link>
+      </div>
+    );
 
   return (
-    <div>
-      <p>User <span className={"border-b font-bold"}>{session?.user.username}</span> logged in</p>
-      <div className='p-6 container mx-auto'>
-                 <h1>User Profile</h1>
-                 <UserProfile user={user} />
-             </div>
-             <div className='space-y-4'>
+    <div className='mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 p-4'>
+      <div>
+        <UserProfile user={userData} />
+      </div>
+      <div className='flex flex-row items-center justify-center gap-8'>
+        <div className='flex 1 justify-center'>
+        <Component history={workout_history} />
+        </div>
+        <div className='flex 1 justify-center'>
+        <ProcessWorkoutData history={workout_history} />
+        </div>
+      </div>
+      <h1 className='text-center text-xl font-bold'>Workout History</h1>
+      <div className='w-full'>
         {workout_history.map((workout) => (
           <WorkoutCard key={workout.workout_history_id} workout={workout} />
         ))}
       </div>
     </div>
   );
-};
+}

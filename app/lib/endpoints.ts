@@ -1,4 +1,5 @@
 import { sql } from '@vercel/postgres';
+import { User, Workout, Workout_history } from '@/app/lib/definitions';
 
 export async function fetchUsers() {
   try {
@@ -10,10 +11,10 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserByUserId(user_id: number) {
+export async function fetchUserByUsername(username: string){
   try {
-    const data = await sql`SELECT * FROM users 
-    WHERE user_id = ${user_id}`;
+    const data= await sql<User>`SELECT * FROM users 
+    WHERE username = ${username}`;
     return data.rows[0];
   } catch (error) {
     console.error('error fetching user', error);
@@ -23,7 +24,7 @@ export async function fetchUserByUserId(user_id: number) {
 
 export async function fetchWorkouts() {
   try {
-    const data = await sql`SELECT * FROM workouts`;
+    const data = await sql<Workout>`SELECT * FROM workouts`;
     return data.rows;
   } catch (error) {
     console.error('error fetching workouts', error);
@@ -42,9 +43,20 @@ export async function fetchWorkoutById(workout_id: number) {
   }
 }
 
+export const fetchWorkoutByName = async (workout_name: string | undefined) => {
+  try {
+    const data = await sql<Workout>`SELECT * FROM workouts
+    WHERE workout_name = ${workout_name}`;
+    return data.rows[0];
+  } catch (error) {
+    console.error('error fetching workout', error);
+    throw new Error('error fetching workout');
+  }
+}
+
 export async function fetchWorkoutHistoryByUserId(user_id: number) {
   try {
-    const data = await sql`SELECT * FROM workout_history
+    const data = await sql<Workout_history>`SELECT * FROM workout_history
     WHERE user_id = ${user_id}`;
     return data.rows;
   } catch (error) {
@@ -56,7 +68,12 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
 export async function fetchExerciseById(exercise_id: string) {
   try {
     const response = await fetch(
-      `https://exercisedb-api.vercel.app/api/v1/exercises/${exercise_id}`
+      `https://exercisedb-api.vercel.app/api/v1/exercises/${exercise_id}`,
+      {
+        headers: {
+          'X-Api-Key': `${process.env.API_KEY}`,
+        },
+      }
     );
     if (!response.ok) {
       throw new Error(`Error fetching exercise with ID: ${exercise_id}`);

@@ -18,12 +18,15 @@ const AppOverview = () => {
               fitness, FitSpo simplifies your journey to consistent progress.
             </p>
             <div className='mt-[20px] max-[370px]:flex-col min-[320px]:max-[1023px]:flex min-[320px]:max-[1023px]:justify-center'>
-              <button className='rounded-[35px] bg-fitGreen px-[33px] py-[20px] text-[18px] font-bold transition ease-in-out hover:bg-fitBlue hover:text-fitGreen'>
+              <button
+                onClick={() => router.push('/login')}
+                className='rounded-[15px] bg-fitGreen px-[33px] py-[20px] text-[18px] font-bold transition ease-in-out hover:bg-fitBlue hover:text-fitGreen'
+              >
                 Try for free
               </button>
               <button
                 onClick={() => router.push('/about')}
-                className='ml-[10px] rounded-[35px] border border-fitGreen px-[33px] py-[20px] text-[18px] font-bold text-fitGreen transition ease-in-out hover:border-fitBlue hover:bg-fitBlue hover:text-fitGreen max-[370px]:ml-0 max-[370px]:mt-[15px]'
+                className='ml-[10px] rounded-[15px] border border-fitGreen px-[33px] py-[20px] text-[18px] font-bold text-fitGreen transition ease-in-out hover:border-fitBlue hover:bg-fitBlue hover:text-fitGreen max-[370px]:ml-0 max-[370px]:mt-[15px]'
               >
                 Read more
               </button>

@@ -14,7 +14,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="relative w-full max-w-md p-6 space-y-6 bg-white shadow-md rounded-lg z-10">
+      <div className="relative max-w-md p-2.5 md:p-10 space-y-6 bg-white shadow-md rounded-lg z-10">
         <h1 className="text-2xl font-bold text-center text-fitBlue">
           Log in to Your FitSpo Account
         </h1>
@@ -45,7 +45,7 @@ export const Login = () => {
             Log in
           </button>
           <div
-            className="flex h-8 items-end space-x-1"
+            className="flex items-end space-x-1"
             aria-live="polite"
             aria-atomic="true"
           >

@@ -19,6 +19,7 @@ export default {
         fitViolet: '#857CED',
         fitBlue: '#091B35',
         fitGreen: '#D3F076',
+        fitDarkerGreen: '#bde719',
         fitRed: '#FD6131',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -63,10 +64,13 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  daisyui: {
+    themes: ["light"],
+  },
+  plugins: [require('tailwindcss-animate'), require('daisyui')],
 } satisfies Config;

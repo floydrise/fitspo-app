@@ -1,4 +1,5 @@
 import { fetchUsers } from '@/app/lib/endpoints';
+import Image from 'next/image';
 import React from 'react';
 
 async function page() {
@@ -26,15 +27,11 @@ async function page() {
           }}
         >
           <h2>{user.name}</h2>
-          <img
-            style={{
-              width: '150px',
-              height: '150px',
-              borderRadius: '50%',
-              display: 'flex',
-            }}
+          <Image
             src={user.avatar_img_url}
-            alt={user.name}
+            alt={`${user.name}'s avatar`}
+            width={150}
+            height={150}
           />
         </div>
       ))}

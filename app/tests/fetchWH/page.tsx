@@ -4,7 +4,6 @@ import React from 'react';
 
 async function page() {
   const workout_history = await fetchWorkoutHistoryByUserId(1);
-  console.log(workout_history)
   return (
     <div>
       <h1>workout history</h1>

@@ -1,3 +1,4 @@
+/*
 'use client';
 import {
   Pagination,
@@ -64,7 +65,12 @@ const Page = () => {
     setIsLoading(true);
     async function fetchExercises() {
       const res = await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/${bodyFilter === 'all' ? '' : 'bodyparts/' + bodyFilter + '/'}exercises?offset=0&limit=12`
+        `https://exercisedb-api.vercel.app/api/v1/${bodyFilter === 'all' ? '' : 'bodyparts/' + bodyFilter + '/'}exercises?offset=0&limit=12`,
+        {
+          headers: {
+            'X-Api-Key': 'edb_cX9xwiLzwQK7N7fec-JY2-xvEHssimU2V4N4kVxFbKlS7',
+          }
+        }
       );
       const { data } = await res.json();
       setExercises(data.exercises);
@@ -85,7 +91,7 @@ const Page = () => {
                 onClick={() => setBodyFilter(name.toLowerCase())}
               >
                 {name}
-                {/* <Link href={'/exercises'}>{name}</Link> */}
+                {/!* <Link href={'/exercises'}>{name}</Link> *!/}
               </Button>
             </li>
           ))}
@@ -100,13 +106,13 @@ const Page = () => {
             defaultValue={searchParams.get('search')?.toString()}
             onChange={(e) => handleSearch(e.target.value)}
           />
-          {/* <Button type='submit' variant='searchBtn' size='searchSize'>
+          {/!* <Button type='submit' variant='searchBtn' size='searchSize'>
             Search
-          </Button> */}
+          </Button> *!/}
         </Form>
       </div>
       <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
-      {/* <ExerciseInfo /> */}
+      {/!* <ExerciseInfo /> *!/}
       <div>
         <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
           {isLoading
@@ -135,6 +141,106 @@ const Page = () => {
         </PaginationContent>
       </Pagination>
     </section>
+  );
+};
+
+export default Page;
+*/
+
+import React from 'react';
+import ExerciseCard from '@/app/ui/ExerciseCard';
+import Search from '@/app/ui/Search';
+// import Pages from '@/app/ui/Pages';
+import ExerciseInfo from '@/app/ui/ExerciseInfo';
+import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
+
+interface Exercise {
+  name: string;
+  exerciseId: string;
+}
+
+const Page = async (props: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+    pageSize?: string;
+    modal?: string;
+    exercise_id?: string;
+  }>;
+}) => {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query;
+  const currentPage = Number((searchParams?.page as string) || '0');
+  const cardsPerPage = Number((searchParams?.pageSize as string) || '12');
+  const showModal = searchParams?.modal === 'true';
+  const exercise_id = searchParams?.exercise_id;
+
+  const req = query
+    ? await fetch(
+        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=${cardsPerPage}`,
+        {
+          headers: {
+            'X-Api-Key': `${process.env.API_KEY}`,
+          },
+        }
+      )
+    : await fetch(
+        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=${cardsPerPage}`,
+        {
+          headers: {
+            'X-Api-Key': `${process.env.API_KEY}`,
+          },
+        }
+      );
+
+  const {
+    data: { exercises, totalPages },
+  } = await req.json();
+
+  const exercisesList: Exercise[] = await exercises;
+
+  // ${showModal && 'fixed'}
+
+  return (
+    <>
+      {showModal ? (
+        <>
+          <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+            <div className='flex justify-center'>
+              <ExerciseInfo exercise_id={exercise_id} />
+            </div>
+          </section>
+        </>
+      ) : (
+        <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+          <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
+          <Search placeholder={'Search for an exercise'} />
+          {/* <ExerciseInfo /> */}
+          <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
+            {exercisesList.length > 0 ? (
+              exercisesList.map(({ name, exerciseId }) => (
+                <li key={exerciseId}>
+                  <ExerciseCard exTitle={name} exerciseId={exerciseId} />
+                </li>
+              ))
+            ) : (
+              <p className={'text-3xl font-bold text-red-500'}>
+                No exercises match this query
+              </p>
+            )}
+          </ul>
+          <div className='mt-10'>
+            {exercisesList.length > 0 ? (
+              <PaginationWithLinks
+                page={currentPage}
+                pageSize={cardsPerPage}
+                totalCount={totalPages * cardsPerPage}
+              />
+            ) : null}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
