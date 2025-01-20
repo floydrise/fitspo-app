@@ -150,8 +150,9 @@ export default Page;
 import React from 'react';
 import ExerciseCard from '@/app/ui/ExerciseCard';
 import Search from '@/app/ui/Search';
-import Pages from '@/app/ui/Pages';
+// import Pages from '@/app/ui/Pages';
 import ExerciseInfo from '@/app/ui/ExerciseInfo';
+import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 
 interface Exercise {
   name: string;
@@ -162,22 +163,21 @@ const Page = async (props: {
   searchParams?: Promise<{
     query?: string;
     page?: string;
+    pageSize?: string;
     modal?: string;
     exercise_id?: string;
   }>;
 }) => {
   const searchParams = await props.searchParams;
   const query = searchParams?.query;
-  const currentPage =
-    Number(searchParams?.page) === 1
-      ? 0
-      : (Number(searchParams?.page) - 1) * 10 || 0;
+  const currentPage = Number((searchParams?.page as string) || '0');
+  const cardsPerPage = Number((searchParams?.pageSize as string) || '12');
   const showModal = searchParams?.modal === 'true';
   const exercise_id = searchParams?.exercise_id;
 
   const req = query
     ? await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=10`,
+        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=${cardsPerPage}`,
         {
           headers: {
             'X-Api-Key': `${process.env.API_KEY}`,
@@ -185,7 +185,7 @@ const Page = async (props: {
         }
       )
     : await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=10`,
+        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=${cardsPerPage}`,
         {
           headers: {
             'X-Api-Key': `${process.env.API_KEY}`,
@@ -231,7 +231,11 @@ const Page = async (props: {
           </ul>
           <div className='mt-10'>
             {exercisesList.length > 0 ? (
-              <Pages totalPages={totalPages} />
+              <PaginationWithLinks
+                page={currentPage}
+                pageSize={cardsPerPage}
+                totalCount={totalPages * cardsPerPage}
+              />
             ) : null}
           </div>
         </section>
