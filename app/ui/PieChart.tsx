@@ -20,24 +20,8 @@ import { Workout_history } from '../lib/definitions';
 const chartConfig: ChartConfig = {
   exercise: {
     label: 'Times worked out',
-    color: 'hsl(var(--chart-1))',
-  },
-  chrome: {
-    label: 'Chrome',
-    color: 'hsl(var(--chart-2))',
-  },
-  safari: {
-    label: 'Safari',
-    color: 'hsl(var(--chart-3))',
-  },
-  firefox: {
-    label: 'Firefox',
-    color: 'hsl(var(--chart-4))',
-  },
-  edge: {
-    label: 'Edge',
-    color: 'hsl(var(--chart-5))',
-  },
+    color: 'hsl(272, 61%, 34%)',
+  }
 };
 export function Component({ history }: { history: Workout_history[] }) {
   const data = history.flatMap((history) =>
@@ -63,13 +47,10 @@ export function Component({ history }: { history: Workout_history[] }) {
     );
     const chartData: ChartData[] = Object.entries(exerciseCounts).map(
       ([exercise, count]) => {
-        const configItem = chartConfig[exercise as keyof typeof chartConfig];
-        console.log(configItem);
-
         return {
           exercise,
           attempts: count,
-          fill: configItem?.color || 'hsl(var(--default-color))',
+          fill: 'hsl(272, 61%, 34%)',
         };
       }
     );
@@ -86,7 +67,7 @@ export function Component({ history }: { history: Workout_history[] }) {
       <CardContent className='flex-1 pb-0'>
         <ChartContainer
           config={chartConfig}
-          className='mx-auto aspect-square max-h-[250px]'
+          className='mx-auto aspect-square max-h-[300px]'
         >
           <PieChart>
             <ChartTooltip
@@ -100,6 +81,7 @@ export function Component({ history }: { history: Workout_history[] }) {
               innerRadius={60}
               outerRadius={100}
               strokeWidth={5}
+              paddingAngle={20}
             >
               <Label
                 content={({ viewBox }) => {
