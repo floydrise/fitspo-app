@@ -47,6 +47,7 @@ export function Component({ history }: { history: Workout_history[] }) {
     );
     const chartData: ChartData[] = Object.entries(exerciseCounts).map(
       ([exercise, count]) => {
+
         return {
           exercise,
           attempts: count,
