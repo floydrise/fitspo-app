@@ -24,7 +24,7 @@ export async function fetchUserByUsername(username: string){
 
 export async function fetchWorkouts() {
   try {
-    const data = await sql`SELECT * FROM workouts`;
+    const data = await sql<Workout>`SELECT * FROM workouts`;
     return data.rows;
   } catch (error) {
     console.error('error fetching workouts', error);

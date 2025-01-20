@@ -1,63 +1,16 @@
 import React from 'react';
-import { fetchExerciseById, fetchWorkouts } from '@/app/lib/endpoints';
-
-// import ExerciseCard from '../ui/ExerciseCard';
-import Link from 'next/link';
+import {fetchWorkouts } from '@/app/lib/endpoints';
+import { Workout } from '@/app/lib/definitions';
+import WorkoutCard from '@/components/ui/workoutCard';
 
 async function Page() {
-  const workouts = await fetchWorkouts();
 
-  const workoutsWithExercises = await Promise.all(
-    workouts.map(async (workout) => {
-      const exercises = await Promise.all(
-        workout.exercise_ids.map(async (exercise_id: string) => {
-          const {
-            data: { name },
-          } = await fetchExerciseById(exercise_id);
-          return name;
-        })
-      );
-      return {
-        ...workout,
-        exercises,
-        workout_id: workout.workout_id,
-        workout_name: workout.workout_name,
-      };
-    })
-  );
-  console.log(workoutsWithExercises)
+  const workouts: Workout[] = await fetchWorkouts();
   return (
-    <section>
-      <h1 className='m-4 flex justify-start text-3xl font-bold'>
-        Workouts List
-      </h1>
-      <div className='mb-5 flex min-h-screen w-full flex-wrap justify-center gap-14 py-6'>
-        {workoutsWithExercises.map((workout) => (
-          <div
-            key={workout.workout_id}
-            className='flex w-10/12 max-w-sm cursor-pointer rounded-lg border border-gray-200 bg-violet-100 p-4'
-          >
-            <Link
-              key={workout.workout_id}
-              href={`/tracker/${workout.workout_name}`}
-              passHref
-            >
-              <div>
-                <h2 className='mb-2 flex flex-col items-center justify-center text-xl font-bold'>
-                  {workout.workout_name}
-                </h2>
-{/*                <ul className='mb-1 flex flex-col items-center gap-1'>
-                  {workout.exercises.map((exercise:string) => (
-                    <li key={exercise}>
-                      <ExerciseCard exTitle={exercise} />
-                    </li>
-                  ))}
-                </ul>*/}
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+    <section className={"flex flex-wrap justify-center items-center gap-6 m-6"}>
+      {workouts.map((workout) => (
+        <WorkoutCard key={workout.workout_id} workoutName={workout.workout_name}/>
+      ))}
     </section>
   );
 }

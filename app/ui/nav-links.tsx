@@ -22,7 +22,7 @@ const NavLinks = () => {
             key={link.name}
             href={link.href}
           >
-            <Button variant={pathname === link.href ? "purple" : "ghost"}>{link.name}</Button>
+            <Button variant={pathname === link.href ? "purple" : "gray"}>{link.name}</Button>
           </Link>
         );
       })}
