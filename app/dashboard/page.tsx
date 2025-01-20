@@ -9,6 +9,7 @@ import { WorkoutCard } from '../ui/WorkoutCard';
 import UserProfile from '../ui/UserProfile';
 import { Component } from '../ui/PieChart';
 import Link from 'next/link';
+import { ProcessWorkoutData } from '../ui/ProcessWorkoutData';
 
 export default async function Page() {
   const session = await auth();
@@ -35,8 +36,13 @@ export default async function Page() {
       <div>
         <UserProfile user={userData} />
       </div>
-      <div>
+      <div className='flex flex-row items-center justify-center gap-8'>
+        <div className='flex 1 justify-center'>
         <Component history={workout_history} />
+        </div>
+        <div className='flex 1 justify-center'>
+        <ProcessWorkoutData history={workout_history} />
+        </div>
       </div>
       <h1 className='text-center text-xl font-bold'>Workout History</h1>
       <div className='w-full'>

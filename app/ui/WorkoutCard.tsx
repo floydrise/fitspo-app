@@ -37,7 +37,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
           {workout.exercise_list.map((exercise) => (
             <div
               key={exercise.name}
-              className='rounded-md border border-gray-200 p-3'
+              className='rounded-md border border-gray-200 p-3 m-2'
             >
               <p className='mb-1 text-base font-medium'>{exercise.name}</p>
               <p className='text-sm text-gray-600'>
