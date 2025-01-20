@@ -22,7 +22,7 @@ const ProfilePic = ({ avatarImg, title }: { avatarImg: string | undefined, title
       <DropdownMenuTrigger
         className={'flex justify-center items-center gap-2 p-1 pl-1.5 rounded-3xl bg-fitGreen'}
       >
-        <p><span className={"font-bold"}>Hello,</span> {title}</p>
+        <p className={"text-gray-800"}><span className={"font-bold text-gray-800"}>Hello,</span> {title}</p>
         <Avatar>
           <AvatarImage src={avatarImg} />
           <AvatarFallback>CN</AvatarFallback>
@@ -44,7 +44,7 @@ const ProfilePic = ({ avatarImg, title }: { avatarImg: string | undefined, title
           <form
             action={async () => {
               'use server';
-              await signOut({ redirectTo: '/', redirect: true });
+              await signOut({ redirectTo: '/home', redirect: true });
             }}
           >
             <Button variant={'ghost'}>

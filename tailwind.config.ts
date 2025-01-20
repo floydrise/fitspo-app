@@ -64,10 +64,13 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  daisyui: {
+    themes: ["light"],
+  },
+  plugins: [require('tailwindcss-animate'), require('daisyui')],
 } satisfies Config;
