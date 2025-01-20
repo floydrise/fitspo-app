@@ -160,37 +160,38 @@ interface Exercise {
 
 const Page = async (props: {
   searchParams?: Promise<{
-    query?: string,
+    query?: string;
     page?: string;
-    modal?: string,
-    exercise_id?: string
+    modal?: string;
+    exercise_id?: string;
   }>;
 }) => {
-
   const searchParams = await props.searchParams;
   const query = searchParams?.query;
   const currentPage =
     Number(searchParams?.page) === 1
       ? 0
       : (Number(searchParams?.page) - 1) * 10 || 0;
-  const showModal = searchParams?.modal === "true";
+  const showModal = searchParams?.modal === 'true';
   const exercise_id = searchParams?.exercise_id;
 
-  const req = query ? await fetch(
-    `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=10`,
-    {
-      headers: {
-        'X-Api-Key': `${process.env.API_KEY}`,
-      },
-    }
-  ) :  await fetch(
-    `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=10`,
-    {
-      headers: {
-        'X-Api-Key': `${process.env.API_KEY}`,
-      },
-    }
-  );
+  const req = query
+    ? await fetch(
+        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=10`,
+        {
+          headers: {
+            'X-Api-Key': `${process.env.API_KEY}`,
+          },
+        }
+      )
+    : await fetch(
+        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=10`,
+        {
+          headers: {
+            'X-Api-Key': `${process.env.API_KEY}`,
+          },
+        }
+      );
 
   const {
     data: { exercises, totalPages },
@@ -198,23 +199,44 @@ const Page = async (props: {
 
   const exercisesList: Exercise[] = await exercises;
 
+  // ${showModal && 'fixed'}
+
   return (
-    <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
-      <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
-      <Search placeholder={'Search for an exercise'} />
-      {/* <ExerciseInfo /> */}
-      <main className={'mb-10'}>
-        <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
-          {exercisesList.length > 0 ? exercisesList.map(({ name, exerciseId }) => (
-            <li key={exerciseId}>
-              <ExerciseCard exTitle={name} exerciseId={exerciseId} />
-            </li>
-          )) : <p className={"text-3xl font-bold text-red-500"}>No exercises match this query</p>}
-        </ul>
-        {showModal && <ExerciseInfo exercise_id={exercise_id}/>}
-      </main>
-      {exercisesList.length > 0 ? <Pages totalPages={totalPages} /> : null}
-    </section>
+    <>
+      {showModal ? (
+        <>
+          <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+            <div className='flex justify-center'>
+              <ExerciseInfo exercise_id={exercise_id} />
+            </div>
+          </section>
+        </>
+      ) : (
+        <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+          <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
+          <Search placeholder={'Search for an exercise'} />
+          {/* <ExerciseInfo /> */}
+          <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
+            {exercisesList.length > 0 ? (
+              exercisesList.map(({ name, exerciseId }) => (
+                <li key={exerciseId}>
+                  <ExerciseCard exTitle={name} exerciseId={exerciseId} />
+                </li>
+              ))
+            ) : (
+              <p className={'text-3xl font-bold text-red-500'}>
+                No exercises match this query
+              </p>
+            )}
+          </ul>
+          <div className='mt-10'>
+            {exercisesList.length > 0 ? (
+              <Pages totalPages={totalPages} />
+            ) : null}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
