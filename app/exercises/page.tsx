@@ -150,7 +150,7 @@ export default Page;
 import React from 'react';
 import ExerciseCard from '@/app/ui/ExerciseCard';
 import Search from '@/app/ui/Search';
-import Pages from '@/app/ui/Pages';
+// import Pages from '@/app/ui/Pages';
 import ExerciseInfo from '@/app/ui/ExerciseInfo';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
 
