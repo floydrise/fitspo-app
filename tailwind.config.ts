@@ -18,6 +18,7 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         fitGrey: '#F6F6F6',
+        fitLightViolet: '#6959f1',
         fitViolet: '#857CED',
         fitBlue: '#091B35',
         fitGreen: '#D3F076',
