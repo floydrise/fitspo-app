@@ -21,13 +21,14 @@ const buttonVariants = cva(
         searchBtn:
           'bg-fitGreen text-fitBlue hover:bg-Green/90 text-sm font-bold',
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        gray: "bg-transparent text-black hover:bg-gray-200",
-        link: "text-primary underline-offset-4 hover:underline",
-        green: "bg-fitGreen text-gray-800 shadow hover:bg-fitDarkerGreen",
-        purple: "bg-fitViolet text-gray-50 shadow hover:bg-fitLightViolet",
-        orange: "bg-orange-300 text-gray-50 shadow hover:bg-orange-400"
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        gray: 'bg-transparent text-black hover:bg-gray-200',
+        link: 'text-primary underline-offset-4 hover:underline',
+        green: 'bg-fitGreen text-gray-800 shadow hover:bg-fitDarkerGreen',
+        purple: 'bg-fitViolet text-gray-50 shadow hover:bg-fitLightViolet',
+        orange: 'bg-orange-300 text-fitBlue shadow hover:bg-orange-400',
+        fitBlue: 'bg-fitBlue text-white shadow hover:bg-blue-950',
       },
       size: {
         default: 'h-9 px-4 py-2',
