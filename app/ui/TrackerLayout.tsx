@@ -1,9 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TrackerCard from './TrackerCard';
 // import Timer from './timer';
 import FinishAndCancel from './FinishAndCancel';
-import { SubmitData, Workout } from '../lib/definitions';
+import { SubmitData, Workout, Workout_history } from '../lib/definitions';
 
 function TrackerLayout({
   workout,
@@ -14,14 +14,24 @@ function TrackerLayout({
   exerciseNames: string[];
   user_id: number;
 }) {
-  const [exerciseList, setExerciseListAction] = useState<SubmitData[]>([]);
-  const [submitData, setSubmitData] = useState({
+  const [exerciseList, setExerciseListAction] = useState<SubmitData[]>([] as SubmitData[]);
+  const [submitData, setSubmitData] = useState<Workout_history>({
     user_id: user_id,
     workout_id: workout.workout_id,
     date: new Date().toISOString().split('T')[0],
     duration: 0,
-    exercise_list: exerciseList,
+    exercise_list: [],
   });
+
+  useEffect(() => {
+    setSubmitData((prev: Workout_history) => {
+      const copy = structuredClone(prev);
+      copy.exercise_list = exerciseList
+      return copy;
+    })
+  }, [exerciseList])
+
+  console.log(submitData);
 
   return (
     <div>
@@ -36,7 +46,7 @@ function TrackerLayout({
         <ul key={exerciseName} className='flex items-center justify-center p-1'>
           <TrackerCard
             exerciseName={exerciseName}
-            setExerciseList={setExerciseListAction}
+            setExerciseListAction={setExerciseListAction}
           />
         </ul>
       ))}

@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { Dispatch, useState } from 'react';
+import React, { useState } from 'react';
 import {
   LockOpenIcon,
   LockClosedIcon,
@@ -21,7 +21,7 @@ export default function TrackerCard({
   setExerciseListAction
 }: {
   exerciseName: string;
-  setExerciseListAction: Dispatch<React.SetStateAction<SubmitData>>
+  setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>
 }) {
   const [sets, setSets] = useState([
     {
@@ -34,7 +34,7 @@ export default function TrackerCard({
     },
   ]);
 
-  const [exerciseList, setExerciseList] = useState<SubmitData[]>([]);
+  // const [exerciseList, setExerciseList] = useState<SubmitData[]>([]);
 
   /*  const [completed, setCompleted] = useState<Workout_history[]>([
     {
@@ -95,10 +95,10 @@ export default function TrackerCard({
       sets_count: sets.length,
     };
 
-    setExerciseList((prevExerciseList) => [...prevExerciseList, exerciseData]);
+    setExerciseListAction((prevExerciseList) => [...prevExerciseList, exerciseData]);
 
-    console.log(exerciseData, 'exerciseData');
-    console.log(exerciseList, 'exerciseList');
+/*    console.log(exerciseData, 'exerciseData');
+    console.log(exerciseList, 'exerciseList');*/
 
     // setExerciseListAction((prev) => ({ ...prev, exerciseData }));
 
