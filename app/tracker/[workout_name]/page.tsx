@@ -1,10 +1,16 @@
 import React from 'react';
-import { fetchExerciseById, fetchWorkoutByName } from '@/app/lib/endpoints';
+import {
+  fetchExerciseById,
+  fetchUserByUsername,
+  fetchWorkoutByName,
+} from '@/app/lib/endpoints';
 import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
 import TrackerCard from '@/app/ui/TrackerCard';
 import Timer from '@/app/ui/timer';
 import FinishAndCancel from '@/app/ui/FinishAndCancel';
+import { auth } from '@/auth';
+import TrackerLayout from '@/app/ui/TrackerLayout';
 
 export default async function Page(props: {
   params: Promise<{ workout_name: string }>;
@@ -28,21 +34,12 @@ export default async function Page(props: {
 
   const exerciseNames: string[] = await Promise.all(exercises);
 
+  const session = await auth();
+  const { user_id } = await fetchUserByUsername(session?.user.username);
+
   return (
     <section className='container mx-auto'>
-      <div className='mx-1 mt-2 flex max-w-[100%] items-center justify-between rounded-[5px] bg-fitViolet p-2'>
-        <h1 className='text-2xl font-bold text-white'>
-          {workout.workout_name} workout
-        </h1>
-        <Timer />
-        <div className='text-xl font-bold text-white'></div>
-      </div>
-      {exerciseNames.map((exerciseName) => (
-        <ul key={exerciseName} className='flex items-center justify-center p-1'>
-          <TrackerCard exerciseName={exerciseName} />
-        </ul>
-      ))}
-      <FinishAndCancel />
+      <TrackerLayout workout={workout} exerciseNames={exerciseNames} user_id={user_id}/>
     </section>
   );
 }

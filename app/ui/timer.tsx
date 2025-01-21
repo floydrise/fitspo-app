@@ -2,8 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 
-const Timer: React.FC = () => {
-  const [seconds, setSeconds] = useState(0); // Current time in seconds
+const Timer = ({
+  seconds,
+  setSeconds,
+}: {
+  seconds: number;
+  setSeconds: any;
+}) => {
   const [isRunning, setIsRunning] = useState(false); // Timer running status
 
   useEffect(() => {
@@ -28,6 +33,8 @@ const Timer: React.FC = () => {
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  console.log(seconds);
 
   return (
     <div className='mx-auto flex max-w-md items-center justify-between rounded-lg bg-gray-100 p-1 shadow-md'>
