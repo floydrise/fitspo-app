@@ -4,10 +4,12 @@ import SkeletonWorkout from '@/components/ui/SkeletonWorkout';
 
 async function Page() {
   return (
-    <section className={'m-6 flex flex-wrap items-center justify-center gap-6'}>
-      <Suspense
-        fallback={<SkeletonWorkout/>}
-      >
+    <section
+      className={
+        'justify-content-between container m-6 mx-auto grid justify-items-center gap-8 px-[15px] md:grid-cols-2 xl:grid-cols-3'
+      }
+    >
+      <Suspense fallback={<SkeletonWorkout />}>
         <WorkoutCard />
       </Suspense>
     </section>
