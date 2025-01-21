@@ -34,9 +34,8 @@ export default function TrackerCard({
   };
 
   const removeSet = (id: number) => {
-    const updateSets = sets
-      .filter((set) => set.id !== id)
-      // .map((set, index) => ({ ...set, id: index + 1 }));
+    const updateSets = sets.filter((set) => set.id !== id);
+    // .map((set, index) => ({ ...set, id: index + 1 }));
     setSets(updateSets);
   };
 
@@ -46,6 +45,10 @@ export default function TrackerCard({
         set.id === id ? { ...set, locked: !set.locked } : set
       )
     );
+  };
+
+  const done = () => {
+    console.log('done');
   };
 
   return (
@@ -73,17 +76,15 @@ export default function TrackerCard({
           {sets.map((set, index) => (
             <div className='flex items-center pt-1 text-fitBlue' key={set.id}>
               <div
-                className={`mx-1 rounded-xl border-2 border-solid bg-fitGrey p-1 px-3 font-bold text-fitBlue ${
-                  set.locked ? 'bg-gray-300' : ''
-                }`}
+                className={`mx-1 rounded-xl p-1 px-3 font-bold text-fitBlue`}
               >
                 {set.id}
               </div>
               <div className='mr-1'>
                 <input
                   type='number'
-                  id={`${exerciseName}_weight_${set.id}`}
-                  name={`${exerciseName}_weight_${set.id}`}
+                  id={`${exerciseName}_${set.id}_weight`}
+                  name={`${exerciseName}_${set.id}_weight`}
                   placeholder='weight'
                   min='1'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
@@ -103,8 +104,8 @@ export default function TrackerCard({
               </div>
               <div className='mx-1'>
                 <input
-                  id={`${exerciseName}_reps_${set.id}`}
-                  name={`${exerciseName}_reps_${set.id}`}
+                  id={`${exerciseName}_${set.id}_reps`}
+                  name={`${exerciseName}_${set.id}_reps`}
                   placeholder='Reps'
                   type='number'
                   min='1'
@@ -142,12 +143,18 @@ export default function TrackerCard({
             </div>
           ))}
         </div>
-        <div className='flex items-center justify-center pt-2'>
+        <div className='flex items-center justify-between px-2 pt-2'>
           <button
             onClick={addSet}
             className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
           >
             Add set
+          </button>
+          <button
+            onClick={done}
+            className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
+          >
+            Done
           </button>
         </div>
       </div>

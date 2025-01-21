@@ -9,7 +9,7 @@ export default async function Page(props: {
 }) {
   const pathname = await props.params;
   let removeSpace = pathname.workout_name.match(/[a-z]+/gim)?.join(' ');
-  
+
   if (removeSpace) {
     removeSpace = removeSpace[0].toUpperCase() + removeSpace.slice(1);
   }
@@ -27,7 +27,7 @@ export default async function Page(props: {
   const exerciseNames: string[] = await Promise.all(exercises);
 
   return (
-    <section>
+    <section className='container mx-auto'>
       <div className='mx-1 mt-2 flex max-w-[100%] items-center justify-between rounded-[5px] bg-fitViolet p-2'>
         <h1 className='text-2xl font-bold text-white'>
           {workout.workout_name} workout
