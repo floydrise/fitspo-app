@@ -3,7 +3,8 @@ import { fetchExerciseById, fetchWorkoutByName } from '@/app/lib/endpoints';
 import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
 import TrackerCard from '@/app/ui/TrackerCard';
-import Timer from "@/app/ui/timer"
+import Timer from '@/app/ui/timer';
+import FinishAndCancel from '@/app/ui/FinishAndCancel';
 
 export default async function Page(props: {
   params: Promise<{ workout_name: string }>;
@@ -33,23 +34,15 @@ export default async function Page(props: {
         <h1 className='text-2xl font-bold text-white'>
           {workout.workout_name} workout
         </h1>
-        <div className='text-xl font-bold text-white'>
-          <Timer />
-        </div>
+        <Timer />
+        <div className='text-xl font-bold text-white'></div>
       </div>
       {exerciseNames.map((exerciseName) => (
         <ul key={exerciseName} className='flex items-center justify-center p-1'>
           <TrackerCard exerciseName={exerciseName} />
         </ul>
       ))}
-      <div className='flex items-center justify-center gap-20'>
-        <button className='rounded-[15px] bg-fitGreen px-[33px] py-[10px] text-[18px] font-bold transition ease-in-out hover:bg-fitBlue hover:text-fitGreen'>
-          Finish
-        </button>
-        <button className='rounded-[15px] bg-fitBlue px-[33px] py-[10px] text-[18px] font-bold text-fitGreen transition ease-in-out hover:bg-fitRed hover:text-fitBlue'>
-          Cancel
-        </button>
-      </div>
+      <FinishAndCancel />
     </section>
   );
 }
