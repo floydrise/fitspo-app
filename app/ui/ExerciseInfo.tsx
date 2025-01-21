@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { headers } from 'next/headers';
 import { firstLetterToUpper } from '@/lib/utils';
 
 interface ExerciseInfo {
@@ -28,7 +29,15 @@ const ExerciseInfo = async ({
   );
   const { data } = await req.json();
   const exerciseInfo: ExerciseInfo = data;
-  console.log(exerciseInfo.gifUrl);
+  // console.log(exerciseInfo.gifUrl);
+
+  const headerList = await headers();
+  const fullUrl = headerList.get('referer') || '';
+  const url = new URL(fullUrl);
+  const urlParams = new URLSearchParams(url.search);
+  const pageNumber = urlParams.get('page');
+
+  // console.log(headerList.get('host'));
 
   return (
     <div className='min-h-[480px] max-w-[900px] rounded-[15px] bg-white px-[10px] pb-[30px] pt-[10px] shadow'>
@@ -49,7 +58,7 @@ const ExerciseInfo = async ({
             </p>
           </div>
         </div>
-        <Link href={'/exercises'}>
+        <Link href={`/exercises${pageNumber ? '?page=' + pageNumber : ''}`}>
           <button className='transition-opacity ease-in-out hover:opacity-80'>
             <Image
               src='/closeBtn.svg'
