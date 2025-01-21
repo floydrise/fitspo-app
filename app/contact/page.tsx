@@ -19,35 +19,20 @@ export default function Contact() {
   ];
 
   return (
-    <div className='p-6 container mx-auto'>
-      <h1
-        className='text-2xl font-bold'
-        style={{ display: 'flex', justifyContent: 'center' }}
-      >
-        Contact Us
-      </h1>
-      <h2 style={{ display: 'flex', justifyContent: 'center' }}>Our Team</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '1em',
-          margin: '1em',
-        }}
-      >
+    <div className='mx-auto: container mt-2 rounded-lg bg-fitViolet p-6 text-white'>
+      <h1 className='flex justify-center text-2xl font-bold'>Contact Us</h1>
+      <h2 className='flex justify-center'>Our Team</h2>
+      <div className='m-[1em] flex flex-row flex-wrap justify-center gap-[1em]'>
         {team.map((name, index) => (
           <a
             key={index}
             href={`https://github.com/${githubUsername[index]}`}
             target='_blank'
             rel='noopener noreferrer'
-            style={{ width: '150px' }}
-            className='mx-auto block max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-shadow hover:shadow-xl'
+            className='shadow:lg mx-auto block w-[150px] max-w-sm rounded-lg border border-fitGreen bg-fitGreen p-4 text-fitBlue transition-shadow hover:border-fitBlue hover:bg-fitBlue hover:text-fitGreen hover:shadow-2xl'
           >
             <div className='text-center'>
-              <h2 className='mb-2 text-xl font-bold text-gray-800'>{name}</h2>
+              <h2 className='mb-2 text-xl font-bold'>{name}</h2>
               <p className='text-gray-600'></p>
             </div>
           </a>

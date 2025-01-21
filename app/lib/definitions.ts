@@ -30,14 +30,16 @@ export type Workout_history = {
 
 // in case we need it
 export type APIExercise = {
-  exerciseId: string;
-  name: string;
-  gifUrl: string;
-  instructions: string[];
-  targetMuscles: string[];
-  bodyParts: string[];
-  equipment: string[];
-  secondaryMuscles: string[];
+  data: {
+    exerciseId: string;
+    name: string;
+    gifUrl: string;
+    instructions: string[];
+    targetMuscles: string[];
+    bodyParts: string[];
+    equipment: string[];
+    secondaryMuscles: string[];
+  };
 };
 
 export type ExerciseCardType = {

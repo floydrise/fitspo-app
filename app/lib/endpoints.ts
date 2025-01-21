@@ -1,5 +1,10 @@
 import { sql } from '@vercel/postgres';
-import { User, Workout, Workout_history } from '@/app/lib/definitions';
+import {
+  APIExercise,
+  User,
+  Workout,
+  Workout_history,
+} from '@/app/lib/definitions';
 
 export async function fetchUsers() {
   try {
@@ -11,9 +16,9 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserByUsername(username: string){
+export async function fetchUserByUsername(username: string) {
   try {
-    const data= await sql<User>`SELECT * FROM users 
+    const data = await sql<User>`SELECT * FROM users 
     WHERE username = ${username}`;
     return data.rows[0];
   } catch (error) {
@@ -52,7 +57,7 @@ export const fetchWorkoutByName = async (workout_name: string | undefined) => {
     console.error('error fetching workout', error);
     throw new Error('error fetching workout');
   }
-}
+};
 
 export async function fetchWorkoutHistoryByUserId(user_id: number) {
   try {
@@ -65,7 +70,9 @@ export async function fetchWorkoutHistoryByUserId(user_id: number) {
   }
 }
 
-export async function fetchExerciseById(exercise_id: string) {
+export async function fetchExerciseById(
+  exercise_id: string
+): Promise<APIExercise> {
   try {
     const response = await fetch(
       `https://exercisedb-api.vercel.app/api/v1/exercises/${exercise_id}`,
