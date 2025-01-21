@@ -19,13 +19,19 @@ export type Exercise = {
   sets_count: number;
 };
 
+export interface SubmitData {
+  name: string;
+  weight: number;
+  reps_count: number;
+  sets_count: number;
+}
+
 export type Workout_history = {
-  workout_history_id: number;
   user_id: number;
   workout_id: number;
-  date: Date;
+  date: string;
   duration: number;
-  exercise_list: Exercise[];
+  exercise_list: SubmitData[];
 };
 
 // in case we need it

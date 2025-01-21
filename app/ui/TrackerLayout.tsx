@@ -1,9 +1,9 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import TrackerCard from './TrackerCard';
-import Timer from './timer';
+// import Timer from './timer';
 import FinishAndCancel from './FinishAndCancel';
-import { Workout } from '../lib/definitions';
+import { SubmitData, Workout } from '../lib/definitions';
 
 function TrackerLayout({
   workout,
@@ -14,8 +14,14 @@ function TrackerLayout({
   exerciseNames: string[];
   user_id: number;
 }) {
-    const [seconds, setSeconds] = useState(0);
-
+  const [exerciseList, setExerciseListAction] = useState<SubmitData[]>([]);
+  const [submitData, setSubmitData] = useState({
+    user_id: user_id,
+    workout_id: workout.workout_id,
+    date: new Date().toISOString().split('T')[0],
+    duration: 0,
+    exercise_list: exerciseList,
+  });
 
   return (
     <div>
@@ -23,15 +29,14 @@ function TrackerLayout({
         <h1 className='text-2xl font-bold text-white'>
           {workout.workout_name} workout
         </h1>
-        <Timer seconds={seconds} setSeconds={setSeconds}/>
+        {/*<Timer seconds={seconds} setSeconds={setSeconds}/>*/}
         <div className='text-xl font-bold text-white'></div>
       </div>
       {exerciseNames.map((exerciseName) => (
         <ul key={exerciseName} className='flex items-center justify-center p-1'>
           <TrackerCard
             exerciseName={exerciseName}
-            user_id={user_id}
-            workout_id={workout.workout_id}
+            setExerciseList={setExerciseListAction}
           />
         </ul>
       ))}

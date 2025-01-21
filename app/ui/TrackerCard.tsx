@@ -1,20 +1,27 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import {
   LockOpenIcon,
   LockClosedIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { SubmitData } from '@/app/lib/definitions';
+// import { Workout_history } from '@/app/lib/definitions';
+
+/*interface SubmitData {
+  name: string;
+  weight: number;
+  reps_count: number;
+  sets_count: number;
+}*/
 
 export default function TrackerCard({
   exerciseName,
-  user_id,
-  workout_id,
+  setExerciseListAction
 }: {
   exerciseName: string;
-  user_id: number;
-  workout_id: number;
+  setExerciseListAction: Dispatch<React.SetStateAction<SubmitData>>
 }) {
   const [sets, setSets] = useState([
     {
@@ -27,17 +34,24 @@ export default function TrackerCard({
     },
   ]);
 
-  const [completed, setCompleted] = useState([
+/*  const [exerciseList, setExerciseList] = useState<SubmitData[]>([
+    {
+      name: '',
+      weight: 0,
+      reps_count: 0,
+      sets_count: 0,
+    },
+  ]);*/
+
+/*  const [completed, setCompleted] = useState<Workout_history[]>([
     {
       user_id: user_id,
       workout_id: workout_id,
       date: new Date().toISOString().split('T')[0],
       duration: 0,
-      exercise_list: [
-
-      ],
+      exercise_list: exerciseList,
     },
-  ]);
+  ]);*/
 
   const addSet = () => {
     const newSet = {
@@ -73,10 +87,39 @@ export default function TrackerCard({
       )
     );
 
-  };
-  console.log(completed, "completed")
-  // console.log(sets, 'sets');
+    let totalWeight: number = 0;
+    let totalReps: number = 0;
+    sets.forEach((set) => {
+      totalWeight += set.weight;
+      totalReps += set.reps;
+    });
 
+    const exerciseData = {
+      name: exerciseName,
+      weight: totalWeight,
+      reps_count: totalReps,
+      sets_count: sets.length,
+    };
+
+
+    setExerciseListAction((prev) => [...prev, exerciseData])
+
+   /*
+
+
+
+
+
+    setExerciseList((prev) => [...prev, exerciseData]);
+
+    // Append to completed immutably
+    setCompleted((prev) =>
+      prev.map((workout) => ({
+        ...workout,
+        exercise_list: [...workout.exercise_list, exerciseData],
+      }))
+    );*/
+  };
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>
       <div className='rounded-xl bg-white p-[10px]'>
@@ -181,6 +224,7 @@ export default function TrackerCard({
             Add set
           </button>
           <button
+            disabled={sets[0].done}
             onClick={() => {
               completeExercise(exerciseName);
             }}
