@@ -34,16 +34,9 @@ export default function TrackerCard({
     },
   ]);
 
-/*  const [exerciseList, setExerciseList] = useState<SubmitData[]>([
-    {
-      name: '',
-      weight: 0,
-      reps_count: 0,
-      sets_count: 0,
-    },
-  ]);*/
+  const [exerciseList, setExerciseList] = useState<SubmitData[]>([]);
 
-/*  const [completed, setCompleted] = useState<Workout_history[]>([
+  /*  const [completed, setCompleted] = useState<Workout_history[]>([
     {
       user_id: user_id,
       workout_id: workout_id,
@@ -81,18 +74,19 @@ export default function TrackerCard({
   };
 
   const completeExercise = (exerciseName: string) => {
-    setSets((prevSets) =>
-      prevSets.map((set) =>
-        set.exerciseName === exerciseName ? { ...set, done: true } : set
-      )
-    );
-
     let totalWeight: number = 0;
     let totalReps: number = 0;
-    sets.forEach((set) => {
-      totalWeight += set.weight;
-      totalReps += set.reps;
+
+    const updatedSets = sets.map((set) => {
+      if (set.exerciseName === exerciseName) {
+        totalWeight += set.weight;
+        totalReps += set.reps;
+        return { ...set, locked: true, done: true };
+      }
+      return set;
     });
+
+    setSets(updatedSets);
 
     const exerciseData = {
       name: exerciseName,
@@ -101,10 +95,21 @@ export default function TrackerCard({
       sets_count: sets.length,
     };
 
+    setExerciseList((prevExerciseList) => [...prevExerciseList, exerciseData]);
 
-    setExerciseListAction((prev) => [...prev, exerciseData])
+    console.log(exerciseData, 'exerciseData');
+    console.log(exerciseList, 'exerciseList');
+
+    // setExerciseListAction((prev) => ({ ...prev, exerciseData }));
 
    /*
+   /*
+
+
+
+
+
+    /*
 
 
 
@@ -205,7 +210,7 @@ export default function TrackerCard({
                     <LockOpenIcon className={'w-5 text-fitBlue'} />
                   )}
                 </button>
-                {index > 0 && (
+                {index > 0 && !set.done && (
                   <button onClick={() => removeSet(set.id)}>
                     <XMarkIcon
                       className={'w-5 text-fitBlue hover:text-fitRed'}
@@ -219,7 +224,11 @@ export default function TrackerCard({
         <div className='flex items-center justify-between px-2 pt-2'>
           <button
             onClick={addSet}
-            className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
+            className={`cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
+              sets[0].done
+                ? 'cursor-auto bg-fitGrey text-gray-400'
+                : 'cursor-pointer hover:bg-fitBlue hover:text-fitGreen'
+            }`}
           >
             Add set
           </button>
@@ -228,7 +237,11 @@ export default function TrackerCard({
             onClick={() => {
               completeExercise(exerciseName);
             }}
-            className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
+            className={`rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
+              sets[0].done
+                ? 'cursor-auto bg-fitGrey text-gray-400'
+                : 'cursor-pointer hover:bg-fitBlue hover:text-fitGreen'
+            }`}
           >
             Done
           </button>
