@@ -51,13 +51,13 @@ export function ProcessWorkoutData({ history }: WorkoutCountChartProps) {
   }
 
   return (
-    <Card className="w-full max-w-3xl">
+    <Card className="w-72 md:w-full max-w-3xl">
       <CardHeader>
         <CardTitle className="text-center">Your total workouts</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[210px]">
+        <ChartContainer config={chartConfig} className="h-[210px] w-64 md:w-full">
           <BarChart data={chartData} layout="vertical" margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" horizontal={false} />
             <XAxis type="number" />

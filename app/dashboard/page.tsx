@@ -36,8 +36,8 @@ export default async function Page() {
       <div>
         <UserProfile user={userData} />
       </div>
-      <div className='flex flex-row items-center justify-center gap-8'>
-        <div className='flex 1 justify-center'>
+      <div className='flex flex-row  flex-wrap items-center justify-center gap-8'>
+        <div className='flex justify-center'>
         <Component history={workout_history} />
         </div>
         <div className='flex 1 justify-center'>
