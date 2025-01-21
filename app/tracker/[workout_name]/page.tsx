@@ -3,6 +3,7 @@ import { fetchExerciseById, fetchWorkoutByName } from '@/app/lib/endpoints';
 import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
 import TrackerCard from '@/app/ui/TrackerCard';
+import Timer from "@/app/ui/timer"
 
 export default async function Page(props: {
   params: Promise<{ workout_name: string }>;
@@ -33,7 +34,7 @@ export default async function Page(props: {
           {workout.workout_name} workout
         </h1>
         <div className='text-xl font-bold text-white'>
-          {'<'}Timer component{'>'}
+          <Timer />
         </div>
       </div>
       {exerciseNames.map((exerciseName) => (
