@@ -1,16 +1,15 @@
-import React from 'react';
-import {fetchWorkouts } from '@/app/lib/endpoints';
-import { Workout } from '@/app/lib/definitions';
+import React, { Suspense } from 'react';
 import WorkoutCard from '@/components/ui/workoutCard';
+import SkeletonWorkout from '@/components/ui/SkeletonWorkout';
 
 async function Page() {
-
-  const workouts: Workout[] = await fetchWorkouts();
   return (
-    <section className={"flex flex-wrap justify-center items-center gap-6 m-6"}>
-      {workouts.map((workout) => (
-        <WorkoutCard key={workout.workout_id} workoutName={workout.workout_name}/>
-      ))}
+    <section className={'m-6 flex flex-wrap items-center justify-center gap-6'}>
+      <Suspense
+        fallback={<SkeletonWorkout/>}
+      >
+        <WorkoutCard />
+      </Suspense>
     </section>
   );
 }

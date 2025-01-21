@@ -2,13 +2,16 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Workout } from '@/app/lib/definitions';
+import { fetchWorkouts } from '@/app/lib/endpoints';
 
 interface WorkoutDescription {
-  workoutName:string,
-  description: string
+  workoutName: string;
+  description: string;
 }
 
-const WorkoutCard = ({ workoutName }: { workoutName: string }) => {
+const WorkoutCard = async () => {
+  const workouts: Workout[] = await fetchWorkouts();
   const workoutDescriptions: WorkoutDescription[] = [
     {
       workoutName: 'Upper Body',
@@ -53,25 +56,42 @@ const WorkoutCard = ({ workoutName }: { workoutName: string }) => {
   ];
 
   return (
-    <div data-theme={"dark"} className='card bg-base-100 image-full h-72 w-96 shadow-xl'>
-      <figure className={'h-72'}>
-        <Image
-          src={`/${workoutName}.png`}
-          alt={'workout pic'}
-          width={1000}
-          height={800}
-        />
-      </figure>
-      <div className='card-body'>
-        <h2 className='card-title text-gray-300'>{workoutName}</h2>
-        <p className={"text-gray-300"}>{workoutDescriptions.filter((workout: WorkoutDescription) => workout.workoutName === workoutName)[0].description} </p>
-        <div className='card-actions justify-end'>
-          <Button variant={"default"} asChild>
-            <Link href={`/tracker/${workoutName}`}>Start workout</Link>
-          </Button>
+    <>
+      {workouts.map((workout) => (
+        <div
+          key={workout.workout_id}
+          data-theme={'dark'}
+          className='card image-full h-72 w-96 bg-base-100 shadow-xl'
+        >
+          <figure className={'h-72'}>
+            <Image
+              src={`/${workout.workout_name}.png`}
+              alt={'workout pic'}
+              width={1000}
+              height={800}
+            />
+          </figure>
+          <div className='card-body'>
+            <h2 className='card-title text-gray-300'>{workout.workout_name}</h2>
+            <p className={'text-gray-300'}>
+              {
+                workoutDescriptions.filter(
+                  (workoutFilter: WorkoutDescription) =>
+                    workoutFilter.workoutName === workout.workout_name
+                )[0].description
+              }{' '}
+            </p>
+            <div className='card-actions justify-end'>
+              <Button variant={'green'} asChild>
+                <Link href={`/tracker/${workout?.workout_name}`}>
+                  Start workout
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
 };
 
