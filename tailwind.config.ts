@@ -1,3 +1,4 @@
+import { heroui } from '@heroui/theme';
 import type { Config } from 'tailwindcss';
 
 export default {
@@ -6,6 +7,7 @@ export default {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/components/skeleton.js',
   ],
   theme: {
     extend: {
@@ -70,7 +72,7 @@ export default {
     },
   },
   daisyui: {
-    themes: ["light"],
+    themes: ['light'],
   },
-  plugins: [require('tailwindcss-animate'), require('daisyui')],
+  plugins: [require('tailwindcss-animate'), require('daisyui'), heroui()],
 } satisfies Config;
