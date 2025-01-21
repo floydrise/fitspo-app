@@ -17,13 +17,13 @@ export function HeaderDropdown() {
   const pathname = usePathname();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className='relative'>
         <Button variant='outline'>
-          Menu <Bars3Icon />
+          <Bars3Icon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56'>
-        <DropdownMenuRadioGroup value={pathname} >
+      <DropdownMenuContent className='absolute left-[-24px]'>
+        <DropdownMenuRadioGroup value={pathname}>
           <Link href={'/'}>
             <DropdownMenuRadioItem value='/'>Home</DropdownMenuRadioItem>
           </Link>

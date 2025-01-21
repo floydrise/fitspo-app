@@ -16,19 +16,29 @@ import { signOut } from '@/auth';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-const ProfilePic = ({ avatarImg, title }: { avatarImg: string | undefined, title: string | undefined }) => {
+const ProfilePic = ({
+  avatarImg,
+  title,
+}: {
+  avatarImg: string | undefined;
+  title: string | undefined;
+}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        className={'flex justify-center items-center gap-2 p-1 pl-1.5 rounded-3xl bg-orange-300'}
+        className={
+          'relative flex items-center justify-center gap-2 rounded-3xl bg-none p-1 pl-0 min-[510px]:bg-orange-300 min-[510px]:pl-4'
+        }
       >
-        <p className={"text-gray-800"}><span className={"font-bold text-gray-800"}>Hello,</span> {title}</p>
+        <p className={'hidden pr-1 text-gray-800 min-[510px]:block'}>
+          <span className={'font-bold text-gray-800'}>Hello,</span> {title}
+        </p>
         <Avatar>
           <AvatarImage src={avatarImg} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className='absolute right-[-20px] min-[510px]:right-[-70px]'>
         <DropdownMenuLabel className={'text-center'}>
           My Account
         </DropdownMenuLabel>

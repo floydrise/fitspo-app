@@ -61,7 +61,7 @@ const WorkoutCard = async () => {
         <div
           key={workout.workout_id}
           data-theme={'dark'}
-          className='card image-full h-72 w-96 bg-base-100 shadow-xl'
+          className='card image-full h-72 max-w-96 bg-base-100 shadow-xl'
         >
           <figure className={'h-72'}>
             <Image

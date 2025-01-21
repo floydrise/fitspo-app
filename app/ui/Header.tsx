@@ -15,37 +15,46 @@ export default async function Header() {
 
   return (
     <>
-      <header className='flex min-h-32 flex-wrap items-center justify-around gap-5 border-b border-solid border-slate-400'>
-        <Link href={'/'} className={'flex'}>
-          <Image
-            src='/Logo.svg'
-            width={600}
-            height={531}
-            alt='Logo of our website'
-            className={'h-auto w-24 md:h-auto md:w-[150px]'}
-          />
-        </Link>
-        <nav className='hidden items-center gap-5 md:flex md:justify-center'>
-          <NavLinks />
-        </nav>
-        <nav className={'flex items-center md:hidden'}>
-          <HeaderDropdown />
-        </nav>
-        <div className={'flex items-center gap-2'}>
-          <div className={session?.user ? 'hidden' : 'flex gap-2'}>
-            <Button variant={'green'} asChild={true}>
-              <Link href={'/login'}>Log in</Link>
-            </Button>
-            <Button
-              variant={"orange"}
-              asChild={true}
-              className={'hidden md:block'}
+      <header className='border-b border-solid border-slate-400'>
+        <div className='container mx-auto flex min-h-32 justify-between px-[15px]'>
+          <Link href={'/'} className='order-2 flex md:order-none'>
+            <Image
+              src='/Logo.svg'
+              width={600}
+              height={531}
+              alt='Logo of our website'
+              className={'h-auto w-24 md:h-auto md:w-[150px]'}
+            />
+          </Link>
+          <nav className='hidden items-center gap-5 md:flex md:justify-center'>
+            <NavLinks />
+          </nav>
+          <nav className={'order-1 flex items-center md:order-none md:hidden'}>
+            <HeaderDropdown />
+          </nav>
+          <div className={'order-3 flex items-center gap-2 md:order-none'}>
+            <div
+              className={
+                session?.user
+                  ? 'hidden'
+                  : 'flex flex-col gap-2 min-[428px]:flex-row'
+              }
             >
-              <Link href={'/signup'}>Sign up</Link>
-            </Button>
-          </div>
-          <div className={session?.user ? 'flex items-center gap-2' : 'hidden'}>
-            <ProfilePic title={userData?.name} avatarImg={userData?.avatar_img_url}/>
+              <Button variant={'green'} asChild={true}>
+                <Link href={'/login'}>Log in</Link>
+              </Button>
+              <Button variant={'orange'} asChild={true}>
+                <Link href={'/signup'}>Sign up</Link>
+              </Button>
+            </div>
+            <div
+              className={session?.user ? 'flex items-center gap-2' : 'hidden'}
+            >
+              <ProfilePic
+                title={userData?.name}
+                avatarImg={userData?.avatar_img_url}
+              />
+            </div>
           </div>
         </div>
       </header>
