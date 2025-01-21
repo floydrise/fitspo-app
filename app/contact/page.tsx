@@ -19,7 +19,7 @@ export default function Contact() {
   ];
 
   return (
-    <div className='mx-auto: container mt-2 rounded-lg bg-fitViolet p-6 text-white'>
+    <div className='container mx-auto mt-2 rounded-lg bg-fitViolet p-6 text-white'>
       <h1 className='flex justify-center text-2xl font-bold'>Contact Us</h1>
       <h2 className='flex justify-center'>Our Team</h2>
       <div className='m-[1em] flex flex-row flex-wrap justify-center gap-[1em]'>

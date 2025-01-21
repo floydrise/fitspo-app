@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 
-
 const AboutPage = () => {
   return (
     <div className='min-h-screen bg-fitViolet text-white'>
@@ -12,8 +11,10 @@ const AboutPage = () => {
             About the FitSpo Project
           </h1>
         </div>
-   <p className="text-2xl font-bold text-white bg-fitBlue inline-block px-4 py-2 rounded-lg shadow-lg">
-        {/* Description section and why and how we came up with the idea */}
+        <p className='inline-block rounded-lg bg-fitBlue px-4 py-2 text-2xl font-bold text-white shadow-lg'>
+          {/* Description section and why and how we came up with the idea */}
+          Description
+        </p>
 
         {/* Mission section */}
         <div className='space-y-4'>
