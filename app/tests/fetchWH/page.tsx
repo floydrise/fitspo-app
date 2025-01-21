@@ -12,7 +12,7 @@ async function page() {
           {workout.exercise_list.map((exercise: Exercise) => {
             {
               return (
-                <ul style={{ margin: '10px' }} key={exercise.name}>
+                <ul className='m-[10px]' key={exercise.name}>
                   <li>Name: {exercise.name}</li>
                   <li>Previous weight: {exercise.previous_weight}</li>
                   <li>Reps: {exercise.reps_count}</li>

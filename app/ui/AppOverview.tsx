@@ -155,7 +155,7 @@ const AppOverview = () => {
         </div>
         <div className=''>
           <Image
-            className='min-[320px]:max-[768px]:max-w-[40px]'
+            className='min-[320px]:max-[768px]:max-w-[400px]'
             src='/progress.png'
             width={474}
             height={316}

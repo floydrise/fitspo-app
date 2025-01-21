@@ -5,26 +5,14 @@ import React from 'react';
 async function page() {
   const users = await fetchUsers();
   return (
-    <div
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <h1 style={{ margin: '10px' }}>
+    <div className='flex flex-col items-center justify-center'>
+      <h1 className='m-[10px]'>
         <b>Users</b>
       </h1>
       {users.map((user) => (
         <div
           key={user.user_id}
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
+          className='flex flex-col items-center justify-center'
         >
           <h2>{user.name}</h2>
           <Image

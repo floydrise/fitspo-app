@@ -36,15 +36,16 @@ export default function TrackerCard({
   const removeSet = (id: number) => {
     const updateSets = sets
       .filter((set) => set.id !== id)
-      .map((set, index) => ({ ...set, id: index + 1 }));
+      // .map((set, index) => ({ ...set, id: index + 1 }));
     setSets(updateSets);
   };
 
   const lock = (id: number) => {
-    const updateSets = sets.map((set) =>
-      set.id === id ? { ...set, locked: !set.locked } : set
+    setSets((prevSets) =>
+      prevSets.map((set) =>
+        set.id === id ? { ...set, locked: !set.locked } : set
+      )
     );
-    setSets(updateSets);
   };
 
   return (
@@ -71,17 +72,23 @@ export default function TrackerCard({
         <div>
           {sets.map((set, index) => (
             <div className='flex items-center pt-1 text-fitBlue' key={set.id}>
-              <div className='mx-1 rounded-xl bg-fitGrey p-1 px-3 font-bold text-fitBlue'>
+              <div
+                className={`mx-1 rounded-xl border-2 border-solid bg-fitGrey p-1 px-3 font-bold text-fitBlue ${
+                  set.locked ? 'bg-gray-300' : ''
+                }`}
+              >
                 {set.id}
               </div>
               <div className='mr-1'>
                 <input
                   type='number'
-                  id={`${exerciseName}_weight`}
-                  name={`${exerciseName}_weight`}
+                  id={`${exerciseName}_weight_${set.id}`}
+                  name={`${exerciseName}_weight_${set.id}`}
                   placeholder='weight'
                   min='1'
-                  className='w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1'
+                  className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
+                    set.locked ? 'cursor-not-allowed bg-gray-300' : ''
+                  }`}
                   disabled={set.locked}
                   onChange={(e) => {
                     const updatedSets = sets.map((s) =>
@@ -96,12 +103,14 @@ export default function TrackerCard({
               </div>
               <div className='mx-1'>
                 <input
-                  id={`${exerciseName}_reps`}
-                  name={`${exerciseName}_reps`}
+                  id={`${exerciseName}_reps_${set.id}`}
+                  name={`${exerciseName}_reps_${set.id}`}
                   placeholder='Reps'
                   type='number'
                   min='1'
-                  className='w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1'
+                  className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
+                    set.locked ? 'cursor-not-allowed bg-gray-300' : ''
+                  }`}
                   disabled={set.locked}
                   onChange={(e) => {
                     const updatedSets = sets.map((s) =>
