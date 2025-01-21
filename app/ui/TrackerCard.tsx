@@ -9,8 +9,12 @@ import {
 
 export default function TrackerCard({
   exerciseName,
+  user_id,
+  workout_id,
 }: {
   exerciseName: string;
+  user_id: number;
+  workout_id: number;
 }) {
   const [sets, setSets] = useState([
     {
@@ -22,7 +26,18 @@ export default function TrackerCard({
       done: false,
     },
   ]);
-  // const [Completed, setCompleted] = useState([]);
+
+  const [completed, setCompleted] = useState([
+    {
+      user_id: user_id,
+      workout_id: workout_id,
+      date: new Date().toISOString().split('T')[0],
+      duration: 0,
+      exercise_list: [
+
+      ],
+    },
+  ]);
 
   const addSet = () => {
     const newSet = {
@@ -55,14 +70,12 @@ export default function TrackerCard({
     setSets((prevSets) =>
       prevSets.map((set) =>
         set.exerciseName === exerciseName ? { ...set, done: true } : set
-    
       )
     );
+
   };
-  // const array = []
-  // array.push(sets)
-  // console.log(array, "array")
-  console.log(sets, 'sets');
+  console.log(completed, "completed")
+  // console.log(sets, 'sets');
 
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>
@@ -99,9 +112,12 @@ export default function TrackerCard({
                   id={`${exerciseName}_${set.id}_weight`}
                   name={`${exerciseName}_${set.id}_weight`}
                   placeholder='weight'
+                  value={set.weight || ''}
                   min='1'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
-                    set.locked ? 'cursor-not-allowed bg-gray-300' : ''
+                    set.locked || set.done
+                      ? 'cursor-not-allowed bg-gray-300'
+                      : ''
                   }`}
                   disabled={set.locked || set.done}
                   onChange={(e) => {
@@ -120,9 +136,12 @@ export default function TrackerCard({
                   name={`${exerciseName}_${set.id}_reps`}
                   placeholder='Reps'
                   type='number'
+                  value={set.reps || ''}
                   min='1'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
-                    set.locked ? 'cursor-not-allowed bg-gray-300' : ''
+                    set.locked || set.done
+                      ? 'cursor-not-allowed bg-gray-300'
+                      : ''
                   }`}
                   disabled={set.locked || set.done}
                   onChange={(e) => {
@@ -137,7 +156,7 @@ export default function TrackerCard({
               </div>
               <div className='flex w-[27%] items-center justify-between px-1'>
                 <button onClick={() => lock(set.id)}>
-                  {set.locked ? (
+                  {set.locked || set.done ? (
                     <LockClosedIcon className={'w-5 text-fitBlue'} />
                   ) : (
                     <LockOpenIcon className={'w-5 text-fitBlue'} />

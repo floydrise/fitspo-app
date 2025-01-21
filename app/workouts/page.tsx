@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import WorkoutCard from '@/components/ui/workoutCard';
+import WorkoutCard from '@/components/ui/workoutPageCard';
 import SkeletonWorkout from '@/components/ui/SkeletonWorkout';
 
 async function Page() {

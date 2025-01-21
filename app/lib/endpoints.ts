@@ -16,7 +16,7 @@ export async function fetchUsers() {
   }
 }
 
-export async function fetchUserByUsername(username: string) {
+export async function fetchUserByUsername(username: string | undefined) {
   try {
     const data = await sql<User>`SELECT * FROM users 
     WHERE username = ${username}`;
