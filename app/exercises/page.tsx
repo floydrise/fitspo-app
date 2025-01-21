@@ -170,14 +170,14 @@ const Page = async (props: {
 }) => {
   const searchParams = await props.searchParams;
   const query = searchParams?.query;
-  const currentPage = Number((searchParams?.page as string) || '0');
+  const currentPage = Number((searchParams?.page as string) || '1');
   const cardsPerPage = Number((searchParams?.pageSize as string) || '12');
   const showModal = searchParams?.modal === 'true';
   const exercise_id = searchParams?.exercise_id;
 
   const req = query
     ? await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage}&limit=${cardsPerPage}`,
+        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage === 1 ? '0' : currentPage * cardsPerPage}&limit=${cardsPerPage}`,
         {
           headers: {
             'X-Api-Key': `${process.env.API_KEY}`,
@@ -185,7 +185,7 @@ const Page = async (props: {
         }
       )
     : await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage}&limit=${cardsPerPage}`,
+        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage === 1 ? '0' : currentPage * cardsPerPage}&limit=${cardsPerPage}`,
         {
           headers: {
             'X-Api-Key': `${process.env.API_KEY}`,
@@ -234,7 +234,7 @@ const Page = async (props: {
               <PaginationWithLinks
                 page={currentPage}
                 pageSize={cardsPerPage}
-                totalCount={totalPages * cardsPerPage}
+                totalCount={(totalPages - 1) * cardsPerPage}
               />
             ) : null}
           </div>
