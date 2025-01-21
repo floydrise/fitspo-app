@@ -19,8 +19,10 @@ export default function TrackerCard({
       weight: 0,
       reps: 0,
       locked: false,
+      done: false,
     },
   ]);
+  // const [Completed, setCompleted] = useState([]);
 
   const addSet = () => {
     const newSet = {
@@ -29,13 +31,15 @@ export default function TrackerCard({
       weight: 0,
       reps: 0,
       locked: false,
+      done: false,
     };
     setSets([...sets, newSet]);
   };
 
   const removeSet = (id: number) => {
-    const updateSets = sets.filter((set) => set.id !== id);
-    // .map((set, index) => ({ ...set, id: index + 1 }));
+    const updateSets = sets
+      .filter((set) => set.id !== id)
+      .map((set, index) => ({ ...set, id: index + 1 }));
     setSets(updateSets);
   };
 
@@ -47,9 +51,18 @@ export default function TrackerCard({
     );
   };
 
-  const done = () => {
-    console.log('done');
+  const completeExercise = (exerciseName: string) => {
+    setSets((prevSets) =>
+      prevSets.map((set) =>
+        set.exerciseName === exerciseName ? { ...set, done: true } : set
+    
+      )
+    );
   };
+  // const array = []
+  // array.push(sets)
+  // console.log(array, "array")
+  console.log(sets, 'sets');
 
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>
@@ -90,14 +103,13 @@ export default function TrackerCard({
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked ? 'cursor-not-allowed bg-gray-300' : ''
                   }`}
-                  disabled={set.locked}
+                  disabled={set.locked || set.done}
                   onChange={(e) => {
                     const updatedSets = sets.map((s) =>
                       s.id === set.id
                         ? { ...s, weight: parseInt(e.target.value) }
                         : s
                     );
-                    console.log(updatedSets);
                     setSets(updatedSets);
                   }}
                 />
@@ -112,14 +124,13 @@ export default function TrackerCard({
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked ? 'cursor-not-allowed bg-gray-300' : ''
                   }`}
-                  disabled={set.locked}
+                  disabled={set.locked || set.done}
                   onChange={(e) => {
                     const updatedSets = sets.map((s) =>
                       s.id === set.id
                         ? { ...s, reps: parseInt(e.target.value) }
                         : s
                     );
-                    console.log(updatedSets);
                     setSets(updatedSets);
                   }}
                 />
@@ -151,7 +162,9 @@ export default function TrackerCard({
             Add set
           </button>
           <button
-            onClick={done}
+            onClick={() => {
+              completeExercise(exerciseName);
+            }}
             className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
           >
             Done
