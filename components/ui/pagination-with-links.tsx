@@ -157,7 +157,7 @@ export function PaginationWithLinks({
         </div>
       )}
       <Pagination className={cn({ 'md:justify-end': pageSizeSelectOptions })}>
-        <PaginationContent className='max-sm:gap-0'>
+        <PaginationContent className='flex-col max-sm:gap-0 min-[478px]:flex-row'>
           <PaginationItem>
             <PaginationPrevious
               href={buildLink(Math.max(page - 1, 1))}
@@ -168,7 +168,7 @@ export function PaginationWithLinks({
               }
             />
           </PaginationItem>
-          {renderPageNumbers()}
+          <div className='flex'>{renderPageNumbers()}</div>
           <PaginationItem>
             <PaginationNext
               href={buildLink(Math.min(page + 1, totalPageCount))}
