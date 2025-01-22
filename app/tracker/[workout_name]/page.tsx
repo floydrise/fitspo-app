@@ -6,9 +6,6 @@ import {
 } from '@/app/lib/endpoints';
 import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
-import TrackerCard from '@/app/ui/TrackerCard';
-import Timer from '@/app/ui/timer';
-import FinishAndCancel from '@/app/ui/FinishAndCancel';
 import { auth } from '@/auth';
 import TrackerLayout from '@/app/ui/TrackerLayout';
 

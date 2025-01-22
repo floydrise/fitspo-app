@@ -1,20 +1,29 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   LockOpenIcon,
   LockClosedIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { SubmitData } from '@/app/lib/definitions';
+// import { Workout_history } from '@/app/lib/definitions';
+
+/*interface SubmitData {
+  name: string;
+  weight: number;
+  reps_count: number;
+  sets_count: number;
+}*/
 
 export default function TrackerCard({
   exerciseName,
-  user_id,
-  workout_id,
+  setExerciseListAction,
+  setCounter,
 }: {
   exerciseName: string;
-  user_id: number;
-  workout_id: number;
+  setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const [sets, setSets] = useState([
     {
@@ -27,17 +36,17 @@ export default function TrackerCard({
     },
   ]);
 
-  const [completed, setCompleted] = useState([
+  // const [exerciseList, setExerciseList] = useState<SubmitData[]>([]);
+
+  /*  const [completed, setCompleted] = useState<Workout_history[]>([
     {
       user_id: user_id,
       workout_id: workout_id,
       date: new Date().toISOString().split('T')[0],
       duration: 0,
-      exercise_list: [
-
-      ],
+      exercise_list: exerciseList,
     },
-  ]);
+  ]);*/
 
   const addSet = () => {
     const newSet = {
@@ -67,16 +76,53 @@ export default function TrackerCard({
   };
 
   const completeExercise = (exerciseName: string) => {
-    setSets((prevSets) =>
-      prevSets.map((set) =>
-        set.exerciseName === exerciseName ? { ...set, done: true } : set
-      )
+    setCounter((prev: number): number => {
+      return prev + 1;
+    });
+    let totalWeight: number = 0;
+    let totalReps: number = 0;
+
+    const updatedSets = sets.map((set) => {
+      if (set.exerciseName === exerciseName) {
+        totalWeight += set.weight;
+        totalReps += set.reps;
+        return { ...set, locked: true, done: true };
+      }
+      return set;
+    });
+
+    setSets(updatedSets);
+
+    const exerciseData = {
+      name: exerciseName,
+      weight: totalWeight,
+      reps_count: totalReps,
+      sets_count: sets.length,
+    };
+
+    setExerciseListAction((prevExerciseList) => [
+      ...prevExerciseList,
+      exerciseData,
+    ]);
+
+    /*    
+    console.log(exerciseData, 'exerciseData');
+    console.log(exerciseList, 'exerciseList');
+
+    setExerciseListAction((prev) => ({ ...prev, exerciseData }));
+
+    
+    setExerciseList((prev) => [...prev, exerciseData]);
+
+    // Append to completed immutably
+    setCompleted((prev) =>
+      prev.map((workout) => ({
+        ...workout,
+        exercise_list: [...workout.exercise_list, exerciseData],
+      }))
     );
-
+    */
   };
-  console.log(completed, "completed")
-  // console.log(sets, 'sets');
-
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>
       <div className='rounded-xl bg-white p-[10px]'>
@@ -113,7 +159,7 @@ export default function TrackerCard({
                   name={`${exerciseName}_${set.id}_weight`}
                   placeholder='weight'
                   value={set.weight || ''}
-                  min='1'
+                  min='0'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked || set.done
                       ? 'cursor-not-allowed bg-gray-300'
@@ -137,7 +183,7 @@ export default function TrackerCard({
                   placeholder='Reps'
                   type='number'
                   value={set.reps || ''}
-                  min='1'
+                  min='0'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked || set.done
                       ? 'cursor-not-allowed bg-gray-300'
@@ -162,7 +208,7 @@ export default function TrackerCard({
                     <LockOpenIcon className={'w-5 text-fitBlue'} />
                   )}
                 </button>
-                {index > 0 && (
+                {index > 0 && !set.done && (
                   <button onClick={() => removeSet(set.id)}>
                     <XMarkIcon
                       className={'w-5 text-fitBlue hover:text-fitRed'}
@@ -175,16 +221,26 @@ export default function TrackerCard({
         </div>
         <div className='flex items-center justify-between px-2 pt-2'>
           <button
+            disabled={sets[0].done}
             onClick={addSet}
-            className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
+            className={`rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
+              sets[0].done
+                ? 'cursor-auto bg-fitGrey text-gray-400'
+                : 'cursor-pointer hover:bg-fitBlue hover:text-fitGreen'
+            }`}
           >
             Add set
           </button>
           <button
+            disabled={sets[0].done}
             onClick={() => {
               completeExercise(exerciseName);
             }}
-            className='cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue hover:bg-fitBlue hover:text-fitGreen'
+            className={`rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
+              sets[0].done
+                ? 'cursor-auto bg-fitGrey text-gray-400'
+                : 'cursor-pointer hover:bg-fitBlue hover:text-fitGreen'
+            }`}
           >
             Done
           </button>
