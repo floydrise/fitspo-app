@@ -159,7 +159,7 @@ export default function TrackerCard({
                   name={`${exerciseName}_${set.id}_weight`}
                   placeholder='weight'
                   value={set.weight || ''}
-                  min='1'
+                  min='0'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked || set.done
                       ? 'cursor-not-allowed bg-gray-300'
@@ -183,7 +183,7 @@ export default function TrackerCard({
                   placeholder='Reps'
                   type='number'
                   value={set.reps || ''}
-                  min='1'
+                  min='0'
                   className={`w-[100%] rounded-xl border-2 border-solid bg-fitGrey p-1 ${
                     set.locked || set.done
                       ? 'cursor-not-allowed bg-gray-300'
@@ -221,8 +221,9 @@ export default function TrackerCard({
         </div>
         <div className='flex items-center justify-between px-2 pt-2'>
           <button
+            disabled={sets[0].done}
             onClick={addSet}
-            className={`cursor-pointer rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
+            className={`rounded-xl bg-fitGreen px-12 py-1 font-bold text-fitBlue ${
               sets[0].done
                 ? 'cursor-auto bg-fitGrey text-gray-400'
                 : 'cursor-pointer hover:bg-fitBlue hover:text-fitGreen'

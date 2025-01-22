@@ -1,3 +1,4 @@
+'use server';
 import { sql } from '@vercel/postgres';
 import {
   APIExercise,
@@ -99,7 +100,6 @@ export async function postWorkoutHistory(exercise_data: Workout_history) {
     const data =
       await sql`INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
     VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});`;
-    return data.rows[0];
   } catch (error) {
     console.error('error posting workout history ', error);
     throw new Error('error posting workout history');

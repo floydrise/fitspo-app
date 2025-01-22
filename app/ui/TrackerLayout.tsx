@@ -56,7 +56,7 @@ function TrackerLayout({
           />
         </ul>
       ))}
-      <FinishAndCancel counter={counter} workoutLength={workoutLength}/>
+      <FinishAndCancel submitData={submitData} counter={counter} workoutLength={workoutLength}/>
     </div>
   );
 }
