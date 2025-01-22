@@ -1,7 +1,7 @@
 # Fitspo - Fitness Tracking Made Easy
 
 Welcome to our fitness webapp fitSpo! 
-We created this app as we felt the best to way to encourage improvement is to look back at the progress you made.
+We created this app as we felt the best to way to encourage improvement is to look back at the progress you've made.
 
 ## 🚀 Live Demo
 
@@ -19,20 +19,6 @@ This is a full stack application that allows you to view specific excercises wit
 - View your dashboard whilst logged in
 - Select from a list of pre built workouts containing multiple exercises
 - Start a workout and once finished can view your workout history on your dashboard
-
----
-
-## 🛠️ Getting Started
-
-Please feel free to clone our project and run it locally.
-
-**Follow these steps:**
-
-1. Clone the repo with "git clone https://github.com/floydrise/fitspo-app.git"
-
-2. Install all the necessary dependencies with "npm install"
-
-3. Run the development server by using "npm run dev" and clicking on the hyperlink
 
 ---
 
