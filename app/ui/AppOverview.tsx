@@ -47,8 +47,8 @@ const AppOverview = () => {
         <div className='max-w-[574px]'>
           <Image
             src='/addForm.svg'
-            width={357}
-            height={247}
+            width={436}
+            height={300}
             alt='Workout form example'
           />
         </div>
