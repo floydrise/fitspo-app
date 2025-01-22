@@ -62,7 +62,7 @@ const Page = async (props: {
         </>
       ) : (
         <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
-          <h2 className='text-[32px] font-semibold text-fitBlue'>Exercises</h2>
+          <h1 className='text-[32px] font-semibold text-fitBlue'>Exercises</h1>
           <Search placeholder={'Search for an exercise'} />
           {/* <ExerciseInfo /> */}
           <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
