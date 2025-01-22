@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { formatTime } from '@/lib/utils';
+import { formatTime } from "@/lib/utils";
 
 const Timer = ({
   setTimeAction,
