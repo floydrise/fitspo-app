@@ -2,17 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { headers } from 'next/headers';
 import { firstLetterToUpper } from '@/lib/utils';
-
-interface ExerciseInfo {
-  exerciseId: string;
-  name: string;
-  gifUrl: string;
-  instructions: string[];
-  targetMuscles: string[];
-  bodyParts: string[];
-  equipments: string[];
-  secondaryMuscles: string[];
-}
+import { ExerciseInfoInterface } from '../lib/definitions';
 
 const ExerciseInfo = async ({
   exercise_id,
@@ -28,7 +18,7 @@ const ExerciseInfo = async ({
     }
   );
   const { data } = await req.json();
-  const exerciseInfo: ExerciseInfo = data;
+  const exerciseInfo: ExerciseInfoInterface = data;
 
   const headerList = await headers();
   const fullUrl = headerList.get('referer') || '';

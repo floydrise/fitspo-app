@@ -16,11 +16,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
-import { Workout_history } from '../lib/definitions';
-
-interface WorkoutCountChartProps {
-  history: Workout_history[];
-}
+import { WorkoutCountChartProps } from '../lib/definitions';
 
 export function ProcessWorkoutData({ history }: WorkoutCountChartProps) {
   const workoutName: { [key: number]: string } = {
@@ -86,7 +82,6 @@ export function ProcessWorkoutData({ history }: WorkoutCountChartProps) {
             <YAxis
               dataKey='name'
               type='category'
-              // width={90}
               tickMargin={20}
               minTickGap={10}
               interval={0}

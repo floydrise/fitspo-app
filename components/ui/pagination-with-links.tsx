@@ -19,17 +19,7 @@ import {
 } from './select';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
-
-export interface PaginationWithLinksProps {
-  pageSizeSelectOptions?: {
-    pageSizeSearchParam?: string;
-    pageSizeOptions: number[];
-  };
-  totalCount: number;
-  pageSize: number;
-  page: number;
-  pageSearchParam?: string;
-}
+import { PaginationWithLinksProps } from '@/app/lib/definitions';
 
 /**
  * Navigate with Nextjs links (need to update your own `pagination.tsx` to use Nextjs Link)
@@ -75,7 +65,13 @@ export function PaginationWithLinks({
       newSearchParams.delete(pageSearchParam || 'page'); // Clear the page number when changing page size
       router.push(`${pathname}?${newSearchParams.toString()}`);
     },
-    [pageSizeSelectOptions?.pageSizeSearchParam, searchParams, pageSearchParam, router, pathname]
+    [
+      pageSizeSelectOptions?.pageSizeSearchParam,
+      searchParams,
+      pageSearchParam,
+      router,
+      pathname,
+    ]
   );
 
   const renderPageNumbers = () => {

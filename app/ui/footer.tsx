@@ -4,9 +4,7 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className='pb-12 pt-4 text-center text-gray-500'>
-      {/* Footer Content */}
       <div className='container mx-auto flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0'>
-        {/* Left Side, Home, About, and Contact */}
         <nav className='flex justify-between'>
           <Link
             href='/'
@@ -35,8 +33,6 @@ export default function Footer() {
             Github
           </Link>
         </nav>
-
-        {/* Center FitSpo Logo */}
         <div>
           <Link href={'/'}>
             <Image
@@ -48,8 +44,6 @@ export default function Footer() {
             />
           </Link>
         </div>
-
-        {/* Right Side, Copyright Info */}
         <div className='text-sm'>
           <p>Copyright © 2025 FitSpo. All rights reserved.</p>
         </div>

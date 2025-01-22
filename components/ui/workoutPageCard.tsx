@@ -2,13 +2,8 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Workout } from '@/app/lib/definitions';
+import { Workout, WorkoutDescription } from '@/app/lib/definitions';
 import { fetchWorkouts } from '@/app/lib/endpoints';
-
-interface WorkoutDescription {
-  workoutName: string;
-  description: string;
-}
 
 const WorkoutCard = async () => {
   const workouts: Workout[] = await fetchWorkouts();
