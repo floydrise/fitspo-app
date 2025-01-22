@@ -63,7 +63,7 @@ export const fetchWorkoutByName = async (workout_name: string | undefined) => {
 export async function fetchWorkoutHistoryByUserId(user_id: number) {
   try {
     const data = await sql<Workout_history>`SELECT * FROM workout_history
-    WHERE user_id = ${user_id} order by date desc `;
+    WHERE user_id = ${user_id} order by workout_history_id desc `;
     return data.rows;
   } catch (error) {
     console.error('error fetching workout history ', error);
