@@ -9,10 +9,12 @@ function TrackerLayout({
   workout,
   exerciseNames,
   user_id,
+  bodyPart,
 }: {
   workout: Workout;
   exerciseNames: string[];
   user_id: number;
+  bodyPart: string;
 }) {
   const [exerciseList, setExerciseListAction] = useState<SubmitData[]>(
     [] as SubmitData[]
@@ -26,7 +28,7 @@ function TrackerLayout({
   });
   const [counter, setCounter] = useState(0);
 
-  const workoutLength = workout.exercise_ids.length
+  const workoutLength = workout.exercise_ids.length;
 
   useEffect(() => {
     setSubmitData((prev: Workout_history) => {
@@ -35,8 +37,6 @@ function TrackerLayout({
       return copy;
     });
   }, [exerciseList]);
-
-  console.log(submitData);
 
   return (
     <div>
@@ -53,10 +53,15 @@ function TrackerLayout({
             exerciseName={exerciseName}
             setExerciseListAction={setExerciseListAction}
             setCounter={setCounter}
+            bodyPart={bodyPart}
           />
         </ul>
       ))}
-      <FinishAndCancel submitData={submitData} counter={counter} workoutLength={workoutLength}/>
+      <FinishAndCancel
+        submitData={submitData}
+        counter={counter}
+        workoutLength={workoutLength}
+      />
     </div>
   );
 }

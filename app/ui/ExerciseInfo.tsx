@@ -44,7 +44,7 @@ const ExerciseInfo = async ({
       <div className='mx-auto flex h-[82px] max-w-[880px] items-center justify-between rounded-[15px] bg-fitViolet py-[7px] pl-[14px] pr-[28px]'>
         <div className='flex items-center'>
           <Image
-            src='/upper_arms.svg'
+            src={`/${exerciseInfo.bodyParts}.svg`}
             width={68}
             height={68}
             alt='Upper arms icon'
