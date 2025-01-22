@@ -46,9 +46,9 @@ const AppOverview = () => {
       <div className='flex items-center justify-around px-[15px] py-[55px] min-[320px]:max-[1023px]:flex-col min-[320px]:max-[1023px]:items-center'>
         <div className='max-w-[574px]'>
           <Image
-            src='/form.png'
-            width={574}
-            height={296}
+            src='/addForm.svg'
+            width={357}
+            height={247}
             alt='Workout form example'
           />
         </div>
