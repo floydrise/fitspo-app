@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   fetchExerciseById,
   fetchUserByUsername,
@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
 import { auth } from '@/auth';
 import TrackerLayout from '@/app/ui/TrackerLayout';
+import TrackerSkeleton from '@/components/ui/TrackerSkeleton';
 
 export default async function Page(props: {
   params: Promise<{ workout_name: string }>;
@@ -39,12 +40,12 @@ export default async function Page(props: {
 
   return (
     <section className='container mx-auto'>
-      <TrackerLayout
-        workout={workout}
-        bodyPart={bodyPartName ? bodyPartName : 'chest'}
-        exerciseNames={exerciseNames}
-        user_id={user_id}
-      />
+        <TrackerLayout
+          workout={workout}
+          bodyPart={bodyPartName ? bodyPartName : 'chest'}
+          exerciseNames={exerciseNames}
+          user_id={user_id}
+        />
     </section>
   );
 }
