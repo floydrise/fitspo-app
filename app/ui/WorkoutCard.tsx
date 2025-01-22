@@ -7,7 +7,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const date: string = workout.date.toDateString();
+  const date: string = workout.date.toString();
   const duration: number = Math.round(workout.duration / 60);
   const workoutName: { [key: number]: string } = {
     1: 'Upper Body',
