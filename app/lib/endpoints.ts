@@ -92,3 +92,16 @@ export async function fetchExerciseById(
     throw new Error(`Error fetching exercise with ID: ${exercise_id}`);
   }
 }
+
+export async function postWorkoutHistory(exercise_data: Workout_history) {
+  const { user_id, workout_id, date, duration, exercise_list } = exercise_data;
+  try {
+    const data =
+      await sql`INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
+    VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});`;
+    return data.rows[0];
+  } catch (error) {
+    console.error('error posting workout history ', error);
+    throw new Error('error posting workout history');
+  }
+}

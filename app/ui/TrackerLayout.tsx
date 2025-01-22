@@ -14,7 +14,9 @@ function TrackerLayout({
   exerciseNames: string[];
   user_id: number;
 }) {
-  const [exerciseList, setExerciseListAction] = useState<SubmitData[]>([] as SubmitData[]);
+  const [exerciseList, setExerciseListAction] = useState<SubmitData[]>(
+    [] as SubmitData[]
+  );
   const [submitData, setSubmitData] = useState<Workout_history>({
     user_id: user_id,
     workout_id: workout.workout_id,
@@ -22,14 +24,17 @@ function TrackerLayout({
     duration: 0,
     exercise_list: [],
   });
+  const [counter, setCounter] = useState(0);
+
+  const workoutLength = workout.exercise_ids.length
 
   useEffect(() => {
     setSubmitData((prev: Workout_history) => {
       const copy = structuredClone(prev);
-      copy.exercise_list = exerciseList
+      copy.exercise_list = exerciseList;
       return copy;
-    })
-  }, [exerciseList])
+    });
+  }, [exerciseList]);
 
   console.log(submitData);
 
@@ -47,10 +52,11 @@ function TrackerLayout({
           <TrackerCard
             exerciseName={exerciseName}
             setExerciseListAction={setExerciseListAction}
+            setCounter={setCounter}
           />
         </ul>
       ))}
-      <FinishAndCancel />
+      <FinishAndCancel counter={counter} workoutLength={workoutLength}/>
     </div>
   );
 }

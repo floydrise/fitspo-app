@@ -18,10 +18,12 @@ import { SubmitData } from '@/app/lib/definitions';
 
 export default function TrackerCard({
   exerciseName,
-  setExerciseListAction
+  setExerciseListAction,
+  setCounter,
 }: {
   exerciseName: string;
-  setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>
+  setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const [sets, setSets] = useState([
     {
@@ -74,6 +76,9 @@ export default function TrackerCard({
   };
 
   const completeExercise = (exerciseName: string) => {
+    setCounter((prev: number): number => {
+      return prev + 1;
+    });
     let totalWeight: number = 0;
     let totalReps: number = 0;
 
@@ -95,26 +100,18 @@ export default function TrackerCard({
       sets_count: sets.length,
     };
 
-    setExerciseListAction((prevExerciseList) => [...prevExerciseList, exerciseData]);
+    setExerciseListAction((prevExerciseList) => [
+      ...prevExerciseList,
+      exerciseData,
+    ]);
 
-/*    console.log(exerciseData, 'exerciseData');
-    console.log(exerciseList, 'exerciseList');*/
+    /*    
+    console.log(exerciseData, 'exerciseData');
+    console.log(exerciseList, 'exerciseList');
 
-    // setExerciseListAction((prev) => ({ ...prev, exerciseData }));
+    setExerciseListAction((prev) => ({ ...prev, exerciseData }));
 
-   /*
-   /*
-
-
-
-
-
-    /*
-
-
-
-
-
+    
     setExerciseList((prev) => [...prev, exerciseData]);
 
     // Append to completed immutably
@@ -123,7 +120,8 @@ export default function TrackerCard({
         ...workout,
         exercise_list: [...workout.exercise_list, exerciseData],
       }))
-    );*/
+    );
+    */
   };
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>
