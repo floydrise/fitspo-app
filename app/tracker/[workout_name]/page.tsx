@@ -24,8 +24,11 @@ export default async function Page(props: {
     notFound();
   }
 
+  let bodyPartName: string = '';
+
   const exercises = workout.exercise_ids.map(async (exercise_id: string) => {
     const Exercises = await fetchExerciseById(exercise_id);
+    bodyPartName = Exercises.data.bodyParts.toString();
     return Exercises.data.name;
   });
 
@@ -36,7 +39,12 @@ export default async function Page(props: {
 
   return (
     <section className='container mx-auto'>
-      <TrackerLayout workout={workout} exerciseNames={exerciseNames} user_id={user_id}/>
+      <TrackerLayout
+        workout={workout}
+        bodyPart={bodyPartName ? bodyPartName : 'chest'}
+        exerciseNames={exerciseNames}
+        user_id={user_id}
+      />
     </section>
   );
 }

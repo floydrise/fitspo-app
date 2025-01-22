@@ -9,10 +9,12 @@ function TrackerLayout({
   workout,
   exerciseNames,
   user_id,
+  bodyPart,
 }: {
   workout: Workout;
   exerciseNames: string[];
   user_id: number;
+  bodyPart: string;
 }) {
   const [exerciseList, setExerciseListAction] = useState<SubmitData[]>(
     [] as SubmitData[]
@@ -36,8 +38,6 @@ function TrackerLayout({
     });
   }, [exerciseList]);
 
-  console.log(submitData);
-
   return (
     <div>
       <div className='mx-1 mt-2 flex max-w-[100%] items-center justify-between rounded-[5px] bg-fitViolet p-2'>
@@ -53,6 +53,7 @@ function TrackerLayout({
             exerciseName={exerciseName}
             setExerciseListAction={setExerciseListAction}
             setCounter={setCounter}
+            bodyPart={bodyPart}
           />
         </ul>
       ))}

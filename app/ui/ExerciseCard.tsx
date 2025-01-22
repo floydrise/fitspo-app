@@ -6,14 +6,15 @@ import { firstLetterToUpper } from '@/lib/utils';
 const ExerciseCard = ({
   exTitle,
   exerciseId,
+  bodyParts,
 }: {
   exTitle: string;
   exerciseId: string;
+  bodyParts: string;
 }) => {
-  const {replace} = useRouter();
+  const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
 
   const handleClick = (exerciseId: string) => {
     const params = new URLSearchParams(searchParams);
@@ -23,9 +24,14 @@ const ExerciseCard = ({
   };
 
   return (
-    <div onClick={() => {handleClick(exerciseId)}} className='radius-[20px] flex h-[120px] w-[300px] cursor-pointer items-center rounded-[20px] bg-fitViolet px-3.5 duration-100 hover:bg-[#7972D9] active:bg-[#7F79E6] sm:w-[360px]'>
+    <div
+      onClick={() => {
+        handleClick(exerciseId);
+      }}
+      className='radius-[20px] flex h-[120px] w-[300px] cursor-pointer items-center rounded-[20px] bg-fitViolet px-3.5 duration-100 hover:bg-[#7972D9] active:bg-[#7F79E6] sm:w-[360px]'
+    >
       <Image
-        src={`/upper_arms.svg`}
+        src={`/${bodyParts}.svg`}
         width={68}
         height={68}
         alt='Body part filter'
