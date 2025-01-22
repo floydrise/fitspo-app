@@ -7,7 +7,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const date: string = workout.date.toString();
+  const date: string = workout.date.toDateString();
   const duration: number = Math.round(workout.duration / 60);
   const workoutName: { [key: number]: string } = {
     1: 'Upper Body',
@@ -37,7 +37,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
           {workout.exercise_list.map((exercise) => (
             <div
               key={exercise.name}
-              className='rounded-md border border-gray-200 p-3 m-2'
+              className='m-2 rounded-md border border-gray-200 p-3'
             >
               <p className='mb-1 text-base font-medium'>{exercise.name}</p>
               <p className='text-sm text-gray-600'>

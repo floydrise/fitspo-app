@@ -98,7 +98,7 @@ export async function postWorkoutHistory(exercise_data: Workout_history) {
   const { user_id, workout_id, date, duration, exercise_list } = exercise_data;
   try {
     await sql`INSERT INTO workout_history (user_id, workout_id, date, duration, exercise_list)
-    VALUES (${user_id}, ${workout_id}, ${date}, ${duration}, ${JSON.stringify(exercise_list)});`;
+    VALUES (${user_id}, ${workout_id}, ${date.toISOString().split('T')[0]}, ${duration}, ${JSON.stringify(exercise_list)});`;
   } catch (error) {
     console.error('error posting workout history ', error);
     throw new Error('error posting workout history');
