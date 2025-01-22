@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { formatTime } from "@/lib/utils";
+import { Button } from '@/components/ui/button';
 
 const Timer = ({
   setTimeAction,
@@ -42,16 +43,12 @@ const Timer = ({
           <p>Timer:</p>
           {formatTime(seconds)}
         </span>
-        <button
+        <Button
           onClick={() => handleClick(seconds)}
-          className={`rounded-md px-4 py-2 font-semibold text-white transition ${
-            isRunning
-              ? 'bg-red-500 hover:bg-red-600'
-              : 'bg-green-500 hover:bg-green-600'
-          }`}
+          variant={isRunning ? "destructive" : "green"}
         >
           {isRunning ? 'Stop' : 'Start'}
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import React from 'react';
+import TrackerSkeleton from '@/components/ui/TrackerSkeleton';
 
 const Loading = () => {
   return (
-    <div>
-      Loading ...
+    <div className={"container mx-auto"}>
+      <TrackerSkeleton/>
     </div>
   );
 };
