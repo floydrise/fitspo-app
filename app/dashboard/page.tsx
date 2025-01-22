@@ -10,6 +10,7 @@ import UserProfile from '../ui/UserProfile';
 import { Component } from '../ui/PieChart';
 import Link from 'next/link';
 import { ProcessWorkoutData } from '../ui/ProcessWorkoutData';
+import { Button } from '@/components/ui/button';
 
 export default async function Page() {
   const session = await auth();
@@ -23,11 +24,13 @@ export default async function Page() {
       <div className='mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 p-4'>
         <UserProfile user={userData} />
         <p>nothing to see yet...</p>
+        <Button variant={'green'} asChild>
         <Link href='/workouts'>
           <p className='text-center text-xl font-bold'>
             Click here to start your Journey
           </p>
         </Link>
+        </Button>
       </div>
     );
 
