@@ -39,12 +39,12 @@ export default async function Page(props: {
 
   return (
     <section className='container mx-auto'>
-      <TrackerLayout
-        workout={workout}
-        bodyPart={bodyPartName ? bodyPartName : 'chest'}
-        exerciseNames={exerciseNames}
-        user_id={user_id}
-      />
+        <TrackerLayout
+          workout={workout}
+          bodyPart={bodyPartName ? bodyPartName : 'chest'}
+          exerciseNames={exerciseNames}
+          user_id={user_id}
+        />
     </section>
   );
 }

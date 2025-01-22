@@ -4,6 +4,7 @@ import TrackerCard from './TrackerCard';
 import Timer from './timer';
 import FinishAndCancel from './FinishAndCancel';
 import { SubmitData, Workout, Workout_history } from '../lib/definitions';
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 
 function TrackerLayout({
   workout,
@@ -44,10 +45,15 @@ function TrackerLayout({
 
   return (
     <div>
-      <div className='mx-1 mt-2 flex max-w-[100%] items-center justify-between rounded-[5px] bg-fitViolet p-2'>
+      <div className='mx-1 mt-2 flex flex-wrap max-w-[100%] items-center justify-center md:justify-between rounded-[5px] bg-fitViolet p-2'>
+        <div className={"flex justify-center items-center gap-3"}>
         <h1 className='text-2xl font-bold text-white'>
           {workout.workout_name} workout
         </h1>
+        <span className={'tooltip w-5 hidden md:flex'} data-tip={'Input weight and reps, click done after each exercise, stop the timer and Finish the workout'}>
+          <QuestionMarkCircleIcon/>
+        </span>
+        </div>
         <div className='text-xl font-bold text-white'>
           <Timer
             setTimeAction={setTimeAction}
@@ -62,7 +68,7 @@ function TrackerLayout({
             exerciseName={exerciseName}
             setExerciseListAction={setExerciseListAction}
             setCounterAction={setCounterAction}
-        bodyPart={bodyPart}
+            bodyPart={bodyPart}
           />
         </ul>
       ))}

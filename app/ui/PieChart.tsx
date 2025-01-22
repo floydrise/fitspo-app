@@ -21,7 +21,7 @@ const chartConfig: ChartConfig = {
   exercise: {
     label: 'Times worked out',
     color: 'hsl(272, 61%, 34%)',
-  }
+  },
 };
 export function Component({ history }: { history: Workout_history[] }) {
   const data = history.flatMap((history) =>
@@ -45,13 +45,25 @@ export function Component({ history }: { history: Workout_history[] }) {
       },
       {} as Record<string, number>
     );
-    const chartData: ChartData[] = Object.entries(exerciseCounts).map(
-      ([exercise, count]) => {
 
+    const generateColours = (numOfExercises: number): string[] => {
+      const saturation = '100%';
+      const lightness = '50%';
+      const colours = [];
+
+      for (let i = 0; i < numOfExercises; i++) {
+        const hue = Math.floor((360 / numOfExercises) * i);
+        colours.push(`hsl(${hue}, ${saturation}, ${lightness})`);
+      }
+      return colours;
+    };
+
+    const chartData: ChartData[] = Object.entries(exerciseCounts).map(
+      ([exercise, count], index) => {
         return {
           exercise,
           attempts: count,
-          fill: 'hsl(272, 61%, 34%)',
+          fill: generateColours(Object.keys(exerciseCounts).length)[index],
         };
       }
     );
@@ -82,7 +94,6 @@ export function Component({ history }: { history: Workout_history[] }) {
               innerRadius={60}
               outerRadius={100}
               strokeWidth={5}
-              paddingAngle={20}
             >
               <Label
                 content={({ viewBox }) => {
