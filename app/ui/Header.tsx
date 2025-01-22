@@ -43,7 +43,11 @@ export default async function Header() {
               <Button variant={'green'} asChild={true}>
                 <Link href={'/login'}>Log in</Link>
               </Button>
-              <Button variant={'orange'} asChild={true}>
+              <Button
+                className='hidden md:block'
+                variant={'orange'}
+                asChild={true}
+              >
                 <Link href={'/signup'}>Sign up</Link>
               </Button>
             </div>
