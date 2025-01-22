@@ -1,22 +1,24 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { formatTime } from '@/lib/utils';
 
 const Timer = ({
-  seconds,
-//   setSeconds,
+  setTimeAction,
+  isRunning,
+  setIsRunningAction,
 }: {
-  seconds: number;
-//   setSeconds: () => {}
+  setTimeAction: React.Dispatch<React.SetStateAction<number>>;
+  isRunning: boolean;
+  setIsRunningAction: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [isRunning, setIsRunning] = useState(false); // Timer running status
-
+  const [seconds, setSeconds] = useState(0);
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
 
     if (isRunning) {
       timer = setInterval(() => {
-        // setSeconds((prev) => prev + 1);
+        setSeconds((prev) => prev + 1);
       }, 1000);
     } else if (timer) {
       clearInterval(timer);
@@ -27,24 +29,21 @@ const Timer = ({
     };
   }, [isRunning]);
 
-  // Format the time as minutes:seconds
-  const formatTime = (totalSeconds: number) => {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+  const handleClick = (seconds: number) => {
+    setIsRunningAction((prev) => !prev);
+    setTimeAction(seconds);
   };
 
-  console.log(seconds);
-
   return (
-    <div className='mx-auto flex max-w-md items-center justify-between rounded-lg bg-gray-100 p-1 shadow-md'>
-      {/* Timer and button section/CSS */}
+    <div className='mx-auto flex max-w-md items-center justify-between p-1 '>
       <div className='flex items-center space-x-4'>
-        <span className='text-xl font-bold text-blue-600'>
+        <span className='text-xl flex gap-2 font-bold text-gray-50'>
+          <p>Timer:</p>
           {formatTime(seconds)}
         </span>
         <button
-          onClick={() => setIsRunning((prev) => !prev)}
+          onClick={() => handleClick(seconds)}
           className={`rounded-md px-4 py-2 font-semibold text-white transition ${
             isRunning
               ? 'bg-red-500 hover:bg-red-600'

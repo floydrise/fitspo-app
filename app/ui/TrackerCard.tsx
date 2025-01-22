@@ -7,23 +7,15 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { SubmitData } from '@/app/lib/definitions';
-// import { Workout_history } from '@/app/lib/definitions';
-
-/*interface SubmitData {
-  name: string;
-  weight: number;
-  reps_count: number;
-  sets_count: number;
-}*/
 
 export default function TrackerCard({
   exerciseName,
   setExerciseListAction,
-  setCounter,
+  setCounterAction,
 }: {
   exerciseName: string;
   setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>;
-  setCounter: React.Dispatch<React.SetStateAction<number>>;
+  setCounterAction: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const [sets, setSets] = useState([
     {
@@ -36,17 +28,6 @@ export default function TrackerCard({
     },
   ]);
 
-  // const [exerciseList, setExerciseList] = useState<SubmitData[]>([]);
-
-  /*  const [completed, setCompleted] = useState<Workout_history[]>([
-    {
-      user_id: user_id,
-      workout_id: workout_id,
-      date: new Date().toISOString().split('T')[0],
-      duration: 0,
-      exercise_list: exerciseList,
-    },
-  ]);*/
 
   const addSet = () => {
     const newSet = {
@@ -76,7 +57,7 @@ export default function TrackerCard({
   };
 
   const completeExercise = (exerciseName: string) => {
-    setCounter((prev: number): number => {
+    setCounterAction((prev: number): number => {
       return prev + 1;
     });
     let totalWeight: number = 0;
@@ -105,23 +86,6 @@ export default function TrackerCard({
       exerciseData,
     ]);
 
-    /*    
-    console.log(exerciseData, 'exerciseData');
-    console.log(exerciseList, 'exerciseList');
-
-    setExerciseListAction((prev) => ({ ...prev, exerciseData }));
-
-    
-    setExerciseList((prev) => [...prev, exerciseData]);
-
-    // Append to completed immutably
-    setCompleted((prev) =>
-      prev.map((workout) => ({
-        ...workout,
-        exercise_list: [...workout.exercise_list, exerciseData],
-      }))
-    );
-    */
   };
   return (
     <section className='w-[360px] rounded-xl bg-fitGrey p-[10px]'>

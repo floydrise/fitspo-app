@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import TrackerCard from './TrackerCard';
-// import Timer from './timer';
+import Timer from './timer';
 import FinishAndCancel from './FinishAndCancel';
 import { SubmitData, Workout, Workout_history } from '../lib/definitions';
 
@@ -24,7 +24,10 @@ function TrackerLayout({
     duration: 0,
     exercise_list: [],
   });
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounterAction] = useState(0);
+
+  const [time, setTimeAction] = useState(0);
+  const [isRunning, setIsRunningAction] = useState(true);
 
   const workoutLength = workout.exercise_ids.length;
 
@@ -32,9 +35,10 @@ function TrackerLayout({
     setSubmitData((prev: Workout_history) => {
       const copy = structuredClone(prev);
       copy.exercise_list = exerciseList;
+      copy.duration = time;
       return copy;
     });
-  }, [exerciseList]);
+  }, [exerciseList, time]);
 
   console.log(submitData);
 
@@ -44,15 +48,20 @@ function TrackerLayout({
         <h1 className='text-2xl font-bold text-white'>
           {workout.workout_name} workout
         </h1>
-        {/*<Timer seconds={seconds} setSeconds={setSeconds}/>*/}
-        <div className='text-xl font-bold text-white'></div>
+        <div className='text-xl font-bold text-white'>
+          <Timer
+            setTimeAction={setTimeAction}
+            isRunning={isRunning}
+            setIsRunningAction={setIsRunningAction}
+          />
+        </div>
       </div>
       {exerciseNames.map((exerciseName) => (
         <ul key={exerciseName} className='flex items-center justify-center p-1'>
           <TrackerCard
             exerciseName={exerciseName}
             setExerciseListAction={setExerciseListAction}
-            setCounter={setCounter}
+            setCounterAction={setCounterAction}
           />
         </ul>
       ))}
@@ -60,6 +69,7 @@ function TrackerLayout({
         submitData={submitData}
         counter={counter}
         workoutLength={workoutLength}
+        isRunning={isRunning}
       />
     </div>
   );

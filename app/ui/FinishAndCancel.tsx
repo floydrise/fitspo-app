@@ -9,10 +9,12 @@ function FinishAndCancel({
   counter,
   workoutLength,
   submitData,
+  isRunning
 }: {
   counter: number;
   workoutLength: number;
   submitData: Workout_history;
+  isRunning: boolean
 }) {
   const submit = async (data: Workout_history) => {
     await postWorkoutHistory(data);
@@ -21,10 +23,10 @@ function FinishAndCancel({
   return (
     <div className='flex items-center justify-center gap-20'>
       <button
-        onClick={() => {
+        onClick={async () => {
           submit(submitData);
         }}
-        className={`rounded-[15px] px-[33px] py-[10px] text-[18px] font-bold ${counter >= workoutLength ? 'bg-fitGreen transition ease-in-out hover:bg-fitBlue hover:text-fitGreen' : 'cursor-not-allowed bg-gray-300'} `}
+        className={`rounded-[15px] px-[33px] py-[10px] text-[18px] font-bold ${counter >= workoutLength && !isRunning ? 'bg-fitGreen transition ease-in-out hover:bg-fitBlue hover:text-fitGreen' : 'cursor-not-allowed bg-gray-300'} `}
       >
         Finish
       </button>
