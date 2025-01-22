@@ -12,10 +12,12 @@ export default function TrackerCard({
   exerciseName,
   setExerciseListAction,
   setCounterAction,
+  bodyPart,
 }: {
   exerciseName: string;
   setExerciseListAction: React.Dispatch<React.SetStateAction<SubmitData[]>>;
   setCounterAction: React.Dispatch<React.SetStateAction<number>>;
+   bodyPart: string;
 }) {
   const [sets, setSets] = useState([
     {
@@ -93,7 +95,7 @@ export default function TrackerCard({
         <div className='rounded-xl bg-fitViolet p-[5px]'>
           <div className='flex'>
             <Image
-              src={`/upper_arms.svg`}
+              src={`/${bodyPart}.svg`}
               width={68}
               height={68}
               alt='Body part filter'
