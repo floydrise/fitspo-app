@@ -4,14 +4,13 @@ import SkeletonWorkout from '@/components/ui/SkeletonWorkout';
 
 async function Page() {
   return (
-    <section
-      className={
-        'justify-content-between container m-6 mx-auto grid justify-items-center gap-8 px-[15px] md:grid-cols-2 xl:grid-cols-3'
-      }
-    >
-      <Suspense fallback={<SkeletonWorkout />}>
-        <WorkoutCard />
-      </Suspense>
+    <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
+      <h1 className='text-[32px] font-semibold text-fitBlue'>Workouts</h1>
+      <div className='m-6 flex flex-wrap items-center justify-center gap-10'>
+        <Suspense fallback={<SkeletonWorkout />}>
+          <WorkoutCard />
+        </Suspense>
+      </div>
     </section>
   );
 }

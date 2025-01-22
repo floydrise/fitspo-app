@@ -18,11 +18,13 @@ const NavLinks = () => {
     <>
       {links.map((link) => {
         return (
-          <Link
-            key={link.name}
-            href={link.href}
-          >
-            <Button variant={pathname === link.href ? "purple" : "gray"}>{link.name}</Button>
+          <Link key={link.name} href={link.href}>
+            <Button
+              className='text-[16px]'
+              variant={pathname === link.href ? 'purple' : 'gray'}
+            >
+              {link.name}
+            </Button>
           </Link>
         );
       })}
