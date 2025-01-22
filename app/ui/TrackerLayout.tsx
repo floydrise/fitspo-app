@@ -5,7 +5,6 @@ import Timer from './timer';
 import FinishAndCancel from './FinishAndCancel';
 import { SubmitData, Workout, Workout_history } from '../lib/definitions';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
-import TrackerSkeleton from '@/components/ui/TrackerSkeleton';
 
 function TrackerLayout({
   workout,

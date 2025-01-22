@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import {
   fetchExerciseById,
   fetchUserByUsername,
@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation';
 import { Workout } from '@/app/lib/definitions';
 import { auth } from '@/auth';
 import TrackerLayout from '@/app/ui/TrackerLayout';
-import TrackerSkeleton from '@/components/ui/TrackerSkeleton';
 
 export default async function Page(props: {
   params: Promise<{ workout_name: string }>;
