@@ -44,8 +44,8 @@ const ProfilePic = ({
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Button variant={'ghost'} asChild>
-            <Link className='text-lg' href={'/dashboard'}>
+          <Button className='text-lg' variant={'ghost'} asChild>
+            <Link  href={'/dashboard'}>
               <UserCircleIcon /> Dashboard
             </Link>
           </Button>
