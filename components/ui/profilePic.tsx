@@ -39,13 +39,13 @@ const ProfilePic = ({
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='absolute right-[-20px] min-[510px]:right-[-70px]'>
-        <DropdownMenuLabel className={'text-center'}>
+        <DropdownMenuLabel className={'text-md text-center'}>
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Button variant={'ghost'} asChild>
-            <Link href={'/dashboard'}>
+            <Link className='text-lg' href={'/dashboard'}>
               <UserCircleIcon /> Dashboard
             </Link>
           </Button>
@@ -57,7 +57,7 @@ const ProfilePic = ({
               await signOut({ redirectTo: '/home', redirect: true });
             }}
           >
-            <Button variant={'ghost'}>
+            <Button className='text-lg' variant={'ghost'}>
               <ArrowRightEndOnRectangleIcon />
               Log out
             </Button>
