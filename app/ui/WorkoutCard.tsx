@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Workout_history } from '../lib/definitions';
+import { formatTime } from '@/lib/utils';
 
 export function WorkoutCard({ workout }: { workout: Workout_history }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +9,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
     setIsOpen(!isOpen);
   };
   const date: string = workout.date.toDateString();
-  const duration: number = Math.round(workout.duration / 60);
+  const duration = formatTime(workout.duration)
   const workoutName: { [key: number]: string } = {
     1: 'Upper Body',
     2: 'Lower Body',
@@ -29,7 +30,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
         <h2 className='text-center'>
           <p> {workoutName[workout.workout_id]}</p>
           <p>{date} </p>
-          <p>{duration} minutes </p>
+          <p>Duration: {duration}</p>
         </h2>
       </button>
       {isOpen && (
