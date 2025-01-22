@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { Workout_history } from '../lib/definitions';
+import { ChartData, Workout_history } from '../lib/definitions';
 const chartConfig: ChartConfig = {
   exercise: {
     label: 'Times worked out',
@@ -32,11 +32,7 @@ export function Component({ history }: { history: Workout_history[] }) {
     })
   );
   const userData: string[] = data.map((data) => data.exercise);
-  type ChartData = {
-    exercise: string;
-    attempts: number;
-    fill: string;
-  };
+
   const generateChartData = (data: string[]): ChartData[] => {
     const exerciseCounts: Record<string, number> = data.reduce(
       (acc, exercise) => {

@@ -19,6 +19,20 @@ export type Exercise = {
   sets_count: number;
 };
 
+export interface ExerciseExercisePage {
+  name: string;
+  exerciseId: string;
+  bodyParts: string;
+}
+
+export interface TeamMember {
+  id: number;
+  name: string;
+  gitHub: string;
+  mail: string;
+  linkedin: string;
+}
+
 export interface SubmitData {
   name: string;
   weight: number;
@@ -35,7 +49,6 @@ export type Workout_history = {
   exercise_list: SubmitData[];
 };
 
-// in case we need it
 export type APIExercise = {
   data: {
     exerciseId: string;
@@ -52,4 +65,49 @@ export type APIExercise = {
 export type ExerciseCardType = {
   name: string;
   exerciseId: string;
+};
+
+export interface PaginationWithLinksProps {
+  pageSizeSelectOptions?: {
+    pageSizeSearchParam?: string;
+    pageSizeOptions: number[];
+  };
+  totalCount: number;
+  pageSize: number;
+  page: number;
+  pageSearchParam?: string;
+}
+
+export interface WorkoutDescription {
+  workoutName: string;
+  description: string;
+}
+
+export interface ExerciseProps {
+  query?: string;
+  page?: string;
+  pageSize?: string;
+  modal?: string;
+  exercise_id?: string;
+}
+
+export interface ExerciseInfoInterface {
+  exerciseId: string;
+  name: string;
+  gifUrl: string;
+  instructions: string[];
+  targetMuscles: string[];
+  bodyParts: string[];
+  equipments: string[];
+  secondaryMuscles: string[];
+}
+
+export interface WorkoutCountChartProps {
+  history: Workout_history[];
+}
+
+export type ChartData = {
+  exercise: string;
+  attempts: number;
+  fill: string;
 };

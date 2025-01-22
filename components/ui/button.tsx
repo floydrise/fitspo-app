@@ -46,6 +46,7 @@ const buttonVariants = cva(
   }
 );
 
+// Can't be moved to definitions.ts?
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {

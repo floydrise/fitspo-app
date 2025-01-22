@@ -3,22 +3,9 @@ import ExerciseCard from '@/app/ui/ExerciseCard';
 import Search from '@/app/ui/Search';
 import ExerciseInfo from '@/app/ui/ExerciseInfo';
 import { PaginationWithLinks } from '@/components/ui/pagination-with-links';
+import { ExerciseExercisePage, ExerciseProps } from '../lib/definitions';
 
-interface Exercise {
-  name: string;
-  exerciseId: string;
-  bodyParts: string;
-}
-
-const Page = async (props: {
-  searchParams?: Promise<{
-    query?: string;
-    page?: string;
-    pageSize?: string;
-    modal?: string;
-    exercise_id?: string;
-  }>;
-}) => {
+const Page = async (props: { searchParams?: Promise<ExerciseProps> }) => {
   const searchParams = await props.searchParams;
   const query = searchParams?.query;
   const currentPage = Number((searchParams?.page as string) || '1');
@@ -48,7 +35,7 @@ const Page = async (props: {
     data: { exercises, totalPages },
   } = await req.json();
 
-  const exercisesList: Exercise[] = await exercises;
+  const exercisesList: ExerciseExercisePage[] = await exercises;
 
   return (
     <>
@@ -64,7 +51,6 @@ const Page = async (props: {
         <section className='container mx-auto px-[15px] pb-[50px] pt-[26px]'>
           <h1 className='text-[32px] font-semibold text-fitBlue'>Exercises</h1>
           <Search placeholder={'Search for an exercise'} />
-          {/* <ExerciseInfo /> */}
           <ul className='justify-content-between mt-[26px] grid justify-items-center gap-8 md:grid-cols-2 xl:grid-cols-3'>
             {exercisesList.length > 0 ? (
               exercisesList.map(({ name, exerciseId, bodyParts }) => (

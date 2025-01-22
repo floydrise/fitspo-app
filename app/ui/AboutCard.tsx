@@ -1,13 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
-interface TeamMember {
-  id: number;
-  name: string;
-  gitHub: string;
-  mail: string;
-  linkedin: string;
-}
+import { TeamMember } from '../lib/definitions';
 
 const AboutCard = ({ info }: { info: TeamMember }) => {
   return (
