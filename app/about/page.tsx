@@ -10,7 +10,6 @@ const AboutPage = () => {
             About the FitSpo Project
           </h1>
         </div>
-
         <div className='space-y-2'>
           <h2 className='text-2xl font-semibold text-fitGreen'>Our Mission</h2>
           <p>
@@ -25,11 +24,9 @@ const AboutPage = () => {
             into a reality.
           </p>
         </div>
-
-        {/* Offer section */}
         <div className='space-y-2'>
           <h2 className='text-2xl font-semibold text-fitGreen'>
-            Powered by the Exercisedb API{' '}
+            Powered by Exercisedb API{' '}
           </h2>
           <p className='mb-4'>
             One of the ways we ensure FitSpo stays comprehensive and accurate is
@@ -66,7 +63,6 @@ const AboutPage = () => {
             </li>
           </ul>
         </div>
-        {/* Signup section */}
         <div className='text-center'>
           <p className='inline-block rounded-lg bg-fitBlue px-4 py-2 text-2xl font-bold text-white shadow-lg'>
             Ready to take the next step in your fitness journey?
