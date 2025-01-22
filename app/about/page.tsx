@@ -12,13 +12,11 @@ const AboutPage = () => {
         </div>
 
         <div className='space-y-2'>
-          <h2 className='text-2xl font-semibold text-fitGreen '>
-            Our Mission
-          </h2>
+          <h2 className='text-2xl font-semibold text-fitGreen'>Our Mission</h2>
           <p>
             FitSpo was born from one simple mission: to make fitness accessible,
             fun, and trackable for everyone. Our team noticed there weren’t many
-            user-friendly workout trackers , so we decided to build our own
+            user-friendly workout trackers, so we decided to build our own
             solution.
           </p>
           <p>
@@ -30,25 +28,25 @@ const AboutPage = () => {
 
         {/* Offer section */}
         <div className='space-y-2'>
-          <h2 className='text-2xl font-semibold text-fitGreen '>
+          <h2 className='text-2xl font-semibold text-fitGreen'>
             Powered by the Exercisedb API{' '}
           </h2>
           <p className='mb-4'>
             One of the ways we ensure FitSpo stays comprehensive and accurate is
-            by integrating the{' '}
+            by integrating{' '}
             <a
               href='https://github.com/cyberboyanmol/exercisedb-api'
               className='text-fitBlue underline'
             >
               Exercisedb API
-            </a>
-            . This resource provides a large library of exercises, giving you
-            access to data that helps you find and log workouts tailored to your
-            goals.
+            </a>{' '}
+            by Anmol Gangwar. This resource provides a large library of
+            exercises, giving you access to data that helps you find and log
+            workouts tailored to your goals.
           </p>
         </div>
         <div className='space-y-2'>
-          <h2 className='text-2xl font-semibold text-fitGreen '>
+          <h2 className='text-2xl font-semibold text-fitGreen'>
             What We Offer
           </h2>
           <ul className='list-inside list-disc space-y-2'>
