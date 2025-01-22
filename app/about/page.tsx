@@ -3,35 +3,71 @@ import React from 'react';
 
 const AboutPage = () => {
   return (
-    <div className='min-h-screen bg-fitViolet text-white'>
+    <div className='min-h-screen bg-fitViolet text-black'>
       <div className='container mx-auto space-y-8 px-6 py-12'>
-        {/* Title section with Logo */}
         <div className='flex flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0'>
-          <h1 className='text-center text-4xl font-bold text-fitBlue md:text-left'>
+          <h1 className='text-center text-4xl font-bold text-fitGreen md:text-left'>
             About the FitSpo Project
           </h1>
         </div>
-        <p className='inline-block rounded-lg bg-fitBlue px-4 py-2 text-2xl font-bold text-white shadow-lg'>
-          {/* Description section and why and how we came up with the idea */}
-          Description
-        </p>
 
-        {/* Mission section */}
-        <div className='space-y-4'>
-          <h2 className='text-2xl font-semibold text-fitGreen underline'>
+        <div className='space-y-2'>
+          <h2 className='text-2xl font-semibold text-fitGreen '>
             Our Mission
           </h2>
-          <p>TBD</p>
+          <p>
+            FitSpo was born from one simple mission: to make fitness accessible,
+            fun, and trackable for everyone. Our team noticed there weren’t many
+            user-friendly workout trackers , so we decided to build our own
+            solution.
+          </p>
+          <p>
+            This project was created as a collaboration in our Northcoders
+            Bootcamp, bringing together passionate developers to turn an idea
+            into a reality.
+          </p>
         </div>
 
         {/* Offer section */}
-        <div className='space-y-4'>
-          <h2 className='text-2xl font-semibold text-fitBlue underline'>
+        <div className='space-y-2'>
+          <h2 className='text-2xl font-semibold text-fitGreen '>
+            Powered by the Exercisedb API{' '}
+          </h2>
+          <p className='mb-4'>
+            One of the ways we ensure FitSpo stays comprehensive and accurate is
+            by integrating the{' '}
+            <a
+              href='https://github.com/cyberboyanmol/exercisedb-api'
+              className='text-fitBlue underline'
+            >
+              Exercisedb API
+            </a>
+            . This resource provides a large library of exercises, giving you
+            access to data that helps you find and log workouts tailored to your
+            goals.
+          </p>
+        </div>
+        <div className='space-y-2'>
+          <h2 className='text-2xl font-semibold text-fitGreen '>
             What We Offer
           </h2>
-          <p>TBD</p>
+          <ul className='list-inside list-disc space-y-2'>
+            <li>
+              <strong>Workout Logging & Tracking:</strong> Log daily workouts,
+              sets, and reps with ease. Watch your progress over time using
+              intuitive charts.
+            </li>
+            <li>
+              <strong>Exercise Library & Recommendations:</strong> Explore a
+              variety of exercises from the Exercisedb API and get suggestions
+              based on your goals.
+            </li>
+            <li>
+              <strong>Personalized Dashboard:</strong> Set goals, monitor stats,
+              and celebrate milestones with a snapshot of your progress.
+            </li>
+          </ul>
         </div>
-
         {/* Signup section */}
         <div className='text-center'>
           <p className='inline-block rounded-lg bg-fitBlue px-4 py-2 text-2xl font-bold text-white shadow-lg'>
