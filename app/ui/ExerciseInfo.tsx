@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { headers } from 'next/headers';
 import { firstLetterToUpper } from '@/lib/utils';
 import { ExerciseInfoInterface } from '../lib/definitions';
-import { Suspense } from 'react';
 
 const ExerciseInfo = async ({
   exercise_id,
