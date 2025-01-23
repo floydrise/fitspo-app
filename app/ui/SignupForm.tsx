@@ -9,27 +9,27 @@ const SignupForm = () => {
     <form action={signUp} className={'flex flex-col gap-2'}>
       <div className={'flex flex-col items-start'}>
         <label htmlFor={'username'} className={'flex gap-1'}>
-          <AtSymbolIcon className={'w-5'} /> Username:
+          Username:
         </label>
         <input
           name={'username'}
           id={'username'}
           className={
-            'h-8 rounded-md border focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
           }
-          placeholder={'Username'}
+          placeholder={'Nickname'}
           required
         />
       </div>
       <div className={'flex flex-col items-start'}>
         <label htmlFor={'name'} className={'flex gap-1'}>
-          <UserIcon className={'w-5'} /> First name:
+          Your name:
         </label>
         <input
           name={'name'}
           id={'name'}
           className={
-            'h-8 rounded-md border focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
           }
           placeholder={'First name'}
           required
@@ -37,13 +37,13 @@ const SignupForm = () => {
       </div>
       <div className={'flex flex-col items-start'}>
         <label htmlFor={'imgUrl'} className={'flex gap-1'}>
-          <PhotoIcon className={'w-5'} /> Image URL:
+          Profile picture:
         </label>
         <input
           name={'imgUrl'}
           id={'imgUrl'}
           className={
-            'h-8 rounded-md border focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
           }
           placeholder={'Image url'}
         />
@@ -56,7 +56,7 @@ const SignupForm = () => {
           <Link href={'/'}>Cancel</Link>
         </Button>
       </div>
-      <span className={'text-purple-600 hover:underline'}>
+      <span className={'text-center text-fitBlue hover:underline'}>
         <Link href={'/login'}>Already have an account?</Link>
       </span>
     </form>
