@@ -16,7 +16,7 @@ export default async function Header() {
   return (
     <>
       <header className='border-b border-solid border-slate-400'>
-        <div className='container mx-auto flex min-h-32 justify-between px-[15px]'>
+        <div className='container mx-auto flex min-h-20 justify-between px-[15px] md:min-h-32'>
           <Link href={'/'} className='order-2 flex md:order-none'>
             <Image
               src='/Logo.svg'
