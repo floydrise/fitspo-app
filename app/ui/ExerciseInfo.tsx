@@ -100,13 +100,11 @@ const ExerciseInfo = async ({
           </div>
           <Image
             className='md:mt-[50px] md:min-w-[400px]'
-            src={`${exerciseInfo.gifUrl}?token=${process.env.API_KEY}`}
+            src={"/loader.gif"}
             width={300}
             height={300}
             alt='Exercise example'
             unoptimized={true}
-            blurDataURL={`/loader.gif`}
-            placeholder={'blur'}
           />
         </div>
       </div>
