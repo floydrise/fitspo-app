@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -8,20 +8,19 @@ const nextConfig: NextConfig = {
         destination: '/home',
         permanent: true,
       },
-    ]
+    ];
   },
-  crossOrigin: "anonymous",
+  crossOrigin: 'anonymous',
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'cdn-exercisedb.vercel.app',
         port: '',
-        pathname: '/api/v1/images/*',
-        search: '',
+        pathname: '/api/v1/images/**',
       },
-    ]
-  }
+    ],
+  },
 };
 
 export default nextConfig;
