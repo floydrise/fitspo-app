@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { headers } from 'next/headers';
 import { firstLetterToUpper } from '@/lib/utils';
 import { ExerciseInfoInterface } from '../lib/definitions';
+import { Suspense } from 'react';
 
 const ExerciseInfo = async ({
   exercise_id,
@@ -105,6 +106,8 @@ const ExerciseInfo = async ({
             height={300}
             alt='Exercise example'
             unoptimized={true}
+            blurDataURL={`/loader.gif`}
+            placeholder={'blur'}
           />
         </div>
       </div>
