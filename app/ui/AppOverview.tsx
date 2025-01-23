@@ -7,7 +7,7 @@ const AppOverview = () => {
   return (
     <section>
       <div className='flex justify-center bg-fitViolet px-[15px] lg:max-h-[510px]'>
-        <div className='container flex flex-col-reverse items-center justify-between py-[50px] lg:flex-row'>
+        <div className='container flex flex-col-reverse items-center justify-between py-8 md:py-[50px] lg:flex-row'>
           <div className='overview-info'>
             <h1 className='max-w-[600px] text-[36px] font-bold leading-none text-white min-[320px]:max-[1023px]:max-w-[400px] min-[320px]:max-[1023px]:text-center md:max-sm:text-[48px] lg:text-[68px] lg:font-normal'>
               PLAN YOUR DAILY WORKOUT
