@@ -24,7 +24,7 @@ This is a full stack application that allows you to view specific excercises wit
 
 ## 🔗 API Integration
 
-We used an open source API to fetch all the exercises which you can find [here](https://exercisedb-api.vercel.app/docs#description/introduction)
+We used an open source API called [ExerciseDB](https://github.com/cyberboyanmol/exercisedb-api) created by Anmol Gangwar, to fetch all the exercises.
 
 ---
 
