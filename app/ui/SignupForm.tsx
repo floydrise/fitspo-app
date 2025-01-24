@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { UserIcon, PhotoIcon, AtSymbolIcon } from '@heroicons/react/24/outline';
 import { signUp } from '@/app/lib/serverActions';
 
 const SignupForm = () => {
