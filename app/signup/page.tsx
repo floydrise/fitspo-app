@@ -1,27 +1,38 @@
 import React from 'react';
 import SignupForm from '@/app/ui/SignupForm';
-import { HashtagIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const Page = () => {
   return (
-    <div
-      className={
-        'flex h-screen w-screen flex-col items-center justify-center gap-2 p-10'
-      }
-    >
-      <span className={'flex gap-1'}>
-        <HashtagIcon className={'w-5'} />
-        <h1 className={'text-2xl'}>Sign up</h1>
-      </span>
-      <div
-        className={
-          'flex w-full justify-center rounded-md shadow-md bg-indigo-200 p-4 md:w-1/3'
-        }
-      >
-        <SignupForm />
+    <section className='bg-fitViolet'>
+      <div className='container mx-auto flex justify-center px-[15px] pb-28 pt-10'>
+        <div className='flex w-[450px] flex-col items-center justify-center rounded-[15px] bg-white px-3 shadow-md'>
+          <div className='mt-2.5 flex h-[82px] w-full items-center rounded-[15px] bg-fitViolet py-[7px] pl-[14px] pr-[28px]'>
+            <div className=''>
+              <Image
+                src='/signup.svg'
+                width={68}
+                height={68}
+                alt='User signup'
+              />
+            </div>
+            <div className='ml-[17px]'>
+              <h1 className='text-lg font-semibold leading-none text-white min-[390px]:text-2xl min-[390px]:leading-none'>
+                Create an account
+              </h1>
+              <p className='text-sm text-white min-[390px]:text-lg'>
+                Join now for full access!
+              </p>
+            </div>
+          </div>
+          <div className='flex w-full justify-center p-4 pb-10 md:w-1/3'>
+            <SignupForm />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default Page;
+//
