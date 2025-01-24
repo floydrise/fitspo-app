@@ -15,9 +15,9 @@ const SignupForm = () => {
           name={'username'}
           id={'username'}
           className={
-            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 w-[250px] rounded-md border p-3 focus:outline-none min-[380px]:w-[300px] md:w-[394px]'
           }
-          placeholder={'Nickname'}
+          placeholder={'Pick a username'}
           required
         />
       </div>
@@ -29,7 +29,7 @@ const SignupForm = () => {
           name={'name'}
           id={'name'}
           className={
-            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 w-[250px] rounded-md border p-3 focus:outline-none min-[380px]:w-[300px] md:w-[394px]'
           }
           placeholder={'First name'}
           required
@@ -43,22 +43,19 @@ const SignupForm = () => {
           name={'imgUrl'}
           id={'imgUrl'}
           className={
-            'h-8 rounded-md border p-3 focus:border-violet-200 focus:outline-none focus:ring'
+            'h-8 w-[250px] rounded-md border p-3 focus:outline-none min-[380px]:w-[300px] md:w-[394px]'
           }
-          placeholder={'Image url'}
+          placeholder={'Image URL'}
         />
       </div>
-      <div className={'flex justify-center gap-8'}>
-        <Button variant='green' type={'submit'}>
+      <div className={'mt-2 flex flex-col gap-3'}>
+        <Button className='w-full' variant='orange' type={'submit'}>
           Sign up
         </Button>
-        <Button variant='destructive' asChild={true}>
-          <Link href={'/'}>Cancel</Link>
+        <Button variant='green' asChild={true}>
+          <Link href={'/login'}>Sign In</Link>
         </Button>
       </div>
-      <span className={'text-center text-fitBlue hover:underline'}>
-        <Link href={'/login'}>Already have an account?</Link>
-      </span>
     </form>
   );
 };
