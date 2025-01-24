@@ -14,7 +14,7 @@ const SignupForm = () => {
           name={'username'}
           id={'username'}
           className={
-            'h-8 w-[250px] rounded-md border p-3 focus:outline-none min-[380px]:w-[300px] md:w-[394px]'
+            'h-8 w-[250px] rounded-md border p-3  focus:outline-none min-[380px]:w-[300px] md:w-[394px]'
           }
           placeholder={'Pick a username'}
           required
@@ -51,9 +51,15 @@ const SignupForm = () => {
         <Button className='w-full' variant='orange' type={'submit'}>
           Sign up
         </Button>
-        <Button variant='green' asChild={true}>
+        {/*<Button variant='green' asChild={true}>
           <Link href={'/login'}>Sign In</Link>
-        </Button>
+        </Button>*/}
+        <p className='text-center text-sm text-gray-600'>
+          Already have an account?{' '}
+          <Link href='/signup' className='text-fitBlue hover:underline'>
+            <span className='font-bold'>Log in instead!</span>
+          </Link>
+        </p>
       </div>
     </form>
   );
