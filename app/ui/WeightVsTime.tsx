@@ -60,7 +60,8 @@ function WeightVsTime({ history }: { history: Workout_history[] }) {
       },
       {} as Record<string, { date: string; weight: number; reps: number }>
     )
-  ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  );
+  aggregatedData.reverse();
 
   return (
     <Card className='w-72 max-w-3xl md:w-full'>
@@ -84,12 +85,8 @@ function WeightVsTime({ history }: { history: Workout_history[] }) {
             <XAxis
               dataKey='date'
               tickMargin={5}
-              minTickGap={10}
+              minTickGap={4}
               interval='preserveStartEnd'
-              tickFormatter={(value) => {
-                const date = new Date(value);
-                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
-              }}
               label={{
                 value: 'Date',
                 position: 'bottom',
@@ -148,7 +145,6 @@ function WeightVsTime({ history }: { history: Workout_history[] }) {
               stroke='hsl(272, 61%, 34%)'
               dot={true}
             ></Line>
-            {/* <Line dataKey='reps' stroke='hsl(162, 61%, 34%)' dot={true}></Line> */}
           </LineChart>
         </ChartContainer>
       </CardContent>
