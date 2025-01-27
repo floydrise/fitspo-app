@@ -40,7 +40,7 @@ export function WorkoutCard({ workout }: { workout: Workout_history }) {
               key={exercise.name}
               className='m-2 rounded-md border border-gray-200 p-3'
             >
-              <p className='mb-1 text-base font-medium'>{exercise.name}</p>
+              <p className='mb-1 text-base font-medium'>{exercise.name[0].toUpperCase() + exercise.name.slice(1)}</p>
               <p className='text-sm text-gray-600'>
                 Reps: {exercise.reps_count}
               </p>
