@@ -23,7 +23,7 @@ const chartConfig: ChartConfig = {
     color: 'hsl(272, 61%, 34%)',
   },
 };
-export function Component({ history }: { history: Workout_history[] }) {
+export function MostPopularExercises({ history }: { history: Workout_history[] }) {
   const data = history.flatMap((history) =>
     history.exercise_list.map((exercise) => {
       return {
