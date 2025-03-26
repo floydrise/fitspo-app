@@ -15,27 +15,18 @@ const Page = async (props: { searchParams?: Promise<ExerciseProps> }) => {
 
   const req = query
     ? await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?search=${query}&offset=${currentPage === 1 ? '0' : currentPage * cardsPerPage}&limit=${cardsPerPage}`,
-        {
-          headers: {
-            'X-Api-Key': `${process.env.API_KEY}`,
-          },
-        }
+        `https://f1a1dd76dfdd5be8.mokky.dev/exercises?name=*${query}*&page=${currentPage}&limit=${cardsPerPage}`
       )
     : await fetch(
-        `https://exercisedb-api.vercel.app/api/v1/exercises?offset=${currentPage === 1 ? '0' : currentPage * cardsPerPage}&limit=${cardsPerPage}`,
-        {
-          headers: {
-            'X-Api-Key': `${process.env.API_KEY}`,
-          },
-        }
+        `https://f1a1dd76dfdd5be8.mokky.dev/exercises?page=${currentPage}&limit=${cardsPerPage}`
       );
 
   const {
-    data: { exercises, totalPages },
+    meta: { total_pages: totalPages },
+    items,
   } = await req.json();
 
-  const exercisesList: ExerciseExercisePage[] = await exercises;
+  const exercisesList: ExerciseExercisePage[] = await items;
 
   return (
     <>
@@ -73,7 +64,7 @@ const Page = async (props: { searchParams?: Promise<ExerciseProps> }) => {
               <PaginationWithLinks
                 page={currentPage}
                 pageSize={cardsPerPage}
-                totalCount={(totalPages - 1) * cardsPerPage}
+                totalCount={totalPages * cardsPerPage}
               />
             ) : null}
           </div>
