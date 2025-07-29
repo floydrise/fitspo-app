@@ -30,11 +30,8 @@ const Page = async (props: { searchParams?: Promise<ExerciseProps> }) => {
           },
         }
       );
-
-  const {
-    data: { exercises, totalPages },
-  } = await req.json();
-
+  
+  const {data: exercises, metadata } = await req.json();
   const exercisesList: ExerciseExercisePage[] = await exercises;
 
   return (
@@ -73,7 +70,7 @@ const Page = async (props: { searchParams?: Promise<ExerciseProps> }) => {
               <PaginationWithLinks
                 page={currentPage}
                 pageSize={cardsPerPage}
-                totalCount={(totalPages - 1) * cardsPerPage}
+                totalCount={(metadata.totalPages - 1) * cardsPerPage}
               />
             ) : null}
           </div>

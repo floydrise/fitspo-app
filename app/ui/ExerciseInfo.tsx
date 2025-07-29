@@ -24,7 +24,6 @@ const ExerciseInfo = async ({
   const fullUrl = headerList.get('referer') || '';
   const url = new URL(fullUrl);
   const urlParams = new URLSearchParams(url.search);
-  const pageNumber = urlParams.get('page');
 
   return (
     <div className='min-h-[480px] max-w-[900px] rounded-[15px] bg-white px-[10px] pb-[30px] pt-[10px] shadow'>
@@ -45,7 +44,7 @@ const ExerciseInfo = async ({
             </p>
           </div>
         </div>
-        <Link href={`/exercises${pageNumber ? '?page=' + pageNumber : ''}`}>
+        <Link href={`/exercises${urlParams ? '?' + urlParams.toString() : ''}`}>
           <button className='transition-opacity ease-in-out hover:opacity-80'>
             <Image
               src='/closeBtn.svg'
@@ -100,7 +99,7 @@ const ExerciseInfo = async ({
           </div>
           <Image
             className='md:mt-[50px] md:min-w-[400px]'
-            src={"/loader.gif"}
+            src={'/loader.gif'}
             width={300}
             height={300}
             alt='Exercise example'
